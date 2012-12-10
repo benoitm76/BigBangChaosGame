@@ -20,14 +20,21 @@ namespace BigBangChaosGame
         SpriteBatch spriteBatch;
 
         private Texture2D background;
+        private Texture2D particle;
+
+        private KeyboardState _keyboardState;
 
         private int scrollX = 1;
-        private int scrollY = 1;
+
+        private Game g;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
+            graphics.PreferredBackBufferWidth = 1280;
+            graphics.PreferredBackBufferHeight = 720;
             Content.RootDirectory = "Content";
+            g = new Game();            
         }
 
         /// <summary>
@@ -52,7 +59,9 @@ namespace BigBangChaosGame
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             background = Content.Load<Texture2D>("Pipe2");
-
+            particle = Content.Load<Texture2D>("boule_png");
+            g.particle = new Particle(new Vector2(particle.Width, particle.Height), new Vector2(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight));
+            g.particle.coefDep = 5f;
             // TODO: use this.Content to load your game content here
         }
 
@@ -77,7 +86,26 @@ namespace BigBangChaosGame
                 this.Exit();
 
             // TODO: Add your update logic here
+            _keyboardState = Keyboard.GetState();
+            Vector2 displacement = new Vector2();
+            if (_keyboardState.IsKeyDown(Keys.Up))
+            {
+                displacement.Y = -1;
+            }
+            else if (_keyboardState.IsKeyDown(Keys.Down))
+            {
+                displacement.Y = 1;
+            }
 
+            if (_keyboardState.IsKeyDown(Keys.Right))
+            {
+                displacement.X = 1;
+            }
+            else if (_keyboardState.IsKeyDown(Keys.Left))
+            {
+                displacement.X = -1;
+            }
+            g.particle.Displacement(displacement);
             base.Update(gameTime);
         }
 
@@ -87,12 +115,18 @@ namespace BigBangChaosGame
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-            scrollX = scrollX + 10;
+            GraphicsDevice.Clear(Color.CornflowerBlue);            
+            scrollX = (int)(scrollX + 5 * g.vitesse);
+            
             spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.LinearWrap, null, null);
             spriteBatch.Draw(background, Vector2.Zero, new Rectangle(scrollX, 0, background.Width, background.Height), Color.White);
+            spriteBatch.Draw(particle, g.particle.position, Color.White);
             spriteBatch.End();
-
+            if (scrollX >= background.Width)
+            {
+                scrollX = 0;
+                //g.vitesse = g.vitesse * 1.3f;
+            }
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);
