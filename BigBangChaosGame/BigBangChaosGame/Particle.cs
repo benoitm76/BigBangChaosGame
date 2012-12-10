@@ -14,9 +14,8 @@ namespace BigBangChaosGame
 
         public Particle(Vector2 size_window) : base (size_window)
         {
-            coefDep = 5f;            
+            coefDep = 10f;            
         }
-
         
         public override void LoadContent(ContentManager content, string assetName) 
         {
