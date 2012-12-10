@@ -3,45 +3,75 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Content;
 
 namespace BigBangChaosGame
 {
-    class Particle
+    class Particle : Sprite
     {
-        public Vector2 position { get; set; }
         public float coefDep { get; set; }
-        public Vector2 size_window { get; set; }
-        public Vector2 size_particle { get; set; }
 
-        public Particle(Vector2 size_particle, Vector2 size_window)
+        public Particle(Vector2 size_window) : base (size_window)
         {
-            position = new Vector2(50, (size_window.Y - size_particle.Y) / 2);
-            this.size_window = size_window;
-            this.size_particle = size_particle;
-            coefDep = 1f;
+            coefDep = 5f;            
         }
 
-        public void Displacement(Vector2 displacement)
+        
+        public override void LoadContent(ContentManager content, string assetName) 
         {
+            base.LoadContent(content, assetName);
+            //On défini la position de la particule
+            position = new Vector2(50, (size_window.Y - texture.Height) / 2);
+        }
+
+        public override void HandleInput(KeyboardState keyboardState, MouseState mouseState)
+        {
+            //Permet de déplacer la particule
             Vector2 newPos = new Vector2(position.X, position.Y);
-            newPos.X = newPos.X + displacement.X * coefDep;
-            if (newPos.X + size_particle.X > size_window.X)
+            Vector2 displacement = new Vector2();
+            if (keyboardState.IsKeyDown(Keys.Up))
             {
-                newPos.X = size_window.X - size_particle.X;
+                displacement.Y = -1;
+            }
+            else if (keyboardState.IsKeyDown(Keys.Down))
+            {
+                displacement.Y = 1;
+            }
+
+            if (keyboardState.IsKeyDown(Keys.Right))
+            {
+                displacement.X = 1;
+            }
+            else if (keyboardState.IsKeyDown(Keys.Left))
+            {
+                displacement.X = -1;
+            }
+            newPos.X = newPos.X + displacement.X * coefDep;
+            newPos.Y = newPos.Y + displacement.Y * coefDep;
+            position = newPos;
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            //On vérifie que la particule ne sorte pas de l'écran
+            Vector2 newPos = new Vector2(position.X, position.Y);
+            if (newPos.X + texture.Width > size_window.X)
+            {
+                newPos.X = size_window.X - texture.Width;
             }
             if (newPos.X < 0)
             {
                 newPos.X = 0;
             }
-            if (newPos.Y + size_particle.Y > size_window.Y)
+            if (newPos.Y + texture.Height > size_window.Y)
             {
-                newPos.Y = size_window.Y - size_particle.Y;
+                newPos.Y = size_window.Y - texture.Height;
             }
             if (newPos.Y < 0)
             {
                 newPos.Y = 0;
-            }
-            newPos.Y = newPos.Y + displacement.Y * coefDep;
+            }            
             position = newPos;
         }
     }

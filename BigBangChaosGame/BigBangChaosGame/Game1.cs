@@ -19,10 +19,10 @@ namespace BigBangChaosGame
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        private Texture2D background;
-        private Texture2D particle;
+        private KeyboardState keyboardState;
+        private MouseState mouseState;
 
-        private KeyboardState _keyboardState;
+        private Texture2D background;
 
         private int scrollX = 1;
 
@@ -59,9 +59,8 @@ namespace BigBangChaosGame
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             background = Content.Load<Texture2D>("Pipe2");
-            particle = Content.Load<Texture2D>("boule_png");
-            g.particle = new Particle(new Vector2(particle.Width, particle.Height), new Vector2(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight));
-            g.particle.coefDep = 5f;
+            g.particle = new Particle(new Vector2(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight));
+            g.particle.LoadContent(Content, "boule_png");
             // TODO: use this.Content to load your game content here
         }
 
@@ -86,26 +85,10 @@ namespace BigBangChaosGame
                 this.Exit();
 
             // TODO: Add your update logic here
-            _keyboardState = Keyboard.GetState();
-            Vector2 displacement = new Vector2();
-            if (_keyboardState.IsKeyDown(Keys.Up))
-            {
-                displacement.Y = -1;
-            }
-            else if (_keyboardState.IsKeyDown(Keys.Down))
-            {
-                displacement.Y = 1;
-            }
-
-            if (_keyboardState.IsKeyDown(Keys.Right))
-            {
-                displacement.X = 1;
-            }
-            else if (_keyboardState.IsKeyDown(Keys.Left))
-            {
-                displacement.X = -1;
-            }
-            g.particle.Displacement(displacement);
+            keyboardState = Keyboard.GetState();
+            mouseState = Mouse.GetState();
+            g.particle.HandleInput(keyboardState, mouseState);
+            g.particle.Update(gameTime);
             base.Update(gameTime);
         }
 
@@ -120,7 +103,8 @@ namespace BigBangChaosGame
             
             spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.LinearWrap, null, null);
             spriteBatch.Draw(background, Vector2.Zero, new Rectangle(scrollX, 0, background.Width, background.Height), Color.White);
-            spriteBatch.Draw(particle, g.particle.position, Color.White);
+            g.particle.Draw(spriteBatch, gameTime);
+            //spriteBatch.Draw(particle, g.particle.position, Color.White);
             spriteBatch.End();
             if (scrollX >= background.Width)
             {
