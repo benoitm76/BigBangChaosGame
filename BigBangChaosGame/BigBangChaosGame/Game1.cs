@@ -68,7 +68,7 @@ namespace BigBangChaosGame
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             //Chargement du fond
-            background = Content.Load<Texture2D>("pipe_v1.0");
+            background = Content.Load<Texture2D>("pipe_v2.0");
 
             //Chargement de la particule
             g.particle = new Particle(new Vector2(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight));

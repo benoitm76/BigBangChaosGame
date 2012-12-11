@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using System.Threading.Tasks;
 
 namespace BigBangChaosGame
 {
@@ -94,13 +95,13 @@ namespace BigBangChaosGame
             {
                 newPos.X = 0;
             }
-            if (newPos.Y + texture.Height > size_window.Y)
+            if (newPos.Y + texture.Height > size_window.Y - 70)
             {
-                newPos.Y = size_window.Y - texture.Height;
+                newPos.Y = size_window.Y - texture.Height - 70;
             }
-            if (newPos.Y < 0)
+            if (newPos.Y < 70)
             {
-                newPos.Y = 0;
+                newPos.Y = 70;
             }            
             position = newPos;
         }
@@ -123,6 +124,12 @@ namespace BigBangChaosGame
         {
             health--;
             nb_frame_invulnerability = 60;
+            new Task(() =>
+                {
+                    GamePad.SetVibration(PlayerIndex.One, 0.7f, 0.25f);
+                    System.Threading.Thread.Sleep(500);
+                    GamePad.SetVibration(PlayerIndex.One, 0f, 0f);
+                }).Start();
         }
     }
 }
