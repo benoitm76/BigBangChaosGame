@@ -11,11 +11,10 @@ namespace BigBangChaosGame
     {
         public float coef_dep{get; set;}
 
-        public Ennemies(Vector2 size_window, Vector2 position)
+        public Ennemies(Vector2 size_window)
             : base(size_window)
         {
-            coef_dep = 1;
-            this.position = position;             
+            coef_dep = 1;           
         }
         public void Update(GameTime gameTime, int displacementX)
         {

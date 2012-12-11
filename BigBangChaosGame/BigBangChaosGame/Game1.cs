@@ -8,6 +8,8 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace BigBangChaosGame
 {
@@ -19,9 +21,6 @@ namespace BigBangChaosGame
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        private KeyboardState keyboardState;
-        private MouseState mouseState;
-
         private Vector2 size_window;
 
         private Texture2D background;
@@ -30,14 +29,21 @@ namespace BigBangChaosGame
 
         private Game g;
 
+        static Mutex mu;
+
+        private int distancy_meters = 0;
+
         public Game1()
         {
+            //Chargement des paramètres grapiques
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferredBackBufferWidth = 1280;
             graphics.PreferredBackBufferHeight = 720;
             Content.RootDirectory = "Content";
-            g = new Game();
             size_window = new Vector2(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
+            mu = new Mutex();
+
+            g = new Game(size_window, Content);            
         }
 
         /// <summary>
@@ -49,7 +55,6 @@ namespace BigBangChaosGame
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
             base.Initialize();
         }
 
@@ -61,15 +66,25 @@ namespace BigBangChaosGame
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            background = Content.Load<Texture2D>("Pipe2");
+
+            //Chargement du fond
+            background = Content.Load<Texture2D>("pipe_v1.0");
+
+            //Chargement de la particule
             g.particle = new Particle(new Vector2(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight));
             g.particle.LoadContent(Content, "particle_v2.1");
-            g.ennemies.Add(new Ennemies(size_window, new Vector2(size_window.X - 500, size_window.Y / 2)));
-            g.ennemies[0].coef_dep = 1.2f;
+
+            //Ajout d'un ennemie
+            /*g.ennemies.Add(new Ennemies(size_window, new Vector2(size_window.X - 500, size_window.Y / 2)));
+            g.ennemies[0].coef_dep = 0.9f;
             foreach (Sprite ennemie in g.ennemies)
             {
                 ennemie.LoadContent(Content, "1P");
-            }
+            }*/
+
+            //Mise à jour position de la souris
+            Mouse.SetPosition((int)g.particle.position.X, (int)g.particle.position.Y);
+            g.particle.oldMouseState = Mouse.GetState();
             // TODO: use this.Content to load your game content here
         }
 
@@ -94,33 +109,64 @@ namespace BigBangChaosGame
                 this.Exit();
 
             // TODO: Add your update logic here
-            keyboardState = Keyboard.GetState();
-            mouseState = Mouse.GetState();
-            g.particle.HandleInput(keyboardState, mouseState);
+            //Mouvement de la particule
+            g.particle.HandleInput(Game.XboxController);
+
+            //Mise à jour de la position de la particule
             g.particle.Update(gameTime);
+
+            //Déplacement du fond 
             int displacementX = (int)(5 * g.vitesse);
+
+            //On déplace tous les objets
             List<Ennemies> destroy_ennemies = new List<Ennemies>();
-            foreach(Ennemies ennemie in g.ennemies)
-            {                
+            Parallel.ForEach(g.ennemies, ennemie =>
+            {
                 ennemie.Update(gameTime, displacementX);
                 if (g.particle.nb_frame_invulnerability == 0)
                 {
-                    if (Game1.BoundingCircle(GetCenter((int)g.particle.position.X, (int)g.particle.texture.Width), GetCenter((int)g.particle.position.Y, (int)g.particle.texture.Height), (int)(g.particle.texture.Width / 2), GetCenter((int)ennemie.position.X, (int)ennemie.texture.Width), GetCenter((int)ennemie.position.Y, (int)ennemie.texture.Height), (int)(ennemie.texture.Width / 2)))
+                    //On vérifie si il y a collision avec un ennemie
+                    if (Collision.BoundingCircle(Collision.GetCenter((int)g.particle.position.X, (int)g.particle.texture.Width), Collision.GetCenter((int)g.particle.position.Y, (int)g.particle.texture.Height), (int)(g.particle.texture.Width / 2), Collision.GetCenter((int)ennemie.position.X, (int)ennemie.texture.Width), Collision.GetCenter((int)ennemie.position.Y, (int)ennemie.texture.Height), (int)(ennemie.texture.Width / 2)))
                     {
-                        //g.ennemies.Remove(ennemie);
+                        mu.WaitOne();
                         g.particle.touched();
+                        mu.ReleaseMutex();
                     }
                 }
 
-                if (ennemie.position.X < 0)
+                //On supprime les ennemies disparu de l'écran
+                if (ennemie.position.X < 0 - ennemie.texture.Width)
                 {
+                    mu.WaitOne();
                     destroy_ennemies.Add(ennemie);
+                    mu.ReleaseMutex();
                 }
-                
+            });
+
+            //Mise à jour de la difficulté du jeux en fonction de la distance
+            if (distancy_meters == 1000)
+            {
+                g.distance++;
+                if (g.distance % 5 == 0)
+                {
+                    g.vitesse = g.vitesse * 1.2f;
+                }
+                if (g.distance % 5 == 3)
+                {
+                    g.maxEnnemies++;
+                }
+                distancy_meters = 0;
             }
+            distancy_meters++;            
+
+            //On met à jour la liste des ennemies
             foreach (Ennemies ennemie in destroy_ennemies)
             {
                 g.ennemies.Remove(ennemie);
+            }
+            if (scrollX % 10 == 0)
+            {
+                Parallel.Invoke(() => { g.generateEnnemies(); });
             }
             base.Update(gameTime);
         }
@@ -131,41 +177,35 @@ namespace BigBangChaosGame
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);            
+            GraphicsDevice.Clear(Color.CornflowerBlue);
+            
+            //On augmente le scrolling du fond
             scrollX = (int)(scrollX + 5 * g.vitesse);            
             
             spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.LinearWrap, null, null);
+
+            //On dessine le fond
             spriteBatch.Draw(background, Vector2.Zero, new Rectangle(scrollX, 0, background.Width, background.Height), Color.White);
+
+            //On dessine la particule
             g.particle.Draw(spriteBatch, gameTime);
-            //spriteBatch.Draw(particle, g.particle.position, Color.White);
+      
+            //On dessine les ennemies
             foreach (Ennemies ennemie in g.ennemies)
             {
                 ennemie.Draw(spriteBatch, gameTime);
             }
+
             spriteBatch.End();
+
+            //On reset le scrolling quand il le faut
             if (scrollX >= background.Width)
             {
-                scrollX = 0;
-                //g.vitesse = g.vitesse * 1.3f;
+                scrollX = 0;      
             }
+            
             // TODO: Add your drawing code here            
             base.Draw(gameTime);
-        }
-
-        public static bool BoundingCircle(int x1, int y1, int radius1, int x2, int y2, int radius2) 
-        { 
-            Vector2 V1 = new Vector2(x1, y1); // reference point 1 
-            Vector2 V2 = new Vector2(x2, y2); // reference point 2 
-            Vector2 Distance = V1 - V2; // get the distance between the two reference points 
-            if (Distance.Length() < radius1 + radius2) // if the distance is less than the diameter 
-                return true; 
-         
-            return false;
-        }
-
-        public static int GetCenter(int position, int size)
-        {
-            return position + (size / 2);
         }
     }
 }

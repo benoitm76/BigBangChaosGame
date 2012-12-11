@@ -15,10 +15,12 @@ namespace BigBangChaosGame
         public int nb_frame_invulnerability { get; set; }
         private int health;
 
+        public MouseState oldMouseState { get; set; }
+
         public Particle(Vector2 size_window) : base (size_window)
         {
             health = 5;
-            coefDep = 10f;            
+            coefDep = 10f;
         }
         
         public override void LoadContent(ContentManager content, string assetName) 
@@ -28,37 +30,55 @@ namespace BigBangChaosGame
             position = new Vector2(50, (size_window.Y - texture.Height) / 2);
         }
 
-        public override void HandleInput(KeyboardState keyboardState, MouseState mouseState)
-        {
-            Vector2 displacement = new Vector2();
-            GamePadState gamepadState = GamePad.GetState(PlayerIndex.One);
-            GamePadCapabilities gamepadCaps = GamePad.GetCapabilities(PlayerIndex.One);
-            Vector2 xbox360 = gamepadState.ThumbSticks.Left;
-
-            displacement.X = xbox360.X;
-            displacement.Y = -xbox360.Y;
-
+        public void HandleInput(int controller)
+        {            
             //Permet de déplacer la particule
-            Vector2 newPos = new Vector2(position.X, position.Y);            
-            if (keyboardState.IsKeyDown(Keys.Up))
+            Vector2 displacement = new Vector2();
+            Vector2 newPos = new Vector2(position.X, position.Y);
+            if(controller == Game.Keyboard)
             {
-                displacement.Y = -1;
-            }
-            else if (keyboardState.IsKeyDown(Keys.Down))
-            {
-                displacement.Y = 1;
+                KeyboardState keyboardState = Keyboard.GetState();
+                if (keyboardState.IsKeyDown(Keys.Up))
+                {
+                    displacement.Y = -1;
+                }
+                else if (keyboardState.IsKeyDown(Keys.Down))
+                {
+                    displacement.Y = 1;
+                }
+
+                if (keyboardState.IsKeyDown(Keys.Right))
+                {
+                    displacement.X = 1;
+                }
+                else if (keyboardState.IsKeyDown(Keys.Left))
+                {
+                    displacement.X = -1;
+                }
+                newPos.X = newPos.X + displacement.X * coefDep;
+                newPos.Y = newPos.Y + displacement.Y * coefDep;
             }
 
-            if (keyboardState.IsKeyDown(Keys.Right))
+            else if (controller == Game.XboxController)
             {
-                displacement.X = 1;
+                GamePadState gamepadState = GamePad.GetState(PlayerIndex.One);
+                GamePadCapabilities gamepadCaps = GamePad.GetCapabilities(PlayerIndex.One);
+                Vector2 xbox360 = gamepadState.ThumbSticks.Left;
+                displacement.X = xbox360.X;
+                displacement.Y = -xbox360.Y;
+                newPos.X = newPos.X + displacement.X * coefDep;
+                newPos.Y = newPos.Y + displacement.Y * coefDep;
             }
-            else if (keyboardState.IsKeyDown(Keys.Left))
+            else if (controller == Game.Mouse)
             {
-                displacement.X = -1;
+                MouseState mouseState = Mouse.GetState();
+                displacement.X = mouseState.X - oldMouseState.X;
+                displacement.Y = mouseState.Y - oldMouseState.Y;
+                oldMouseState = mouseState;
+                newPos.X = newPos.X + displacement.X * (coefDep / 10);
+                newPos.Y = newPos.Y + displacement.Y * (coefDep / 10);
+                
             }
-            newPos.X = newPos.X + displacement.X * coefDep;
-            newPos.Y = newPos.Y + displacement.Y * coefDep;
             position = newPos;
         }
 

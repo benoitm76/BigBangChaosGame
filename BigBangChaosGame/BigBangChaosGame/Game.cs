@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
+using System.Threading.Tasks;
 
 namespace BigBangChaosGame
 {
@@ -19,16 +22,49 @@ namespace BigBangChaosGame
         public Particle particle { get; set; }
         public List<Ennemies> ennemies { get; set; }
         public int maxEnnemies { get; set; }
-        public int controller;
+        public Vector2 size_window { get; set; }
+        public int controller { get; set; }
+        public ContentManager content { get; set; }
 
 
+        public Random random;
 
-        public Game()
+        public Game(Vector2 size_window, ContentManager content)
         {
             vitesse = 1f;
             maxEnnemies = 10;
             ennemies = new List<Ennemies>();
             controller = Game.Keyboard;
+            random = new Random();
+            this.size_window = size_window;
+            this.content = content;
+        }
+
+        public void generateEnnemies()
+        {
+            if (ennemies.Count < maxEnnemies)
+            {
+                if (random.Next(0, 1000) % 10 == 0)
+                {
+                    bool collision = false;
+                    Ennemies newEnnemie = new Ennemies(size_window);
+                    newEnnemie.LoadContent(content, "1P");
+                    Vector2 pos = new Vector2((int)size_window.X, random.Next(0, (int)(size_window.Y - newEnnemie.texture.Height)));
+                    Parallel.ForEach(ennemies, ennemie =>
+                    {
+                        if (Collision.BoundingCircle(Collision.GetCenter((int)pos.X, (int)newEnnemie.texture.Width), Collision.GetCenter((int)pos.Y, (int)newEnnemie.texture.Height), (int)(newEnnemie.texture.Width / 2), Collision.GetCenter((int)ennemie.position.X, (int)ennemie.texture.Width), Collision.GetCenter((int)ennemie.position.Y, (int)ennemie.texture.Height), (int)(ennemie.texture.Width / 2)))
+                        {
+                            collision = true;
+                        }
+                    });
+                    if (!collision)
+                    {
+                        newEnnemie.position = pos;
+                        newEnnemie.coef_dep = 1f;
+                        ennemies.Add(newEnnemie);
+                    }
+                }
+            }
         }
     }
 }
