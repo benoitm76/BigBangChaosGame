@@ -107,6 +107,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ennemies.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Particle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

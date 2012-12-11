@@ -5,15 +5,19 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace BigBangChaosGame
 {
     class Particle : Sprite
     {
         public float coefDep { get; set; }
+        public int nb_frame_invulnerability { get; set; }
+        private int health;
 
         public Particle(Vector2 size_window) : base (size_window)
         {
+            health = 5;
             coefDep = 10f;            
         }
         
@@ -26,9 +30,16 @@ namespace BigBangChaosGame
 
         public override void HandleInput(KeyboardState keyboardState, MouseState mouseState)
         {
-            //Permet de déplacer la particule
-            Vector2 newPos = new Vector2(position.X, position.Y);
             Vector2 displacement = new Vector2();
+            GamePadState gamepadState = GamePad.GetState(PlayerIndex.One);
+            GamePadCapabilities gamepadCaps = GamePad.GetCapabilities(PlayerIndex.One);
+            Vector2 xbox360 = gamepadState.ThumbSticks.Left;
+
+            displacement.X = xbox360.X;
+            displacement.Y = -xbox360.Y;
+
+            //Permet de déplacer la particule
+            Vector2 newPos = new Vector2(position.X, position.Y);            
             if (keyboardState.IsKeyDown(Keys.Up))
             {
                 displacement.Y = -1;
@@ -72,6 +83,26 @@ namespace BigBangChaosGame
                 newPos.Y = 0;
             }            
             position = newPos;
+        }
+
+        public override void Draw(SpriteBatch spriteBatch, GameTime gameTime)
+        {
+            Color color = Color.White;
+            if (nb_frame_invulnerability != 0)
+            {
+                if ((int)(nb_frame_invulnerability / 20) % 2 == 1)
+                {
+                    color = Color.Transparent;
+                }
+                nb_frame_invulnerability--;
+            }
+            spriteBatch.Draw(texture, position, color);
+        }
+
+        public void touched()
+        {
+            health--;
+            nb_frame_invulnerability = 60;
         }
     }
 }

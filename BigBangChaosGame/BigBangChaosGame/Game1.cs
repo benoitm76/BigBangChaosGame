@@ -22,6 +22,8 @@ namespace BigBangChaosGame
         private KeyboardState keyboardState;
         private MouseState mouseState;
 
+        private Vector2 size_window;
+
         private Texture2D background;
 
         private int scrollX = 1;
@@ -34,7 +36,8 @@ namespace BigBangChaosGame
             graphics.PreferredBackBufferWidth = 1280;
             graphics.PreferredBackBufferHeight = 720;
             Content.RootDirectory = "Content";
-            g = new Game();            
+            g = new Game();
+            size_window = new Vector2(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
         }
 
         /// <summary>
@@ -60,7 +63,12 @@ namespace BigBangChaosGame
             spriteBatch = new SpriteBatch(GraphicsDevice);
             background = Content.Load<Texture2D>("Pipe2");
             g.particle = new Particle(new Vector2(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight));
-            g.particle.LoadContent(Content, "boule_png");
+            g.particle.LoadContent(Content, "particle_v1.0");
+            g.ennemies.Add(new Ennemies(size_window, new Vector2(size_window.X - 100, size_window.Y / 2)));
+            foreach (Sprite ennemie in g.ennemies)
+            {
+                ennemie.LoadContent(Content, "1P");
+            }
             // TODO: use this.Content to load your game content here
         }
 
@@ -89,6 +97,25 @@ namespace BigBangChaosGame
             mouseState = Mouse.GetState();
             g.particle.HandleInput(keyboardState, mouseState);
             g.particle.Update(gameTime);
+            int displacementX = (int)(5 * g.vitesse);
+            List<Ennemies> destroy_ennemies = new List<Ennemies>();
+            foreach(Ennemies ennemie in g.ennemies)
+            {                
+                ennemie.Update(gameTime, displacementX);
+                if (Game1.BoundingCircle((int)g.particle.position.X, (int)g.particle.position.Y, (int)(g.particle.texture.Width / 2), (int)ennemie.position.X, (int)ennemie.position.Y, (int)(ennemie.texture.Width / 2)))
+                {
+                    //g.ennemies.Remove(ennemie);
+                    g.particle.touched();
+                }
+                if (ennemie.position.X < 500)
+                {
+                    destroy_ennemies.Add(ennemie);
+                }
+            }
+            foreach (Ennemies ennemie in destroy_ennemies)
+            {
+                g.ennemies.Remove(ennemie);
+            }
             base.Update(gameTime);
         }
 
@@ -99,21 +126,35 @@ namespace BigBangChaosGame
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);            
-            scrollX = (int)(scrollX + 5 * g.vitesse);
+            scrollX = (int)(scrollX + 5 * g.vitesse);            
             
             spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.LinearWrap, null, null);
             spriteBatch.Draw(background, Vector2.Zero, new Rectangle(scrollX, 0, background.Width, background.Height), Color.White);
             g.particle.Draw(spriteBatch, gameTime);
             //spriteBatch.Draw(particle, g.particle.position, Color.White);
+            foreach (Ennemies ennemie in g.ennemies)
+            {
+                ennemie.Draw(spriteBatch, gameTime);
+            }
             spriteBatch.End();
             if (scrollX >= background.Width)
             {
                 scrollX = 0;
                 //g.vitesse = g.vitesse * 1.3f;
             }
-            // TODO: Add your drawing code here
-
+            // TODO: Add your drawing code here            
             base.Draw(gameTime);
+        }
+
+        public static bool BoundingCircle(int x1, int y1, int radius1, int x2, int y2, int radius2) 
+        { 
+            Vector2 V1 = new Vector2(x1, y1); // reference point 1 
+            Vector2 V2 = new Vector2(x2, y2); // reference point 2 
+            Vector2 Distance = V1 - V2; // get the distance between the two reference points 
+            if (Distance.Length() < radius1 + radius2) // if the distance is less than the diameter 
+                return true; 
+         
+            return false;
         }
     }
 }
