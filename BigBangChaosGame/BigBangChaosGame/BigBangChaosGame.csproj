@@ -111,6 +111,9 @@
     <Compile Include="Ennemies.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Particle.cs" />
+    <Compile Include="ParticleEmitter\Particle.cs" />
+    <Compile Include="ParticleEmitter\ParticleSystem.cs" />
+    <Compile Include="ParticleEmitter\ParticleSystemSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />

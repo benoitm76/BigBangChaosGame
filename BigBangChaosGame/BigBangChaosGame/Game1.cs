@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using System.Threading.Tasks;
 using System.Threading;
+using ParticleEmitter;
 
 namespace BigBangChaosGame
 {
@@ -33,6 +34,8 @@ namespace BigBangChaosGame
 
         private float distancy_meters = 0;
 
+        ParticleEmitter.ParticleSystem emitter = null;
+
         public Game1()
         {
             //Chargement des paramètres grapiques
@@ -54,6 +57,18 @@ namespace BigBangChaosGame
         /// </summary>
         protected override void Initialize()
         {
+            ParticleSystemSettings settings = new ParticleSystemSettings();
+            settings.ParticleTextureFileName = "ParticleStar";
+            settings.IsBurst = false;
+            settings.SetLifeTimes(1.0f, 1.5f);
+            settings.SetScales(0.1f, 0.4f);
+            settings.ParticlesPerSecond = 100.0f;
+            settings.InitialParticleCount = (int)(settings.ParticlesPerSecond * settings.MaximumLifeTime);
+            settings.SetDirectionAngles(0, 360);
+
+            emitter = new ParticleEmitter.ParticleSystem(this, settings);
+            Components.Add(emitter);
+
             // TODO: Add your initialization logic here
             base.Initialize();
         }
@@ -86,6 +101,8 @@ namespace BigBangChaosGame
             Mouse.SetPosition((int)g.particle.position.X, (int)g.particle.position.Y);
             g.particle.oldMouseState = Mouse.GetState();
             // TODO: use this.Content to load your game content here
+
+            emitter.OriginPosition = new Vector2(g.particle.position.X + g.particle.texture.Width / 2, g.particle.position.Y + g.particle.texture.Height / 2);
         }
 
         /// <summary>
@@ -174,6 +191,9 @@ namespace BigBangChaosGame
             {
                 g.generateEnnemies();
             }
+
+            emitter.OriginPosition = new Vector2(g.particle.position.X + g.particle.texture.Width / 2, g.particle.position.Y + g.particle.texture.Height / 2);
+
             base.Update(gameTime);
         }
 
@@ -193,6 +213,12 @@ namespace BigBangChaosGame
             //On dessine le fond
             spriteBatch.Draw(background, Vector2.Zero, new Rectangle(scrollX, 0, background.Width, background.Height), Color.White);
 
+            spriteBatch.End();
+
+            base.Draw(gameTime);            
+
+            spriteBatch.Begin();
+
             //On dessine la particule
             g.particle.Draw(spriteBatch, gameTime);
       
@@ -211,7 +237,7 @@ namespace BigBangChaosGame
             }
             
             // TODO: Add your drawing code here            
-            base.Draw(gameTime);
+            
         }
     }
 }
