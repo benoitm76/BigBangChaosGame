@@ -32,7 +32,7 @@ namespace BigBangChaosGame
         public Game(Vector2 size_window, ContentManager content)
         {
             vitesse = 1f;
-            maxEnnemies = 10;
+            maxEnnemies = 5;
             ennemies = new List<Ennemies>();
             controller = Game.Keyboard;
             random = new Random();
@@ -44,7 +44,7 @@ namespace BigBangChaosGame
         {
             if (ennemies.Count < maxEnnemies)
             {
-                if (random.Next(0, 1000) % 10 == 0)
+                if (random.Next(0, 1000) % 5 == 0)
                 {
                     bool collision = false;
                     Ennemies newEnnemie = new Ennemies(size_window);
@@ -53,12 +53,10 @@ namespace BigBangChaosGame
                     Parallel.ForEach(ennemies, ennemie =>
                     {
                         if (Collision.BoundingCircle(Collision.GetCenter((int)pos.X, (int)newEnnemie.texture.Width), Collision.GetCenter((int)pos.Y, (int)newEnnemie.texture.Height), (int)(newEnnemie.texture.Width / 2), Collision.GetCenter((int)ennemie.position.X, (int)ennemie.texture.Width), Collision.GetCenter((int)ennemie.position.Y, (int)ennemie.texture.Height), (int)(ennemie.texture.Width / 2)))
-                     {
-                        collision = true;
-                     }
+                        {
+                            collision = true;
+                        }
                     });
-
-
 
                     /*foreach (Ennemies ennemie in ennemies)
                     {

@@ -31,7 +31,7 @@ namespace BigBangChaosGame
 
         static Mutex mu;
 
-        private int distancy_meters = 0;
+        private float distancy_meters = 0;
 
         public Game1()
         {
@@ -144,29 +144,35 @@ namespace BigBangChaosGame
             });
 
             //Mise à jour de la difficulté du jeux en fonction de la distance
-            if (distancy_meters == 1000)
+            if (distancy_meters >= 1000)
             {
                 g.distance++;
-                if (g.distance % 5 == 0)
+                if (g.distance % 3 == 1)
                 {
-                    g.vitesse = g.vitesse * 1.2f;
+                    if (g.vitesse >= 2.5)
+                    {
+                        g.vitesse = g.vitesse * 1.2f;
+                    }
                 }
-                if (g.distance % 5 == 3)
+                if (g.distance % 3 == 2)
                 {
-                    g.maxEnnemies++;
+                    if (g.maxEnnemies >= 30)
+                    {
+                        g.maxEnnemies += 2;
+                    }
                 }
-                distancy_meters = 0;
+                distancy_meters -= 1000;
             }
-            distancy_meters++;            
+            distancy_meters += 1 * g.vitesse;            
 
             //On met à jour la liste des ennemies
             foreach (Ennemies ennemie in destroy_ennemies)
             {
                 g.ennemies.Remove(ennemie);
             }
-            if (scrollX % 10 == 0)
+            if (scrollX % (int)(10 / g.vitesse) == 0)
             {
-                Parallel.Invoke(() => { g.generateEnnemies(); });
+                g.generateEnnemies();
             }
             base.Update(gameTime);
         }
