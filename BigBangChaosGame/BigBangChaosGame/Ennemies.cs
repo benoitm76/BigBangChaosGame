@@ -9,14 +9,17 @@ namespace BigBangChaosGame
 {
     class Ennemies : Sprite
     {
+        public float coef_dep{get; set;}
+
         public Ennemies(Vector2 size_window, Vector2 position)
             : base(size_window)
         {
+            coef_dep = 1;
             this.position = position;             
         }
         public void Update(GameTime gameTime, int displacementX)
         {
-            Vector2 newPos = new Vector2(position.X - displacementX, position.Y);
+            Vector2 newPos = new Vector2(position.X , position.Y);
             position = newPos;
         }
     }

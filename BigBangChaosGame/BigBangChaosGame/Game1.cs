@@ -63,8 +63,9 @@ namespace BigBangChaosGame
             spriteBatch = new SpriteBatch(GraphicsDevice);
             background = Content.Load<Texture2D>("Pipe2");
             g.particle = new Particle(new Vector2(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight));
-            g.particle.LoadContent(Content, "particle_v1.0");
-            g.ennemies.Add(new Ennemies(size_window, new Vector2(size_window.X - 100, size_window.Y / 2)));
+            g.particle.LoadContent(Content, "particle_v2.1");
+            g.ennemies.Add(new Ennemies(size_window, new Vector2(size_window.X - 500, size_window.Y / 2)));
+            g.ennemies[0].coef_dep = 1.2f;
             foreach (Sprite ennemie in g.ennemies)
             {
                 ennemie.LoadContent(Content, "1P");
@@ -102,14 +103,17 @@ namespace BigBangChaosGame
             foreach(Ennemies ennemie in g.ennemies)
             {                
                 ennemie.Update(gameTime, displacementX);
-                if (Game1.BoundingCircle((int)g.particle.position.X, (int)g.particle.position.Y, (int)(g.particle.texture.Width / 2), (int)ennemie.position.X, (int)ennemie.position.Y, (int)(ennemie.texture.Width / 2)))
+                if (g.particle.nb_frame_invulnerability == 0)
                 {
-                    //g.ennemies.Remove(ennemie);
-                    g.particle.touched();
-                }
-                if (ennemie.position.X < 500)
-                {
-                    destroy_ennemies.Add(ennemie);
+                    if (Game1.BoundingCircle(GetCenter((int)g.particle.position.X, (int)g.particle.texture.Width), GetCenter((int)g.particle.position.Y, (int)g.particle.texture.Height), (int)(g.particle.texture.Width / 2), GetCenter((int)ennemie.position.X, (int)ennemie.texture.Width), GetCenter((int)ennemie.position.Y, (int)ennemie.texture.Height), (int)(ennemie.texture.Width / 2)))
+                    {
+                        //g.ennemies.Remove(ennemie);
+                        g.particle.touched();
+                    }
+                    if (ennemie.position.X < 0)
+                    {
+                        destroy_ennemies.Add(ennemie);
+                    }
                 }
             }
             foreach (Ennemies ennemie in destroy_ennemies)
@@ -155,6 +159,11 @@ namespace BigBangChaosGame
                 return true; 
          
             return false;
+        }
+
+        public static int GetCenter(int position, int size)
+        {
+            return position + (size / 2);
         }
     }
 }
