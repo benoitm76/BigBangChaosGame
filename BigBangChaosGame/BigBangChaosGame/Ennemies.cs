@@ -19,7 +19,7 @@ namespace BigBangChaosGame
         }
         public void Update(GameTime gameTime, int displacementX)
         {
-            Vector2 newPos = new Vector2(position.X , position.Y);
+            Vector2 newPos = new Vector2(position.X - displacementX * coef_dep, position.Y);
             position = newPos;
         }
     }

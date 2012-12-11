@@ -110,11 +110,13 @@ namespace BigBangChaosGame
                         //g.ennemies.Remove(ennemie);
                         g.particle.touched();
                     }
-                    if (ennemie.position.X < 0)
-                    {
-                        destroy_ennemies.Add(ennemie);
-                    }
                 }
+
+                if (ennemie.position.X < 0)
+                {
+                    destroy_ennemies.Add(ennemie);
+                }
+                
             }
             foreach (Ennemies ennemie in destroy_ennemies)
             {

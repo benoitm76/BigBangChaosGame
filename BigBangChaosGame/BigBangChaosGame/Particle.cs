@@ -90,7 +90,7 @@ namespace BigBangChaosGame
             Color color = Color.White;
             if (nb_frame_invulnerability != 0)
             {
-                if ((int)(nb_frame_invulnerability / 20) % 2 == 1)
+                if ((int)(nb_frame_invulnerability / 20) % 2 == 0)
                 {
                     color = Color.Transparent;
                 }
