@@ -150,8 +150,8 @@ namespace BigBangChaosGame
             spriteBatch.End();
             emitter.Draw(gameTime);
             spriteBatch.Begin();
-            Color color = Color.Blue;
-            Color color2 = Color.Red;
+            Color color = Color.White;
+            Color color2 = Color.Black;
             if (nb_frame_invulnerability != 0)
             {
                 if ((int)(nb_frame_invulnerability / 20) % 2 == 0)
@@ -161,14 +161,11 @@ namespace BigBangChaosGame
                 }
                 nb_frame_invulnerability--;
             }
-            if (health == 5)
-            {
-                //color2 = new Color(0, 0, 0, 0);
-            }
+            color2 = new Color(Math.Abs((health - 5)) * 51, Math.Abs((health - 5)) * 51, Math.Abs((health - 5)) * 51, Math.Abs((health - 5)) * 51);
+            color = new Color(health * 51, health * 51, health * 51, health * 51);
             if (health == 4)
             {
-                color2 = new Color(51, 51, 51, 51);
-                color = new Color(203, 203, 203, 203);
+
             }
             spriteBatch.Draw(texture, position, color);
             spriteBatch.Draw(texture2, position, color2);   
