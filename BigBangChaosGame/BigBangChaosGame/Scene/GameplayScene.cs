@@ -133,7 +133,7 @@ namespace BigBangChaosGame
                 {
                     scrollX = 0;
                 }                
-                g.particle.HandleInput(BBCGame.XboxController);
+                g.particle.HandleInput(BBCGame.Keyboard);
 
                 //Mise à jour de la position de la particule
                 g.particle.Update(gameTime);
