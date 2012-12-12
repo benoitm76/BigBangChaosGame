@@ -217,9 +217,9 @@ namespace BigBangChaosGame
                 }
                 if (g.particle.health <= 0)
                 {
-                    this.Remove();
+                    this.Remove();                    
+                    new HighScoreMenuScene(sceneMgr, g).Add();
                     new GameOverScene(sceneMgr).Add();
-                    //new HighScoreMenuScene(sceneMgr, g).Add();
                 }
             }
             base.Update(gameTime);
