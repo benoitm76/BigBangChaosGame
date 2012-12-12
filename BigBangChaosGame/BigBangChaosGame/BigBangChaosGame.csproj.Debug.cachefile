@@ -1,6 +1,3 @@
-Content\Pipe2.xnb
-Content\boule_png.xnb
-Content\1P.xnb
 Content\particle_v1.0.xnb
 Content\particle_v2.1.xnb
 Content\pipe_v1.0.xnb
@@ -25,10 +22,6 @@ Content\ControlesB.xnb
 Content\Down.xnb
 Content\High Scores_big.xnb
 Content\Left.xnb
-Content\Particule méchante rose.xnb
-Content\Particule méchante verte.xnb
-Content\Particule méchante violette.xnb
-Content\Particule rouge.xnb
 Content\Right.xnb
 Content\Up.xnb
 Content\Menu principal1.xnb
@@ -36,3 +29,4 @@ Content\Life.xnb
 Content\Dist.xnb
 Content\menufont.xnb
 Content\particle2_v1.0.xnb
+Content\fiole_v1.0.xnb

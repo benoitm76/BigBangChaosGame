@@ -85,8 +85,18 @@ namespace BigBangChaosGame
             {
                 if (random.Next(0, 100) == 55)
                 {
-                    MediKit newBonus = new MediKit(size_window);
-                    newBonus.LoadContent(content, "medic_kitv1.0");
+                    Bonus newBonus;
+                    if (random.Next(0, 100) % 2 == 0)
+                    {
+                        newBonus = new MediKit(size_window);
+                        newBonus.LoadContent(content, "medic_kitv1.0");                      
+                    }
+                    else
+                    {
+                        newBonus = new Invulnerability(size_window);
+                        newBonus.LoadContent(content, "fiole_v1.0");
+                        
+                    }
                     Vector2 pos = new Vector2((int)size_window.X, random.Next(70, (int)(size_window.Y - newBonus.texture.Height - 70)));
                     newBonus.position = pos;
                     bonus.Add(newBonus);

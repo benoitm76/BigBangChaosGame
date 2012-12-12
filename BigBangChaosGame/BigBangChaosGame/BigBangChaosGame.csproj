@@ -114,6 +114,7 @@
     <Compile Include="Ennemies.cs" />
     <Compile Include="BBCGame.cs" />
     <Compile Include="InstructionScene.cs" />
+    <Compile Include="Invulnerability.cs" />
     <Compile Include="MainMenuScene.cs" />
     <Compile Include="MediKit.cs" />
     <Compile Include="MenuButton.cs" />

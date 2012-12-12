@@ -42,27 +42,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Pipe2.jpg">
-      <Name>Pipe2</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="boule_png.png">
-      <Name>boule_png</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="1P.png">
-      <Name>1P</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="particle_v1.0.png">
       <Name>particle_v1.0</Name>
       <Importer>TextureImporter</Importer>
@@ -235,26 +214,6 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Particule méchante rose.png">
-      <Name>Particule méchante rose</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Particule méchante verte.png">
-      <Name>Particule méchante verte</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Particule méchante violette.png">
-      <Name>Particule méchante violette</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Particule rouge.png">
-      <Name>Particule rouge</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
     <Compile Include="Right.png">
       <Name>Right</Name>
       <Importer>TextureImporter</Importer>
@@ -276,6 +235,13 @@
   <ItemGroup>
     <Compile Include="particle2_v1.0.png">
       <Name>particle2_v1.0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="fiole_v1.0.png">
+      <Name>fiole_v1.0</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
