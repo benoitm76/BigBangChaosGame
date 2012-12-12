@@ -32,7 +32,7 @@ namespace BigBangChaosGame
             Components.Add(sceneMgr);
 
             new BackgroundScene(sceneMgr).Add();
-            new GameplayScene(sceneMgr).Add();
+            new MainMenuScene(sceneMgr).Add();
         }
 
         

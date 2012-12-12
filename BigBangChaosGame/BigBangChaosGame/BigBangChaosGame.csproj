@@ -113,6 +113,8 @@
     <Compile Include="BBCGame.cs" />
     <Compile Include="MainMenuScene.cs" />
     <Compile Include="MediKit.cs" />
+    <Compile Include="MenuButton.cs" />
+    <Compile Include="MouseEvent.cs" />
     <Compile Include="Scene\GameplayScene.cs" />
     <Compile Include="Particle.cs" />
     <Compile Include="ParticleEmitter\Particle.cs" />
