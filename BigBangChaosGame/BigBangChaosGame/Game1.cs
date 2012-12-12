@@ -60,9 +60,9 @@ namespace BigBangChaosGame
             ParticleSystemSettings settings = new ParticleSystemSettings();
             settings.ParticleTextureFileName = "ParticleStar";
             settings.IsBurst = false;
-            settings.SetLifeTimes(1.0f, 1.5f);
+            settings.SetLifeTimes(1f, 1.5f);
             settings.SetScales(0.1f, 0.4f);
-            settings.ParticlesPerSecond = 100.0f;
+            settings.ParticlesPerSecond = 50.0f;
             settings.InitialParticleCount = (int)(settings.ParticlesPerSecond * settings.MaximumLifeTime);
             settings.SetDirectionAngles(0, 360);
 
@@ -127,7 +127,7 @@ namespace BigBangChaosGame
 
             // TODO: Add your update logic here
             //Mouvement de la particule
-            g.particle.HandleInput(Game.Keyboard);
+            g.particle.HandleInput(Game.XboxController);
 
             //Mise à jour de la position de la particule
             g.particle.Update(gameTime);
@@ -173,7 +173,7 @@ namespace BigBangChaosGame
                 }
                 if (g.distance % 3 == 2)
                 {
-                    if (g.maxEnnemies <= 30)
+                    if (g.maxEnnemies <= 15)
                     {
                         g.maxEnnemies += 2;
                     }
