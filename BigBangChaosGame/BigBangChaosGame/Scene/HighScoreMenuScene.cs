@@ -10,26 +10,33 @@ namespace BigBangChaosGame.Scene
 {
     public class HighScoreMenuScene : AbstractMenuScene
     {
-
+        
         private SpriteFont _font;
         private BBCGame game;
         private int score;
         private ContentManager Content;
         SpriteBatch spriteBatch;
         private Texture2D background;
-
+       
         public HighScoreMenuScene(SceneManager sceneMgr, BBCGame game)
             : base(sceneMgr, "")
         {
             this.game = game;
             if (Content == null)
-                Content = new ContentManager(SceneManager.Game.Services, "Content");
+                {
+                    Content = new ContentManager(SceneManager.Game.Services, "Content");
+                }
+
+            
+            
         }
 
 
         public override void Initialize()
         {               
             // TODO: Add your initialization logic here
+            TabScore tab = new TabScore();
+           // tab.Ini();
             base.Initialize();           
         }
         protected override void LoadContent()
@@ -58,7 +65,7 @@ namespace BigBangChaosGame.Scene
             score = (int)game.distance;
             string text = string.Format("Score: {0} Km", score);
             Vector2 tailletext = _font.MeasureString(text);
-            spriteBatch.DrawString(_font, text, new Vector2((game.size_window.X / 2) - (tailletext.X / 2), 15), Color.White);
+            spriteBatch.DrawString(_font, text, new Vector2((game.size_window.X / 2) - (tailletext.X / 2), 250), Color.White);
 
 
 
