@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BigBangChaosGame
 {
-    class BBCGame
+    public class BBCGame
     {
 
         #region Constantes
@@ -17,7 +17,7 @@ namespace BigBangChaosGame
         public const int Mouse = 2;
         #endregion
 
-        public int distance { get; set; }
+        public float distance { get; set; }
         public float vitesse { get; set; }
         public Particle particle { get; set; }
         public List<Ennemies> ennemies { get; set; }

@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace BigBangChaosGame
 {
-    class Ennemies : Sprite
+    public class Ennemies : Sprite
     {
         public float coef_dep{get; set;}
 

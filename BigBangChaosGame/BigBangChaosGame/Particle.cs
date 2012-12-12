@@ -11,7 +11,7 @@ using ParticleEmitter;
 
 namespace BigBangChaosGame
 {
-    class Particle : Sprite
+    public class Particle : Sprite
     {
         public float coefDep { get; set; }
         public int nb_frame_invulnerability { get; set; }

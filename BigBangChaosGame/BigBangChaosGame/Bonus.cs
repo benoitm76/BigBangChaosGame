@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace BigBangChaosGame
 {
-    abstract class Bonus : Sprite
+    public abstract class Bonus : Sprite
     {
         public Bonus(Vector2 size_window) : base(size_window)
         {

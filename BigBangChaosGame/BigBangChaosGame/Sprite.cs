@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Input;
 namespace BigBangChaosGame
 {
     //Classe générique permettant l'affichage d'objet
-    class Sprite
+    public class Sprite
     {
         public Texture2D texture { get; set; }
         public Vector2 position { get; set; }

@@ -108,7 +108,7 @@ namespace BigBangChaosGame
                 if (g.particle.health <= 0)
                 {
                     this.Remove();
-                    new HighScoreMenuScene(sceneMgr).Add();
+                    new HighScoreMenuScene(sceneMgr, g).Add();
                 }
                 //On augmente le scrolling du fond
                 scrollX = (int)(scrollX + 5 * g.vitesse);
