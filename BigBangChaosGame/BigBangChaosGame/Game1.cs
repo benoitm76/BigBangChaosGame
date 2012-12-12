@@ -127,7 +127,7 @@ namespace BigBangChaosGame
 
             // TODO: Add your update logic here
             //Mouvement de la particule
-            g.particle.HandleInput(Game.XboxController);
+            g.particle.HandleInput(Game.Keyboard);
 
             //Mise à jour de la position de la particule
             g.particle.Update(gameTime);
@@ -166,14 +166,14 @@ namespace BigBangChaosGame
                 g.distance++;
                 if (g.distance % 3 == 1)
                 {
-                    if (g.vitesse >= 2.5)
+                    if (g.vitesse <= 2.5f)
                     {
-                        g.vitesse = g.vitesse * 1.2f;
+                        g.vitesse = g.vitesse * 1.5f;
                     }
                 }
                 if (g.distance % 3 == 2)
                 {
-                    if (g.maxEnnemies >= 30)
+                    if (g.maxEnnemies <= 30)
                     {
                         g.maxEnnemies += 2;
                     }

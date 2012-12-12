@@ -126,9 +126,9 @@ namespace BigBangChaosGame
             nb_frame_invulnerability = 60;
             new Task(() =>
                 {
-                    /*GamePad.SetVibration(PlayerIndex.One, 0.7f, 0.25f);
+                    GamePad.SetVibration(PlayerIndex.One, 0.7f, 0.25f);
                     System.Threading.Thread.Sleep(500);
-                    GamePad.SetVibration(PlayerIndex.One, 0f, 0f);*/
+                    GamePad.SetVibration(PlayerIndex.One, 0f, 0f);
                 }).Start();
         }
     }
