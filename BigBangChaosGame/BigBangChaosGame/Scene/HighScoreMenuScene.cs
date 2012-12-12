@@ -35,8 +35,8 @@ namespace BigBangChaosGame.Scene
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            background = Content.Load<Texture2D>("pipe_v2.0");
-            _font = Content.Load<SpriteFont>("menufont");
+            background = Content.Load<Texture2D>("fond");
+            _font = Content.Load<SpriteFont>("DF");
             
         }
 
@@ -53,9 +53,12 @@ namespace BigBangChaosGame.Scene
         {
 
             spriteBatch.Begin();
+            spriteBatch.Draw(background, new Rectangle(0, 0, background.Width, background.Height), Color.White );
+           
             score = (int)game.distance;
-            string text = string.Format("score: {0} Km", score);
-            spriteBatch.DrawString(_font, text, new Vector2(640 , 400), Color.Red);
+            string text = string.Format("Score: {0} Km", score);
+            Vector2 tailletext = _font.MeasureString(text);
+            spriteBatch.DrawString(_font, text, new Vector2((game.size_window.X / 2) - (tailletext.X / 2), 15), Color.White);
 
 
 
