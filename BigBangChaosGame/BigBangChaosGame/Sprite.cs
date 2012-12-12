@@ -15,6 +15,9 @@ namespace BigBangChaosGame
         public Texture2D texture { get; set; }
         public Vector2 position { get; set; }
         public Vector2 size_window { get; set; }
+
+        public Color[] color { get; set; }
+
         //public Vector2 size_particle { get; set; }
 
         //Le constructeur prenant en paramètre la taille de la fenêtre
@@ -32,6 +35,8 @@ namespace BigBangChaosGame
         public virtual void LoadContent(ContentManager content, string assetName)
         {
             texture = content.Load<Texture2D>(assetName);
+            color = new Color[texture.Width * texture.Height];
+            texture.GetData(color);
         }
 
         //Fonction Update de l'objet
@@ -48,6 +53,11 @@ namespace BigBangChaosGame
         public virtual void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
             spriteBatch.Draw(texture, position, Color.White);
+        }
+
+        public Rectangle getRectangle()
+        {
+            return new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
         }
     }
 }

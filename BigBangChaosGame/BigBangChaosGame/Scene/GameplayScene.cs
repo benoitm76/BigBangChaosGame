@@ -134,7 +134,13 @@ namespace BigBangChaosGame
                     if (g.particle.nb_frame_invulnerability == 0)
                     {
                         //On vérifie si il y a collision avec un ennemie
-                        if (Collision.BoundingCircle(Collision.GetCenter((int)g.particle.position.X, (int)g.particle.texture.Width), Collision.GetCenter((int)g.particle.position.Y, (int)g.particle.texture.Height), (int)(g.particle.texture.Width / 2), Collision.GetCenter((int)ennemie.position.X, (int)ennemie.texture.Width), Collision.GetCenter((int)ennemie.position.Y, (int)ennemie.texture.Height), (int)(ennemie.texture.Width / 2)))
+                        /*if (Collision.BoundingCircle(Collision.GetCenter((int)g.particle.position.X, (int)g.particle.texture.Width), Collision.GetCenter((int)g.particle.position.Y, (int)g.particle.texture.Height), (int)(g.particle.texture.Width / 2), Collision.GetCenter((int)ennemie.position.X, (int)ennemie.texture.Width), Collision.GetCenter((int)ennemie.position.Y, (int)ennemie.texture.Height), (int)(ennemie.texture.Width / 2)))
+                        {
+                            mu.WaitOne();
+                            g.particle.touched();
+                            mu.ReleaseMutex();
+                        }*/
+                        if (Collision.CheckCollision(g.particle.getRectangle(), g.particle.color, ennemie.getRectangle(), ennemie.color))
                         {
                             mu.WaitOne();
                             g.particle.touched();
