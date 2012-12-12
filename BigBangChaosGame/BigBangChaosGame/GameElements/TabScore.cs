@@ -16,21 +16,20 @@ namespace BigBangChaosGame
         public struct HighScoreData
         {
             public string[] PlayerName;
-            public decimal[] Score;
+            public int[] Score;
             public int Count;
 
           public HighScoreData(int count)
           {
               PlayerName = new string[count];
-              Score = new decimal[count];
+              Score = new int[count];
 
                Count = count;
           }
        }
 
 
-        public  void Ini()
-
+        public void Ini()
         {
             // Get the path of the save game
             string fullpath = "highscores.dat";
@@ -195,7 +194,7 @@ namespace BigBangChaosGame
 
 
         /* Save player highscore when game ends */
-        public void SaveHighScore(decimal score)
+        public void SaveHighScore(int score)
         {
             // Create the data to saved
             HighScoreData data = LoadHighScores(HighScoresFilename);
