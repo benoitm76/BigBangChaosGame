@@ -14,7 +14,7 @@ namespace BigBangChaosGame
     {
         public float coefDep { get; set; }
         public int nb_frame_invulnerability { get; set; }
-        private int health;
+        public int health;
 
         public MouseState oldMouseState { get; set; }
 

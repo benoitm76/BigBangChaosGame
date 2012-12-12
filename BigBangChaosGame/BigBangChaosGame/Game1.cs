@@ -34,6 +34,14 @@ namespace BigBangChaosGame
 
         private float distancy_meters = 0;
 
+        // ajout 12/12 9h by Simon, barre de vie et texte barre de vie.
+        private SpriteFont _lifePourcent;
+        SpriteBatch mBatch;
+        Texture2D mHealthBar;
+
+
+
+
         ParticleEmitter.ParticleSystem emitter = null;
 
         public Game1()
@@ -88,6 +96,12 @@ namespace BigBangChaosGame
             //Chargement de la particule
             g.particle = new Particle(new Vector2(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight));
             g.particle.LoadContent(Content, "particle_v2.1");
+
+
+            // chargement barre de vie et texte by Simon 12/12 9h
+            mBatch = new SpriteBatch(GraphicsDevice);
+            mHealthBar = Content.Load<Texture2D>("vie") as Texture2D;
+            _lifePourcent = Content.Load<SpriteFont>("Life");
 
             //Ajout d'un ennemie
             /*g.ennemies.Add(new Ennemies(size_window, new Vector2(size_window.X - 500, size_window.Y / 2)));
@@ -215,7 +229,32 @@ namespace BigBangChaosGame
 
             spriteBatch.End();
 
-            base.Draw(gameTime);            
+            base.Draw(gameTime);
+
+            // Desinne la barre de vie et son texte, by Simon
+            decimal pourcent = 100 - ((decimal)g.particle.health / 5) * 100;
+            if (pourcent > 100)
+            {
+                pourcent = 100;
+
+            }
+            mBatch.Begin();
+
+            mBatch.Draw(mHealthBar, new Rectangle(10,
+            10, mHealthBar.Width, mHealthBar.Height), new Rectangle(0, 0, mHealthBar.Width, mHealthBar.Height), Color.Blue);
+
+            mBatch.Draw(mHealthBar, new Rectangle(10,
+             10, (int)(mHealthBar.Width * (pourcent / 100)), mHealthBar.Height), new Rectangle(0, 0, mHealthBar.Width, mHealthBar.Height), Color.Red);
+
+            mBatch.End();
+
+            //text Barre de vie
+            spriteBatch.Begin();
+            string text = string.Format("Formation of Bigbang: {0} %", (int)pourcent);
+            spriteBatch.DrawString(_lifePourcent, text, new Vector2(40, 13), Color.White);
+            spriteBatch.End();
+            //
+
 
             spriteBatch.Begin();
 
