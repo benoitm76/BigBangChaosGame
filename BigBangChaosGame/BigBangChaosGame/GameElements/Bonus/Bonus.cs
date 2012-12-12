@@ -14,6 +14,8 @@ namespace BigBangChaosGame
 
         public abstract void applyBonus(BBCGame bbcgame);
 
+        public abstract void LoadContent(Microsoft.Xna.Framework.Content.ContentManager content);
+
         public void Update(GameTime gameTime, int displacementX)
         {
             Vector2 newPos = new Vector2(position.X - displacementX, position.Y);

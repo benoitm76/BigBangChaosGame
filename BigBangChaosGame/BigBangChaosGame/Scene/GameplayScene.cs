@@ -10,6 +10,8 @@ using ParticleEmitter;
 using Microsoft.Xna.Framework.Input;
 using System.Threading.Tasks;
 using BigBangChaosGame.Scene;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Media;
 
 namespace BigBangChaosGame
 {
@@ -35,6 +37,9 @@ namespace BigBangChaosGame
 
         private float _pauseAlpha;
 
+        private SoundEffect accelerateSound;
+        private Song mainTheme;
+
         // ajout 12/12 9h by Simon, barre de vie et texte barre de vie.
         private SpriteFont _lifePourcent;
         Texture2D mHealthBar;
@@ -47,7 +52,7 @@ namespace BigBangChaosGame
         {
             this.sceneMgr = sceneMgr;
             TransitionOnTime = TimeSpan.FromSeconds(1.5);
-            TransitionOffTime = TimeSpan.FromSeconds(0.5);
+            TransitionOffTime = TimeSpan.FromSeconds(0);
 
             if (Content == null)
                 Content = new ContentManager(SceneManager.Game.Services, "Content");
@@ -91,7 +96,23 @@ namespace BigBangChaosGame
             //Mise à jour position de la souris
             Mouse.SetPosition((int)g.particle.position.X, (int)g.particle.position.Y);
             g.particle.oldMouseState = Mouse.GetState();
+
+            accelerateSound = Content.Load<SoundEffect>("Sounds/accelerator_v1.2");
+            mainTheme = Content.Load<Song>("Sounds/main_theme_v1.0");
+            MediaPlayer.Volume = 0.3f;
+            MediaPlayer.IsRepeating = true;
             // TODO: use this.Content to load your game content here
+        }
+
+        protected override void UnloadContent()
+        {
+            if(Content != null)
+                Content.Unload();
+            if (MediaPlayer.State == MediaState.Playing)
+            {
+                MediaPlayer.Stop();
+            }            
+            mainTheme.Dispose();
         }
 
         public override void Update(GameTime gameTime)
@@ -105,6 +126,14 @@ namespace BigBangChaosGame
 
             if (IsActive)
             {
+                if (MediaPlayer.State == MediaState.Stopped)
+                {
+                    MediaPlayer.Play(mainTheme);
+                }
+                else if (MediaPlayer.State == MediaState.Paused)
+                {
+                    MediaPlayer.Resume();
+                }
 
                 //On augmente le scrolling du fond
                 scrollX = (int)(scrollX + 5 * g.vitesse);
@@ -114,7 +143,7 @@ namespace BigBangChaosGame
                 {
                     scrollX = 0;
                 }
-                g.particle.HandleInput(BBCGame.Keyboard);
+                g.particle.HandleInput(BBCGame.XboxController);
 
                 //Mise à jour de la position de la particule
                 g.particle.Update(gameTime);
@@ -181,6 +210,7 @@ namespace BigBangChaosGame
                         if (g.vitesse <= 2.5f)
                         {
                             g.vitesse = g.vitesse * 1.3f;
+                            accelerateSound.Play();
                         }
                     }
                     if ((int)(g.distance / 1000) == 2)
@@ -217,9 +247,17 @@ namespace BigBangChaosGame
                 }
                 if (g.particle.health <= 0)
                 {
-                    this.Remove();                    
+                    this.Remove();
+                    MediaPlayer.Stop();
                     new HighScoreMenuScene(sceneMgr, g).Add();
                     new GameOverScene(sceneMgr).Add();
+                }
+            }
+            else
+            {
+                if (MediaPlayer.State == MediaState.Playing)
+                {
+                    MediaPlayer.Pause();
                 }
             }
             base.Update(gameTime);
@@ -253,8 +291,8 @@ namespace BigBangChaosGame
 
             //Texte Distance
             string text2 = string.Format("{0:00000000}", g.distance);
-            spriteBatch.DrawString(_Dist, text2, new Vector2(750, 13), Color.Red);
-            spriteBatch.DrawString(_Dist, " Km traveled", new Vector2(840, 13), Color.Red);
+            spriteBatch.DrawString(_Dist, text2, new Vector2(size_window.X - 190, 13), Color.Red);
+            spriteBatch.DrawString(_Dist, " Km traveled", new Vector2(size_window.X - 110, 13), Color.Red);
 
             //On dessine la particule
             g.particle.Draw(spriteBatch, gameTime);

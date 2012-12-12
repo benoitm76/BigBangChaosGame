@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System.Threading.Tasks;
 using ParticleEmitter;
+using Microsoft.Xna.Framework.Audio;
 
 namespace BigBangChaosGame
 {
@@ -16,6 +17,8 @@ namespace BigBangChaosGame
         public float coefDep { get; set; }
         public int nb_frame_invulnerability { get; set; }
         public int health;
+
+        private SoundEffect collisionSound;
 
         public Texture2D texture2 { get; set; }
 
@@ -55,7 +58,7 @@ namespace BigBangChaosGame
             //On défini la position de la particule
             position = new Vector2(50, (size_window.Y - texture.Height) / 2);
 
-            emitter.OriginPosition = new Vector2(position.X + texture.Width / 2, position.Y + texture.Height / 2);
+            emitter.OriginPosition = new Vector2(position.X + texture.Width / 2, position.Y + texture.Height / 2);            
         }
 
         public void LoadContent(ContentManager content)
@@ -66,6 +69,8 @@ namespace BigBangChaosGame
             position = new Vector2(50, (size_window.Y - texture.Height) / 2);
 
             emitter.OriginPosition = new Vector2(position.X + texture.Width / 2, position.Y + texture.Height / 2);
+
+            collisionSound = content.Load<SoundEffect>("Sounds/collision_v1.2");
         }
 
         public void HandleInput(int controller)
@@ -171,6 +176,7 @@ namespace BigBangChaosGame
         {
             health--;
             nb_frame_invulnerability = 60;
+            collisionSound.Play();
             new Task(() =>
                 {
                     GamePad.SetVibration(PlayerIndex.One, 0.7f, 0.25f);

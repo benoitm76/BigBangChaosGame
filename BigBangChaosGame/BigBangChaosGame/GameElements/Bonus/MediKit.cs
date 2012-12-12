@@ -12,6 +12,12 @@ namespace BigBangChaosGame
             : base(size_window)
         {
         }
+
+        public override void LoadContent(Microsoft.Xna.Framework.Content.ContentManager content)
+        {
+            base.LoadContent(content, "medic_kitv1.0");
+        }
+
         public override void applyBonus(BBCGame bbcgame)
         {
             if(bbcgame.particle.health < 5)
