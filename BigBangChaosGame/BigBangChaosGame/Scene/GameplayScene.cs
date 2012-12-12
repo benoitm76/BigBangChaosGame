@@ -74,7 +74,7 @@ namespace BigBangChaosGame
             //Chargement de la particule
             g.particle = new Particle(new Vector2(size_window.X, size_window.Y), SceneManager.Game);
             g.particle.Initialize();
-            g.particle.LoadContent(Content, "particle_v2.1");
+            g.particle.LoadContent(Content);
 
             mHealthBar = Content.Load<Texture2D>("vie") as Texture2D;
             _lifePourcent = Content.Load<SpriteFont>("Life");

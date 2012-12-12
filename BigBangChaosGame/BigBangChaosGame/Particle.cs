@@ -17,6 +17,8 @@ namespace BigBangChaosGame
         public int nb_frame_invulnerability { get; set; }
         public int health;
 
+        public Texture2D texture2 { get; set; }
+
         private Game game;
 
         ParticleEmitter.ParticleSystem emitter = null;
@@ -50,6 +52,16 @@ namespace BigBangChaosGame
         public override void LoadContent(ContentManager content, string assetName) 
         {
             base.LoadContent(content, assetName);
+            //On défini la position de la particule
+            position = new Vector2(50, (size_window.Y - texture.Height) / 2);
+
+            emitter.OriginPosition = new Vector2(position.X + texture.Width / 2, position.Y + texture.Height / 2);
+        }
+
+        public void LoadContent(ContentManager content)
+        {
+            base.LoadContent(content, "particle_v2.1");
+            texture2 = content.Load<Texture2D>("particle2_v1.0");
             //On défini la position de la particule
             position = new Vector2(50, (size_window.Y - texture.Height) / 2);
 
@@ -138,16 +150,28 @@ namespace BigBangChaosGame
             spriteBatch.End();
             emitter.Draw(gameTime);
             spriteBatch.Begin();
-            Color color = Color.White;
+            Color color = Color.Blue;
+            Color color2 = Color.Red;
             if (nb_frame_invulnerability != 0)
             {
                 if ((int)(nb_frame_invulnerability / 20) % 2 == 0)
                 {
                     color = Color.Transparent;
+                    color2 = Color.Transparent;
                 }
                 nb_frame_invulnerability--;
             }
+            if (health == 5)
+            {
+                //color2 = new Color(0, 0, 0, 0);
+            }
+            if (health == 4)
+            {
+                color2 = new Color(51, 51, 51, 51);
+                color = new Color(203, 203, 203, 203);
+            }
             spriteBatch.Draw(texture, position, color);
+            spriteBatch.Draw(texture2, position, color2);   
         }
 
         public void touched()
