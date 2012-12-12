@@ -7,11 +7,8 @@ Content\pipe_v1.0.xnb
 Content\pipe_v2.0.xnb
 Content\ParticleStar.xnb
 Content\vie.xnb
-Content\Life.xnb
-Content\Dist.xnb
 Content\fond.xnb
 Content\blank.xnb
-Content\menufont.xnb
 Content\ennemie1_v1.0.xnb
 Content\medic_kitv1.0.xnb
 Content\ennemie2_v1.0.xnb
@@ -24,3 +21,16 @@ Content\Scores.xnb
 Content\Menu principal.xnb
 Content\ennemie1_v2.0.xnb
 Content\ennemie3_v1.0.xnb
+Content\ControlesB.xnb
+Content\Down.xnb
+Content\High Scores_big.xnb
+Content\Left.xnb
+Content\Particule méchante rose.xnb
+Content\Particule méchante verte.xnb
+Content\Particule méchante violette.xnb
+Content\Particule rouge.xnb
+Content\Right.xnb
+Content\Up.xnb
+Content\Life.xnb
+Content\Dist.xnb
+Content\menufont.xnb
