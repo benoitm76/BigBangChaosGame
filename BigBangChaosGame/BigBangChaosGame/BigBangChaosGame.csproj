@@ -123,6 +123,7 @@
     <Compile Include="Scene\Core\AbstractMenuScene.cs" />
     <Compile Include="Scene\BackgroundScene.cs" />
     <Compile Include="Scene\Core\SceneManager.cs" />
+    <Compile Include="Scene\HighScoreMenuScene.cs" />
     <Compile Include="Sprite.cs" />
   </ItemGroup>
   <ItemGroup>

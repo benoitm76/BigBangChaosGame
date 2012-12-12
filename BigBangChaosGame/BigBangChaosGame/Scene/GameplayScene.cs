@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Content;
 using ParticleEmitter;
 using Microsoft.Xna.Framework.Input;
 using System.Threading.Tasks;
+using BigBangChaosGame.Scene;
 
 namespace BigBangChaosGame
 {
@@ -124,6 +125,7 @@ namespace BigBangChaosGame
                 if (g.particle.health <= 0)
                 {
                     this.Remove();
+                    new HighScoreMenuScene(sceneMgr).Add();
                 }
                 //On augmente le scrolling du fond
                 scrollX = (int)(scrollX + 5 * g.vitesse);
