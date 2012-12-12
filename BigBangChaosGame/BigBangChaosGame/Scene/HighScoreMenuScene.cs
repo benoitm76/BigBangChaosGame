@@ -9,7 +9,7 @@ namespace BigBangChaosGame.Scene
     {
         private BBCGame game;
         public HighScoreMenuScene(SceneManager sceneMgr, BBCGame game)
-            : base(sceneMgr, "High Scores")
+            : base(sceneMgr, "")
         {
             this.game = game;
         }
