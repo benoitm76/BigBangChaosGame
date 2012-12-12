@@ -103,39 +103,39 @@ namespace BigBangChaosGame
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 sceneMgr.Game.Exit();
-
-            // TODO: Add your update logic here
-            if (mouseEvent.UpdateMouse() && mouseEvent.getMouseContainer().Intersects(button1.getContainer()))
+            if (IsActive)
             {
-                new GameplayScene(sceneMgr).Add();
+                // TODO: Add your update logic here
+                if (mouseEvent.UpdateMouse() && mouseEvent.getMouseContainer().Intersects(button1.getContainer()))
+                {
+                    new GameplayScene(sceneMgr).Add();
+                }
+
+                if (mouseEvent.UpdateMouse() && mouseEvent.getMouseContainer().Intersects(button2.getContainer()))
+                {
+                    new ControleScene(sceneMgr).Add();
+                }
+
+                if (mouseEvent.UpdateMouse() && mouseEvent.getMouseContainer().Intersects(button3.getContainer()))
+                {
+                    new CreditScene(sceneMgr).Add();
+                }
+
+                if (mouseEvent.UpdateMouse() && mouseEvent.getMouseContainer().Intersects(button4.getContainer()))
+                {
+                    sceneMgr.Game.Exit();
+                }
+
+                if (mouseEvent.UpdateMouse() && mouseEvent.getMouseContainer().Intersects(button5.getContainer()))
+                {
+                    new InstructionScene(sceneMgr).Add();
+                }
+
+                if (mouseEvent.UpdateMouse() && mouseEvent.getMouseContainer().Intersects(button6.getContainer()))
+                {
+                    new ScoreScene(sceneMgr).Add();
+                }
             }
-
-            if (mouseEvent.UpdateMouse() && mouseEvent.getMouseContainer().Intersects(button2.getContainer()))
-            {
-                new ControleScene(sceneMgr).Add();
-            }
-
-            if (mouseEvent.UpdateMouse() && mouseEvent.getMouseContainer().Intersects(button3.getContainer()))
-            {
-                new CreditScene(sceneMgr).Add();
-            }
-
-            if (mouseEvent.UpdateMouse() && mouseEvent.getMouseContainer().Intersects(button4.getContainer()))
-            {
-                sceneMgr.Game.Exit();
-            }
-
-            if (mouseEvent.UpdateMouse() && mouseEvent.getMouseContainer().Intersects(button5.getContainer()))
-            {
-                new InstructionScene(sceneMgr).Add();
-            }
-
-            if (mouseEvent.UpdateMouse() && mouseEvent.getMouseContainer().Intersects(button6.getContainer()))
-            {
-                new ScoreScene(sceneMgr).Add();
-            }
-
-
 
             base.Update(gameTime);
         }
@@ -146,6 +146,12 @@ namespace BigBangChaosGame
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Draw(GameTime gameTime)
         {
+
+            if (TransitionPosition > 0)
+            {
+                SceneManager.FadeBackBufferToBlack(TransitionAlpha);
+            }
+
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
@@ -163,7 +169,7 @@ namespace BigBangChaosGame
 
             sceneMgr.Game.IsMouseVisible = true;
             spriteBatch.End();
-            base.Draw(gameTime);
+            base.Draw(gameTime);            
         }
     }
 }
