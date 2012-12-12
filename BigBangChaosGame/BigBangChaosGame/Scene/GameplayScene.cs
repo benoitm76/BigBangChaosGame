@@ -105,11 +105,7 @@ namespace BigBangChaosGame
 
             if (IsActive)
             {
-                if (g.particle.health <= 0)
-                {
-                    this.Remove();
-                    new HighScoreMenuScene(sceneMgr, g).Add();
-                }
+
                 //On augmente le scrolling du fond
                 scrollX = (int)(scrollX + 5 * g.vitesse);
 
@@ -117,7 +113,7 @@ namespace BigBangChaosGame
                 if (scrollX >= background.Width)
                 {
                     scrollX = 0;
-                }                
+                }
                 g.particle.HandleInput(BBCGame.Keyboard);
 
                 //Mise à jour de la position de la particule
@@ -218,7 +214,13 @@ namespace BigBangChaosGame
                 if (scrollX % (int)(10 / g.vitesse) == 0)
                 {
                     Parallel.Invoke(g.generateEnnemies, g.generateBonus);
-                }                
+                }
+                if (g.particle.health <= 0)
+                {
+                    this.Remove();
+                    new GameOverScene(sceneMgr).Add();
+                    //new HighScoreMenuScene(sceneMgr, g).Add();
+                }
             }
             base.Update(gameTime);
         }

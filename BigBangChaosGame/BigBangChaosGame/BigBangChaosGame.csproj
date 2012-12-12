@@ -107,20 +107,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bonus.cs" />
-    <Compile Include="Collision.cs" />
-    <Compile Include="ControleScene.cs" />
-    <Compile Include="CreditScene.cs" />
-    <Compile Include="Ennemies.cs" />
-    <Compile Include="BBCGame.cs" />
-    <Compile Include="InstructionScene.cs" />
-    <Compile Include="Invulnerability.cs" />
-    <Compile Include="MainMenuScene.cs" />
-    <Compile Include="MediKit.cs" />
-    <Compile Include="MenuButton.cs" />
-    <Compile Include="MouseEvent.cs" />
+    <Compile Include="GameElements\Bonus\Bonus.cs" />
+    <Compile Include="GameElements\Core\Collision.cs" />
+    <Compile Include="Scene\ControleScene.cs" />
+    <Compile Include="Scene\CreditScene.cs" />
+    <Compile Include="GameElements\Ennemies.cs" />
+    <Compile Include="GameElements\BBCGame.cs" />
+    <Compile Include="Scene\GameOverScene.cs" />
+    <Compile Include="Scene\InstructionScene.cs" />
+    <Compile Include="GameElements\Bonus\Invulnerability.cs" />
+    <Compile Include="Scene\MainMenuScene.cs" />
+    <Compile Include="GameElements\Bonus\MediKit.cs" />
+    <Compile Include="GameElements\Core\MenuButton.cs" />
+    <Compile Include="GameElements\Core\MouseEvent.cs" />
     <Compile Include="Scene\GameplayScene.cs" />
-    <Compile Include="Particle.cs" />
+    <Compile Include="GameElements\Particle.cs" />
     <Compile Include="ParticleEmitter\Particle.cs" />
     <Compile Include="ParticleEmitter\ParticleSystem.cs" />
     <Compile Include="ParticleEmitter\ParticleSystemSettings.cs" />
@@ -132,9 +133,9 @@
     <Compile Include="Scene\BackgroundScene.cs" />
     <Compile Include="Scene\Core\SceneManager.cs" />
     <Compile Include="Scene\HighScoreMenuScene.cs" />
-    <Compile Include="ScoreScene.cs" />
-    <Compile Include="Sprite.cs" />
-    <Compile Include="TabScore.cs" />
+    <Compile Include="Scene\ScoreScene.cs" />
+    <Compile Include="GameElements\Core\Sprite.cs" />
+    <Compile Include="GameElements\TabScore.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

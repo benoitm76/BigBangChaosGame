@@ -31,7 +31,7 @@ namespace BigBangChaosGame
             var sceneMgr = new SceneManager(this);
             Components.Add(sceneMgr);
 
-            new BackgroundScene(sceneMgr).Add();
+            new BackgroundScene(sceneMgr).Add();            
             new MainMenuScene(sceneMgr).Add();
         }
 
