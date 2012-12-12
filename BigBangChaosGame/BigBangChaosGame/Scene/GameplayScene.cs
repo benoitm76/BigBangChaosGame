@@ -20,24 +20,14 @@ namespace BigBangChaosGame
         SpriteBatch spriteBatch;
 
         private Vector2 size_window;
-
         private Texture2D background;
-
         private int scrollX = 1;
-
         private BBCGame g;
-
         static Mutex mu;
-
         private float distancy_meters = 0;
-
         private ContentManager Content;
-
         private SceneManager sceneMgr;
-
-        private float _pauseAlpha;
-
-        private SoundEffect accelerateSound;
+        private float _pauseAlpha;        
         private Song mainTheme;
 
         // ajout 12/12 9h by Simon, barre de vie et texte barre de vie.
@@ -97,8 +87,7 @@ namespace BigBangChaosGame
             //Mise à jour position de la souris
             Mouse.SetPosition((int)g.particle.position.X, (int)g.particle.position.Y);
             g.particle.oldMouseState = Mouse.GetState();
-
-            accelerateSound = Content.Load<SoundEffect>("Sounds/accelerator_v1.2");
+            
             mainTheme = Content.Load<Song>("Sounds/main_theme_v1.0");
             MediaPlayer.Volume = 0.3f;
             MediaPlayer.IsRepeating = true;
@@ -204,34 +193,7 @@ namespace BigBangChaosGame
                 });
 
                 //Mise à jour de la difficulté du jeux en fonction de la distance
-                if (distancy_meters >= 1000)
-                {
-                    if ((int)(g.distance / 1000) % 4 == 1)
-                    {
-                        if (g.vitesse <= 2.5f)
-                        {
-                            g.vitesse = g.vitesse * 1.3f;
-                            accelerateSound.Play();
-                        }
-                    }
-                    if ((int)(g.distance / 1000) == 2)
-                    {
-                        if (g.maxEnnemies <= 15)
-                        {
-                            g.maxEnnemies += 1;
-                        }
-                    }
-                    if ((int)(g.distance / 1000) == 0)
-                    {
-                        if (g.maxEnnemies <= 15)
-                        {
-                            g.maxEnnemies += 1;
-                        }
-                    }
-                    distancy_meters -= 1000;
-                }
-                distancy_meters += 1 * g.vitesse;
-                g.distance += 1 * g.vitesse;
+                g.updateDistancy();
 
                 //On met à jour la liste des ennemies
                 foreach (Ennemies ennemie in destroy_ennemies)

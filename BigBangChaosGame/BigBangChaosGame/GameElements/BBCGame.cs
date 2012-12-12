@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework.Audio;
 
 namespace BigBangChaosGame
 {
@@ -27,7 +28,8 @@ namespace BigBangChaosGame
         public Vector2 size_window { get; set; }
         public int controller { get; set; }
         public ContentManager content { get; set; }
-
+        public float distancy_meters { get; set; }
+        private SoundEffect accelerateSound;
 
         public Random random;
 
@@ -42,6 +44,7 @@ namespace BigBangChaosGame
             random = new Random();
             this.size_window = size_window;
             this.content = content;
+            accelerateSound = content.Load<SoundEffect>("Sounds/accelerator_v1.2");
         }
 
         public void generateEnnemies()
@@ -100,6 +103,38 @@ namespace BigBangChaosGame
                     bonus.Add(newBonus);
                 }
             }
+        }
+
+        public void updateDistancy()
+        {
+            if (distancy_meters >= 1000)
+            {
+                if ((int)(distance / 1000) % 4 == 1)
+                {
+                    if (vitesse <= 2.5f)
+                    {
+                        vitesse = vitesse * 1.3f;
+                        accelerateSound.Play();
+                    }
+                }
+                if ((int)(distance / 1000) == 2)
+                {
+                    if (maxEnnemies <= 15)
+                    {
+                        maxEnnemies += 1;
+                    }
+                }
+                if ((int)(distance / 1000) == 0)
+                {
+                    if (maxEnnemies <= 15)
+                    {
+                        maxEnnemies += 1;
+                    }
+                }
+                distancy_meters -= 1000;
+            }
+            distancy_meters += 1 * vitesse;
+            distance += 1 * vitesse;
         }
     }
 }
