@@ -68,7 +68,7 @@ namespace BigBangChaosGame
             ParticleSystemSettings settings = new ParticleSystemSettings();
             settings.ParticleTextureFileName = "ParticleStar";
             settings.IsBurst = false;
-            settings.SetLifeTimes(1f, 1.5f);
+            settings.SetLifeTimes(0.5f, 1f);
             settings.SetScales(0.1f, 0.4f);
             settings.ParticlesPerSecond = 50.0f;
             settings.InitialParticleCount = (int)(settings.ParticlesPerSecond * settings.MaximumLifeTime);
