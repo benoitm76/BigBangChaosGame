@@ -109,8 +109,11 @@
   <ItemGroup>
     <Compile Include="Bonus.cs" />
     <Compile Include="Collision.cs" />
+    <Compile Include="ControleScene.cs" />
+    <Compile Include="CreditScene.cs" />
     <Compile Include="Ennemies.cs" />
     <Compile Include="BBCGame.cs" />
+    <Compile Include="InstructionScene.cs" />
     <Compile Include="MainMenuScene.cs" />
     <Compile Include="MediKit.cs" />
     <Compile Include="MenuButton.cs" />
@@ -128,6 +131,7 @@
     <Compile Include="Scene\BackgroundScene.cs" />
     <Compile Include="Scene\Core\SceneManager.cs" />
     <Compile Include="Scene\HighScoreMenuScene.cs" />
+    <Compile Include="ScoreScene.cs" />
     <Compile Include="Sprite.cs" />
   </ItemGroup>
   <ItemGroup>

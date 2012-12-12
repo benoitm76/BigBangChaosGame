@@ -113,12 +113,12 @@ namespace BigBangChaosGame
 
             if (mouseEvent.UpdateMouse() && mouseEvent.getMouseContainer().Intersects(button2.getContainer()))
             {
-                new GameplayScene(sceneMgr).Add();
+                new ControleScene(sceneMgr).Add();
             }
 
             if (mouseEvent.UpdateMouse() && mouseEvent.getMouseContainer().Intersects(button3.getContainer()))
             {
-                new GameplayScene(sceneMgr).Add();
+                new CreditScene(sceneMgr).Add();
             }
 
             if (mouseEvent.UpdateMouse() && mouseEvent.getMouseContainer().Intersects(button4.getContainer()))
@@ -128,12 +128,12 @@ namespace BigBangChaosGame
 
             if (mouseEvent.UpdateMouse() && mouseEvent.getMouseContainer().Intersects(button5.getContainer()))
             {
-                new GameplayScene(sceneMgr).Add();
+                new InstructionScene(sceneMgr).Add();
             }
 
             if (mouseEvent.UpdateMouse() && mouseEvent.getMouseContainer().Intersects(button6.getContainer()))
             {
-                new GameplayScene(sceneMgr).Add();
+                new ScoreScene(sceneMgr).Add();
             }
 
 
