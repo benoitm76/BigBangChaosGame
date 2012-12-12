@@ -21,7 +21,9 @@ namespace BigBangChaosGame
         public float vitesse { get; set; }
         public Particle particle { get; set; }
         public List<Ennemies> ennemies { get; set; }
+        public List<Bonus> bonus { get; set; }
         public int maxEnnemies { get; set; }
+        public int maxBonus { get; set; }
         public Vector2 size_window { get; set; }
         public int controller { get; set; }
         public ContentManager content { get; set; }
@@ -33,7 +35,9 @@ namespace BigBangChaosGame
         {
             vitesse = 1f;
             maxEnnemies = 5;
+            maxBonus = 2;
             ennemies = new List<Ennemies>();
+            bonus = new List<Bonus>();
             controller = BBCGame.Keyboard;
             random = new Random();
             this.size_window = size_window;
@@ -48,7 +52,7 @@ namespace BigBangChaosGame
                 {
                     bool collision = false;
                     Ennemies newEnnemie = new Ennemies(size_window);
-                    newEnnemie.LoadContent(content, "1P");
+                    newEnnemie.LoadContent(content, "ennemie2_v1.0");
                     Vector2 pos = new Vector2((int)size_window.X, random.Next(70, (int)(size_window.Y - newEnnemie.texture.Height - 70)));
                     Parallel.ForEach(ennemies, ennemie =>
                     {
@@ -72,6 +76,20 @@ namespace BigBangChaosGame
                         newEnnemie.coef_dep = f;
                         ennemies.Add(newEnnemie);
                     }
+                }
+            }
+        }
+        public void generateBonus()
+        {
+            if (bonus.Count < maxBonus)
+            {
+                if (random.Next(0, 100) == 55)
+                {
+                    MediKit newBonus = new MediKit(size_window);
+                    newBonus.LoadContent(content, "medic_kitv1.0");
+                    Vector2 pos = new Vector2((int)size_window.X, random.Next(70, (int)(size_window.Y - newBonus.texture.Height - 70)));
+                    newBonus.position = pos;
+                    bonus.Add(newBonus);
                 }
             }
         }

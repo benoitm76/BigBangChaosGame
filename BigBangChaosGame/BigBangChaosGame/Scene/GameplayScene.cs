@@ -151,6 +151,19 @@ namespace BigBangChaosGame
                     }
                 });
 
+
+                List<Bonus> destroy_bonus = new List<Bonus>();
+                Parallel.ForEach(g.bonus, lbonus =>
+                {
+                    lbonus.Update(gameTime, displacementX);
+                    if (lbonus.position.X < 0 - lbonus.texture.Width)
+                    {
+                        mu.WaitOne();
+                        destroy_bonus.Add(lbonus);
+                        mu.ReleaseMutex();
+                    }
+                });
+
                 //Mise à jour de la difficulté du jeux en fonction de la distance
                 if (distancy_meters >= 1000)
                 {
@@ -185,9 +198,13 @@ namespace BigBangChaosGame
                 {
                     g.ennemies.Remove(ennemie);
                 }
+                foreach (Bonus lbonus in destroy_bonus)
+                {
+                    g.bonus.Remove(lbonus);
+                }
                 if (scrollX % (int)(10 / g.vitesse) == 0)
                 {
-                    g.generateEnnemies();
+                    Parallel.Invoke(g.generateEnnemies, g.generateBonus);
                 }                
             }
             base.Update(gameTime);
@@ -231,6 +248,11 @@ namespace BigBangChaosGame
             foreach (Ennemies ennemie in g.ennemies)
             {
                 ennemie.Draw(spriteBatch, gameTime);
+            }
+
+            foreach (Bonus lbonus in g.bonus)
+            {
+                lbonus.Draw(spriteBatch, gameTime);
             }
 
             spriteBatch.End();
