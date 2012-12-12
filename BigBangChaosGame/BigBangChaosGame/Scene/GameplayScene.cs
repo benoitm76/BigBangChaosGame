@@ -180,7 +180,6 @@ namespace BigBangChaosGame
                 //Mise à jour de la difficulté du jeux en fonction de la distance
                 if (distancy_meters >= 1000)
                 {
-                    g.distance++;
                     if (g.distance % 4 == 1)
                     {
                         if (g.vitesse <= 2.5f)
@@ -205,6 +204,7 @@ namespace BigBangChaosGame
                     distancy_meters -= 1000;
                 }
                 distancy_meters += 1 * g.vitesse;
+                g.distance += 1 * g.vitesse;
 
                 //On met à jour la liste des ennemies
                 foreach (Ennemies ennemie in destroy_ennemies)
@@ -250,9 +250,9 @@ namespace BigBangChaosGame
             spriteBatch.DrawString(_lifePourcent, text, new Vector2(40, 13), Color.White);
 
             //Texte Distance
-            string text2 = string.Format("{0},{1:000}", g.distance, distancy_meters);
-            spriteBatch.DrawString(_Dist, text2, new Vector2(800, 13), Color.Red);
-            spriteBatch.DrawString(_Dist, "K Km traveled", new Vector2(840, 13), Color.Red);
+            string text2 = string.Format("{0:00000000}", g.distance);
+            spriteBatch.DrawString(_Dist, text2, new Vector2(750, 13), Color.Red);
+            spriteBatch.DrawString(_Dist, " Km traveled", new Vector2(840, 13), Color.Red);
 
             //On dessine la particule
             g.particle.Draw(spriteBatch, gameTime);

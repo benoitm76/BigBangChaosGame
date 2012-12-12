@@ -14,7 +14,8 @@ namespace BigBangChaosGame
         }
         public override void applyBonus(BBCGame bbcgame)
         {
-            bbcgame.particle.health += 1;
+            if(bbcgame.particle.health < 5)
+                bbcgame.particle.health += 1;
         }
     }
 }
