@@ -133,6 +133,7 @@
     <Compile Include="Scene\HighScoreMenuScene.cs" />
     <Compile Include="ScoreScene.cs" />
     <Compile Include="Sprite.cs" />
+    <Compile Include="TabScore.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

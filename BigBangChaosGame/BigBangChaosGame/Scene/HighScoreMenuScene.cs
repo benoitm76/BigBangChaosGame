@@ -14,6 +14,8 @@ namespace BigBangChaosGame.Scene
 
         protected override void OnCancel()
         {
+
+
         }
     }
 }
