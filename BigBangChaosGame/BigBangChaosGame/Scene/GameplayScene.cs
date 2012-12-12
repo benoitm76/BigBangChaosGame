@@ -162,7 +162,14 @@ namespace BigBangChaosGame
                 Parallel.ForEach(g.bonus, lbonus =>
                 {
                     lbonus.Update(gameTime, displacementX);
-                    if (lbonus.position.X < 0 - lbonus.texture.Width)
+                    if (Collision.CheckCollision(g.particle.getRectangle(), g.particle.color, lbonus.getRectangle(), lbonus.color))
+                    {
+                        mu.WaitOne();
+                        lbonus.applyBonus(g);
+                        destroy_bonus.Add(lbonus);
+                        mu.ReleaseMutex();
+                    }
+                    else if (lbonus.position.X < 0 - lbonus.texture.Width)
                     {
                         mu.WaitOne();
                         destroy_bonus.Add(lbonus);

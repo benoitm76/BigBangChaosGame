@@ -7,9 +7,11 @@ namespace BigBangChaosGame.Scene
 {
     public class HighScoreMenuScene : AbstractMenuScene
     {
-        public HighScoreMenuScene(SceneManager sceneMgr)
+        private BBCGame game;
+        public HighScoreMenuScene(SceneManager sceneMgr, BBCGame game)
             : base(sceneMgr, "High Scores")
         {
+            this.game = game;
         }
 
         protected override void OnCancel()
