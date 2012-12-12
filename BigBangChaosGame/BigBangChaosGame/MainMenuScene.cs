@@ -77,7 +77,7 @@ namespace BigBangChaosGame
                 Content = new ContentManager(SceneManager.Game.Services, "Content");
 
             // fond pour le menu
-            background = Content.Load<Texture2D>("Menu principal");
+            background = Content.Load<Texture2D>("Menu principal1");
 
 
             // TODO: use this.Content to load your game content here
