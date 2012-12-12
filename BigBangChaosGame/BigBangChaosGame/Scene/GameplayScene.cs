@@ -42,8 +42,6 @@ namespace BigBangChaosGame
         // ajout 12/12 9h by Simon, Affiche de la distance
         private SpriteFont _Dist;
 
-        ParticleEmitter.ParticleSystem emitter = null;
-
         public GameplayScene(SceneManager sceneMgr)
             : base(sceneMgr)
         {
@@ -61,24 +59,10 @@ namespace BigBangChaosGame
         }
 
         public override void Initialize()
-        {
-            ParticleSystemSettings settings = new ParticleSystemSettings();
-            settings.ParticleTextureFileName = "ParticleStar";
-            settings.IsBurst = false;
-            settings.SetLifeTimes(0.5f, 1f);
-            settings.SetScales(0.1f, 0.4f);
-            settings.ParticlesPerSecond = 50.0f;
-            settings.InitialParticleCount = (int)(settings.ParticlesPerSecond * settings.MaximumLifeTime);
-            settings.SetDirectionAngles(0, 360);
-
-            emitter = new ParticleEmitter.ParticleSystem(SceneManager.Game, settings);
-            emitter.Initialize();
-            //Components.Add(emitter);
-
+        {               
             // TODO: Add your initialization logic here
-            base.Initialize();
+            base.Initialize();           
         }
-
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
@@ -88,7 +72,8 @@ namespace BigBangChaosGame
             background = Content.Load<Texture2D>("pipe_v2.0");
 
             //Chargement de la particule
-            g.particle = new Particle(new Vector2(size_window.X, size_window.Y));
+            g.particle = new Particle(new Vector2(size_window.X, size_window.Y), SceneManager.Game);
+            g.particle.Initialize();
             g.particle.LoadContent(Content, "particle_v2.1");
 
             mHealthBar = Content.Load<Texture2D>("vie") as Texture2D;
@@ -107,8 +92,6 @@ namespace BigBangChaosGame
             Mouse.SetPosition((int)g.particle.position.X, (int)g.particle.position.Y);
             g.particle.oldMouseState = Mouse.GetState();
             // TODO: use this.Content to load your game content here
-
-            emitter.OriginPosition = new Vector2(g.particle.position.X + g.particle.texture.Width / 2, g.particle.position.Y + g.particle.texture.Height / 2);
         }
 
         public override void Update(GameTime gameTime)
@@ -205,11 +188,8 @@ namespace BigBangChaosGame
                 if (scrollX % (int)(10 / g.vitesse) == 0)
                 {
                     g.generateEnnemies();
-                }
-
-                emitter.OriginPosition = new Vector2(g.particle.position.X + g.particle.texture.Width / 2, g.particle.position.Y + g.particle.texture.Height / 2);
+                }                
             }
-            emitter.Update(gameTime);
             base.Update(gameTime);
         }
 
@@ -229,12 +209,7 @@ namespace BigBangChaosGame
                 pourcent = 100;
 
             }
-            spriteBatch.End();
-
-            emitter.Draw(gameTime);
-
-            spriteBatch.Begin();
-
+            
             spriteBatch.Draw(mHealthBar, new Rectangle(10,
             10, mHealthBar.Width, mHealthBar.Height), new Rectangle(0, 0, mHealthBar.Width, mHealthBar.Height), Color.Blue);
 

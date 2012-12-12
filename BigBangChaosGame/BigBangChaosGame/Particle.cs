@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System.Threading.Tasks;
+using ParticleEmitter;
 
 namespace BigBangChaosGame
 {
@@ -16,12 +17,34 @@ namespace BigBangChaosGame
         public int nb_frame_invulnerability { get; set; }
         public int health;
 
+        private Game game;
+
+        ParticleEmitter.ParticleSystem emitter = null;
+
         public MouseState oldMouseState { get; set; }
 
-        public Particle(Vector2 size_window) : base (size_window)
+        public Particle(Vector2 size_window, Game game) : base (size_window)
         {
+            this.game = game;
             health = 5;
             coefDep = 10f;
+        }
+
+        public override void Initialize()
+        {
+            ParticleSystemSettings settings = new ParticleSystemSettings();
+            settings.ParticleTextureFileName = "ParticleStar";
+            settings.IsBurst = false;
+            settings.SetLifeTimes(0.5f, 1f);
+            settings.SetScales(0.1f, 0.4f);
+            settings.ParticlesPerSecond = 50.0f;
+            settings.InitialParticleCount = (int)(settings.ParticlesPerSecond * settings.MaximumLifeTime);
+            settings.SetDirectionAngles(0, 360);
+
+            emitter = new ParticleEmitter.ParticleSystem(game, settings);
+            emitter.Initialize();
+
+            base.Initialize();
         }
         
         public override void LoadContent(ContentManager content, string assetName) 
@@ -29,6 +52,8 @@ namespace BigBangChaosGame
             base.LoadContent(content, assetName);
             //On défini la position de la particule
             position = new Vector2(50, (size_window.Y - texture.Height) / 2);
+
+            emitter.OriginPosition = new Vector2(position.X + texture.Width / 2, position.Y + texture.Height / 2);
         }
 
         public void HandleInput(int controller)
@@ -104,10 +129,15 @@ namespace BigBangChaosGame
                 newPos.Y = 70;
             }            
             position = newPos;
+            emitter.OriginPosition = new Vector2(position.X + texture.Width / 2, position.Y + texture.Height / 2);
+            emitter.Update(gameTime);
         }
 
         public override void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
+            spriteBatch.End();
+            emitter.Draw(gameTime);
+            spriteBatch.Begin();
             Color color = Color.White;
             if (nb_frame_invulnerability != 0)
             {
