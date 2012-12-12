@@ -52,7 +52,7 @@ namespace BigBangChaosGame
                 {
                     bool collision = false;
                     Ennemies newEnnemie = new Ennemies(size_window);
-                    newEnnemie.LoadContent(content, "ennemie2_v1.0");
+                    newEnnemie.LoadContent(content, newEnnemie.type_ennemies[random.Next(0,3)]);
                     Vector2 pos = new Vector2((int)size_window.X, random.Next(70, (int)(size_window.Y - newEnnemie.texture.Height - 70)));
                     Parallel.ForEach(ennemies, ennemie =>
                     {

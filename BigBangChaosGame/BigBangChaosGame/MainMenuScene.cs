@@ -17,7 +17,6 @@ namespace BigBangChaosGame
 {
     public class MainMenuScene : AbstractMenuScene
     {
-        GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         MenuButton button1;
         MenuButton button2;

@@ -180,21 +180,21 @@ namespace BigBangChaosGame
                 //Mise à jour de la difficulté du jeux en fonction de la distance
                 if (distancy_meters >= 1000)
                 {
-                    if (g.distance % 4 == 1)
+                    if ((int)(g.distance / 1000) % 4 == 1)
                     {
                         if (g.vitesse <= 2.5f)
                         {
                             g.vitesse = g.vitesse * 1.3f;
                         }
                     }
-                    if (g.distance % 4 == 2)
+                    if ((int)(g.distance / 1000) == 2)
                     {
                         if (g.maxEnnemies <= 15)
                         {
                             g.maxEnnemies += 1;
                         }
                     }
-                    if (g.distance % 4 == 0)
+                    if ((int)(g.distance / 1000) == 0)
                     {
                         if (g.maxEnnemies <= 15)
                         {
