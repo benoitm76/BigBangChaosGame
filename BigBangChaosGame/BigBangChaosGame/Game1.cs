@@ -39,8 +39,8 @@ namespace BigBangChaosGame
         SpriteBatch mBatch;
         Texture2D mHealthBar;
 
-
-
+        // ajout 12/12 9h by Simon, Affiche de la distance
+        private SpriteFont _Dist;
 
         ParticleEmitter.ParticleSystem emitter = null;
 
@@ -102,6 +102,8 @@ namespace BigBangChaosGame
             mBatch = new SpriteBatch(GraphicsDevice);
             mHealthBar = Content.Load<Texture2D>("vie") as Texture2D;
             _lifePourcent = Content.Load<SpriteFont>("Life");
+            // chargement barre de vie et texte by Simon 12/12 9h
+            _Dist= Content.Load<SpriteFont>("Dist");
 
             //Ajout d'un ennemie
             /*g.ennemies.Add(new Ennemies(size_window, new Vector2(size_window.X - 500, size_window.Y / 2)));
@@ -248,12 +250,22 @@ namespace BigBangChaosGame
 
             mBatch.End();
 
-            //text Barre de vie
+            //Texte Barre de vie
             spriteBatch.Begin();
             string text = string.Format("Formation of Bigbang: {0} %", (int)pourcent);
             spriteBatch.DrawString(_lifePourcent, text, new Vector2(40, 13), Color.White);
+
+            //Texte Distance
+            string text2 = string.Format("{0},{1:000}", g.distance, distancy_meters);
+            spriteBatch.DrawString(_Dist, text2, new Vector2(800, 13), Color.Red);
+            spriteBatch.DrawString(_Dist, "K Km traveled", new Vector2(840, 13), Color.Red);
+            
+
             spriteBatch.End();
-            //
+          
+
+            
+
 
 
             spriteBatch.Begin();
