@@ -110,6 +110,7 @@
     <Compile Include="Collision.cs" />
     <Compile Include="Ennemies.cs" />
     <Compile Include="BBCGame.cs" />
+    <Compile Include="MainMenuScene.cs" />
     <Compile Include="Scene\GameplayScene.cs" />
     <Compile Include="Particle.cs" />
     <Compile Include="ParticleEmitter\Particle.cs" />

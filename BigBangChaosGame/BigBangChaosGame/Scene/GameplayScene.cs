@@ -170,18 +170,25 @@ namespace BigBangChaosGame
                 if (distancy_meters >= 1000)
                 {
                     g.distance++;
-                    if (g.distance % 3 == 1)
+                    if (g.distance % 4 == 1)
                     {
                         if (g.vitesse <= 2.5f)
                         {
-                            g.vitesse = g.vitesse * 1.5f;
+                            g.vitesse = g.vitesse * 1.3f;
                         }
                     }
-                    if (g.distance % 3 == 2)
+                    if (g.distance % 4 == 2)
                     {
                         if (g.maxEnnemies <= 15)
                         {
-                            g.maxEnnemies += 2;
+                            g.maxEnnemies += 1;
+                        }
+                    }
+                    if (g.distance % 4 == 0)
+                    {
+                        if (g.maxEnnemies <= 15)
+                        {
+                            g.maxEnnemies += 1;
                         }
                     }
                     distancy_meters -= 1000;
