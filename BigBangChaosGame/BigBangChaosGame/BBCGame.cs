@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BigBangChaosGame
 {
-    class Game
+    class BBCGame
     {
 
         #region Constantes
@@ -29,12 +29,12 @@ namespace BigBangChaosGame
 
         public Random random;
 
-        public Game(Vector2 size_window, ContentManager content)
+        public BBCGame(Vector2 size_window, ContentManager content)
         {
             vitesse = 1f;
             maxEnnemies = 5;
             ennemies = new List<Ennemies>();
-            controller = Game.Keyboard;
+            controller = BBCGame.Keyboard;
             random = new Random();
             this.size_window = size_window;
             this.content = content;

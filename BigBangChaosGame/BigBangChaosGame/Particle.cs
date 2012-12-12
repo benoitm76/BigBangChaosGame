@@ -36,7 +36,7 @@ namespace BigBangChaosGame
             //Permet de déplacer la particule
             Vector2 displacement = new Vector2();
             Vector2 newPos = new Vector2(position.X, position.Y);
-            if(controller == Game.Keyboard)
+            if(controller == BBCGame.Keyboard)
             {
                 KeyboardState keyboardState = Keyboard.GetState();
                 if (keyboardState.IsKeyDown(Keys.Up))
@@ -60,7 +60,7 @@ namespace BigBangChaosGame
                 newPos.Y = newPos.Y + displacement.Y * coefDep;
             }
 
-            else if (controller == Game.XboxController)
+            else if (controller == BBCGame.XboxController)
             {
                 GamePadState gamepadState = GamePad.GetState(PlayerIndex.One);
                 GamePadCapabilities gamepadCaps = GamePad.GetCapabilities(PlayerIndex.One);
@@ -70,7 +70,7 @@ namespace BigBangChaosGame
                 newPos.X = newPos.X + displacement.X * coefDep;
                 newPos.Y = newPos.Y + displacement.Y * coefDep;
             }
-            else if (controller == Game.Mouse)
+            else if (controller == BBCGame.Mouse)
             {
                 MouseState mouseState = Mouse.GetState();
                 displacement.X = mouseState.X - oldMouseState.X;
