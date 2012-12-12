@@ -50,6 +50,7 @@ namespace BigBangChaosGame
         public GameplayScene(SceneManager sceneMgr)
             : base(sceneMgr)
         {
+            _pauseAlpha = 0;
             this.sceneMgr = sceneMgr;
             TransitionOnTime = TimeSpan.FromSeconds(1.5);
             TransitionOffTime = TimeSpan.FromSeconds(0);
