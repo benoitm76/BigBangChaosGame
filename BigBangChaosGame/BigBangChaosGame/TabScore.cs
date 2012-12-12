@@ -234,7 +234,7 @@ namespace BigBangChaosGame
             // Create scoreBoardString
             string scoreBoardString = "Highscores:\n\n";
 
-            for (int i = 0; i < 5; i++) // this part was missing (5 means how many in the list/array/Counter)
+            for (int i = 0; i < 6; i++) // this part was missing (5 means how many in the list/array/Counter)
             {
                 scoreBoardString = scoreBoardString + data2.PlayerName[i] + "-" + data2.Score[i] + "\n";
             }

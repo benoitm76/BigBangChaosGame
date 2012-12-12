@@ -58,6 +58,7 @@ namespace BigBangChaosGame
 
                 SaveHighScores(data, HighScoresFilename, device);
             }
+            /*
 #elif XBOX
  
             using (IsolatedStorageFile iso = IsolatedStorageFile.GetUserStoreForApplication())
@@ -88,7 +89,7 @@ namespace BigBangChaosGame
  
 #endif
 
-
+            */
         }
 
 
