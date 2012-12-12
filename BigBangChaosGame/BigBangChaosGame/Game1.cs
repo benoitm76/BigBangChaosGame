@@ -257,7 +257,7 @@ namespace BigBangChaosGame
 
             //Texte Distance
             string text2 = string.Format("{0},{1:000}", g.distance, distancy_meters);
-            spriteBatch.DrawString(_Dist, text2, new Vector2(800, 13), Color.Red);
+            spriteBatch.DrawString(_Dist, text2, new Vector2( 800, 13), Color.Red);
             spriteBatch.DrawString(_Dist, "K Km traveled", new Vector2(840, 13), Color.Red);
             
 
