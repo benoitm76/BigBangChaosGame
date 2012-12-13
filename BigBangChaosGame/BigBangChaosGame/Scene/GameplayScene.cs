@@ -186,7 +186,7 @@ namespace BigBangChaosGame
                     if (Collision.CheckCollision(g.particle.getRectangle(), g.particle.color, lbonus.getRectangle(), lbonus.color))
                     {
                         mu.WaitOne();
-                        lbonus.applyBonus(g);
+                        lbonus.applyBonus();
                         destroy_bonus.Add(lbonus);
                         mu.ReleaseMutex();
                     }

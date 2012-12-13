@@ -8,8 +8,8 @@ namespace BigBangChaosGame
 {
     class GameJam : Bonus
     {
-        public GameJam(Vector2 size_window)
-            : base(size_window)
+        public GameJam(Vector2 size_window, BBCGame bbcgame)
+            : base(size_window, bbcgame)
         {
         }
 
@@ -18,7 +18,7 @@ namespace BigBangChaosGame
             base.LoadContent(content, "logo_gamjam_bonus_v1.0");
         }
 
-        public override void applyBonus(BBCGame bbcgame)
+        public override void applyBonus()
         {
             bbcgame.distance += 2000; 
         }

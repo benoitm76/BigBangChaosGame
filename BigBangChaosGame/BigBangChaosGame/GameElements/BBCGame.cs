@@ -96,23 +96,23 @@ namespace BigBangChaosGame
                     int rand = random.Next(0, 100) % 5;
                     if (rand == 0)
                     {
-                        newBonus = new MediKit(size_window);                                           
+                        newBonus = new MediKit(size_window, this);                                           
                     }
                     else if(rand == 1)
                     {
-                        newBonus = new Invulnerability(size_window);                       
+                        newBonus = new Invulnerability(size_window, this);                       
                     }
                     else if (rand == 2)
                     {
-                        newBonus = new SpeedDown(size_window);
+                        newBonus = new SpeedDown(size_window, this);
                     }
                     else if (rand == 3)
                     {
-                        newBonus = new SpeedUp(size_window);                        
+                        newBonus = new SpeedUp(size_window, this);                        
                     }
                     else
                     {
-                        newBonus = new GameJam(size_window);
+                        newBonus = new GameJam(size_window, this);
                     }
                     newBonus.LoadContent(content);
                     Vector2 pos = new Vector2((int)size_window.X, random.Next(70, (int)(size_window.Y - newBonus.texture.Height - 70)));

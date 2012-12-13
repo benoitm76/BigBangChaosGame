@@ -8,8 +8,10 @@ namespace BigBangChaosGame
 {
     class SpeedUp : Bonus
     {
-        public SpeedUp(Vector2 size_window)
-            : base(size_window)
+        private int timeSpeedDown;  
+
+        public SpeedUp(Vector2 size_window, BBCGame bbcgame)
+            : base(size_window, bbcgame)
         {
         }
 
@@ -18,11 +20,21 @@ namespace BigBangChaosGame
             base.LoadContent(content, "compteurup_v1.0");
         }
 
-        public override void applyBonus(BBCGame bbcgame)
+        public override void applyBonus()
         {
-            if (bbcgame.maxSpeed > bbcgame.vitesse)
+            if (bbcgame.maxSpeed > bbcgame.vitesse && timeSpeedDown == 0 )
             {
                 bbcgame.vitesse += 0.3f;
+                timeSpeedDown = 60 * 5 + 1;
+            }
+        }
+        public override void Update(GameTime gameTime, int displacementX)
+        {
+            base.Update(gameTime, displacementX);
+
+            if (timeSpeedDown == 1)
+            {
+                bbcgame.vitesse -= 0.3f;
             }
         }
     }

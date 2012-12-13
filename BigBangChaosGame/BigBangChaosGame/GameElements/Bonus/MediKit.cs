@@ -8,8 +8,8 @@ namespace BigBangChaosGame
 {
     class MediKit : Bonus
     {
-        public MediKit(Vector2 size_window)
-            : base(size_window)
+        public MediKit(Vector2 size_window, BBCGame bbcgame)
+            : base(size_window, bbcgame)
         {
         }
 
@@ -18,7 +18,7 @@ namespace BigBangChaosGame
             base.LoadContent(content, "medic_kitv1.0");
         }
 
-        public override void applyBonus(BBCGame bbcgame)
+        public override void applyBonus()
         {
             if(bbcgame.particle.health < 5)
                 bbcgame.particle.health += 1;

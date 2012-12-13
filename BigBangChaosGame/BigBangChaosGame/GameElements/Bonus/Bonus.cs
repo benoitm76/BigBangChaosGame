@@ -8,15 +8,18 @@ namespace BigBangChaosGame
 {
     public abstract class Bonus : Sprite
     {
-        public Bonus(Vector2 size_window) : base(size_window)
+        protected BBCGame bbcgame;
+
+        public Bonus(Vector2 size_window, BBCGame bbcgame) : base(size_window)
         {
+            this.bbcgame = bbcgame;
         }
 
-        public abstract void applyBonus(BBCGame bbcgame);
+        public abstract void applyBonus();
 
         public abstract void LoadContent(Microsoft.Xna.Framework.Content.ContentManager content);
 
-        public void Update(GameTime gameTime, int displacementX)
+        public virtual void Update(GameTime gameTime, int displacementX)
         {
             Vector2 newPos = new Vector2(position.X - displacementX, position.Y);
             position = newPos;
