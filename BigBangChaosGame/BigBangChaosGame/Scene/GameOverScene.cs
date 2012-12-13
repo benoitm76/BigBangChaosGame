@@ -36,10 +36,10 @@ namespace BigBangChaosGame
             if (_content == null)
                 _content = new ContentManager(SceneManager.Game.Services, "Content");
 
-            video = _content.Load<Video>("game_over");
+            video = _content.Load<Video>("game_over_v3.0");
             player = new VideoPlayer();
             player.IsLooped = false;     
-            player.Play(video);                 
+            player.Play(video);     
             
         }
 

@@ -248,13 +248,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="game_over.wmv">
-      <Name>game_over</Name>
-      <Importer>WmvImporter</Importer>
-      <Processor>VideoProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Sounds\main_theme_v1.0.mp3">
       <Name>main_theme_v1.0</Name>
       <Importer>Mp3Importer</Importer>
@@ -403,6 +396,27 @@
       <Name>highscore_v1.0</Name>
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="game_over_v2.0.wmv">
+      <Name>game_over_v2.0</Name>
+      <Importer>WmvImporter</Importer>
+      <Processor>VideoProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="game_over.wmv">
+      <Name>game_over</Name>
+      <Importer>WmvImporter</Importer>
+      <Processor>VideoProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="game_over_v3.0.wmv">
+      <Name>game_over_v3.0</Name>
+      <Importer>WmvImporter</Importer>
+      <Processor>VideoProcessor</Processor>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
