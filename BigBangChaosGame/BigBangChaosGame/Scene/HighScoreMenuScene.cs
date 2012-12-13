@@ -127,7 +127,7 @@ namespace BigBangChaosGame.Scene
             string text2 = string.Format("{0}", afficherHS);
             Vector2 tailletext2 = _font2.MeasureString(text2);
             spriteBatch.DrawString(_font2, text2, new Vector2((game.size_window.X / 2) - (tailletext2.X / 2), 270), Color.White);
-
+            spriteBatch.DrawString(_font2, "Pseudo :", new Vector2(game.size_window.X-1000, 110), Color.White);
             back.DrawButton(spriteBatch);
 
             spriteBatch.End();
