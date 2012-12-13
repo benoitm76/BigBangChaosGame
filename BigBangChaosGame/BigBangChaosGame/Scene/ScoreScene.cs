@@ -25,11 +25,14 @@ namespace BigBangChaosGame
         private SpriteBatch spriteBatch;
         private ContentManager Content;
         private SceneManager sceneMgr;
+        private Vector2 size_window;
+        TabScore tab = new TabScore();
 
         public ScoreScene(SceneManager sceneMgr)
             : base(sceneMgr)
         {
             //new GameplayScene(sceneMgr).Add();
+            size_window = new Vector2(SceneManager.GraphicsDevice.Viewport.Width, SceneManager.GraphicsDevice.Viewport.Height);
             this.sceneMgr = sceneMgr;
         }
 
@@ -53,7 +56,7 @@ namespace BigBangChaosGame
             {
                 Content = new ContentManager(SceneManager.Game.Services, "Content");
             }
-            font = Content.Load<SpriteFont>("DFsmall");
+            font = Content.Load<SpriteFont>("DF");
             base.LoadContent();
         }
 
@@ -72,6 +75,15 @@ namespace BigBangChaosGame
             spriteBatch.Begin();
             
             back.DrawButton(spriteBatch);
+
+
+            string afficherHS = tab.makeHighScoreString();
+            string text = string.Format("{0}", afficherHS);
+            Vector2 tailletext2 = font.MeasureString(text);
+            spriteBatch.DrawString(font, text, new Vector2((size_window.X / 2) - (tailletext2.X / 2), (size_window.Y / 2) - (tailletext2.Y / 2)), Color.White);
+    
+
+
 
             spriteBatch.End();
             base.Draw(gameTime);

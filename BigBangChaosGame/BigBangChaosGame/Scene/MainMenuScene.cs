@@ -112,8 +112,6 @@ namespace BigBangChaosGame
                 if (mouseEvent.UpdateMouse() && mouseEvent.getMouseContainer().Intersects(button1.getContainer()))
                 {
                     new ChoixScene(sceneMgr).Add();
-                    //BBCGame.controller = BBCGame.Keyboard;
-                    //new GameplayScene(sceneMgr).Add();
                 }
 
                 if (mouseEvent.UpdateMouse() && mouseEvent.getMouseContainer().Intersects(button2.getContainer()))
