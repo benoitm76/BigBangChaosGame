@@ -240,13 +240,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="fiole_v1.0.png">
-      <Name>fiole_v1.0</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="DF.spritefont">
       <Name>DF</Name>
       <Importer>FontDescriptionImporter</Importer>
@@ -283,17 +276,17 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="fiole_v2.0.png">
-      <Name>fiole_v2.0</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-	  </Compile>
-  </ItemGroup>
-	<ItemGroup>
     <Compile Include="DFsmall.spritefont">
       <Name>DFsmall</Name>
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="fiole_v2.1.png">
+      <Name>fiole_v2.1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
