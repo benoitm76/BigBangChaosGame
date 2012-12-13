@@ -96,15 +96,7 @@ namespace BigBangChaosGame
 
         /* More score variables */
         HighScoreData data;
-        public string HighScoresFilename = "highscores.dat";
-        int PlayerScore = 0;
-        string PlayerName;
-        string scoreboard;
- 
-        // String for get name
-        string cmdString = "Enter your player name and press Enter";
-        // String we are going to display – initially an empty string
-        string messageString = "";
+        public string HighScoresFilename = "highscores.dat";        
 
         /* Save highscores */
        public static void SaveHighScores2(HighScoreData data, string filename, StorageDevice device)
