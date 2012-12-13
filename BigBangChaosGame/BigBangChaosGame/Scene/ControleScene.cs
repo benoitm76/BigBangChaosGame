@@ -36,6 +36,7 @@ namespace BigBangChaosGame
         public ControleScene(SceneManager sceneMgr)
             : base(sceneMgr)
         {
+            TransitionOnTime = TimeSpan.FromSeconds(1);
             this.sceneMgr = sceneMgr;
         }
 
@@ -109,6 +110,12 @@ namespace BigBangChaosGame
             sceneMgr.Game.IsMouseVisible = true;
             spriteBatch.End();
             base.Draw(gameTime);
+
+            //Permet le fondu au chargement
+            if (TransitionPosition > 0 && SceneState == SceneState.TransitionOn)
+            {
+                SceneManager.FadeBackBufferToBlack(TransitionPosition);
+            }
         }
     }
 }

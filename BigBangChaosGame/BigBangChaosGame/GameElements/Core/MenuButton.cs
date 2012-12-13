@@ -44,6 +44,11 @@ namespace BigBangChaosGame
             spriteBatch.Draw(texture, position, Color.White);
         }
 
+        public void DrawButton(SpriteBatch spriteBatch, Color color)
+        {
+            spriteBatch.Draw(texture, position, color);
+        }
+
 
 
     }

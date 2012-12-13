@@ -28,6 +28,7 @@ namespace BigBangChaosGame
         public CreditScene(SceneManager sceneMgr)
             : base(sceneMgr)
         {
+            TransitionOnTime = TimeSpan.FromSeconds(1);
             this.sceneMgr = sceneMgr;
             //On charge les lignes du fichier
             lines = System.IO.File.ReadAllLines(@"credits.txt").OfType<String>().ToList();
@@ -77,13 +78,14 @@ namespace BigBangChaosGame
 
                 if (mouseEvent.UpdateMouse() && mouseEvent.getMouseContainer().Intersects(back.getContainer()))
                 {
+                    MediaPlayer.Stop();
                     this.Remove();
                 }
             }
         }
 
         public override void Draw(Microsoft.Xna.Framework.GameTime gameTime)
-        {
+        {            
             spriteBatch.Begin();
             back.DrawButton(spriteBatch);
             int i = 0;
@@ -102,6 +104,11 @@ namespace BigBangChaosGame
             scrolling ++;
             spriteBatch.End();
             base.Draw(gameTime);
+            //Permet le fondu au chargement
+            if (TransitionPosition > 0 && SceneState == SceneState.TransitionOn)
+            {
+                SceneManager.FadeBackBufferToBlack(TransitionPosition);
+            }
         }
     }
 }

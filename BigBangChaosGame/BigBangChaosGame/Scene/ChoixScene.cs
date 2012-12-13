@@ -32,6 +32,7 @@ namespace BigBangChaosGame
         public ChoixScene(SceneManager sceneMgr)
             : base(sceneMgr)
         {
+            TransitionOnTime = TimeSpan.FromSeconds(1);
             this.sceneMgr = sceneMgr;
         }
 
@@ -78,14 +79,21 @@ namespace BigBangChaosGame
 
                 if (mouseEvent.UpdateMouse() && mouseEvent.getMouseContainer().Intersects(clavier.getContainer()))
                 {
+                    sceneMgr.Game.IsMouseVisible = false;
                     BBCGame.controller = BBCGame.Keyboard;
                     new GameplayScene(sceneMgr).Add();
+                    this.Remove();
                 }
 
                 if (mouseEvent.UpdateMouse() && mouseEvent.getMouseContainer().Intersects(xbox.getContainer()))
                 {
-                    BBCGame.controller = BBCGame.XboxController;
-                    new GameplayScene(sceneMgr).Add();
+                    if (GamePad.GetState(PlayerIndex.One).IsConnected)
+                    {
+                        sceneMgr.Game.IsMouseVisible = false;
+                        BBCGame.controller = BBCGame.XboxController;
+                        new GameplayScene(sceneMgr).Add();
+                        this.Remove();
+                    }
                 }
 
                 // TODO: Add your update logic here
@@ -107,12 +115,23 @@ namespace BigBangChaosGame
             spriteBatch.Draw(background, Vector2.Zero, Color.White);
 
             clavier.DrawButton(spriteBatch);
-            xbox.DrawButton(spriteBatch);
+            if (GamePad.GetState(PlayerIndex.One).IsConnected)
+            {
+                xbox.DrawButton(spriteBatch);
+            }
+            else
+            {
+                xbox.DrawButton(spriteBatch, Color.Gray);
+            }
             back.DrawButton(spriteBatch);
-
-            sceneMgr.Game.IsMouseVisible = true;
             spriteBatch.End();
             base.Draw(gameTime);
+
+            //Permet le fondu au chargement
+            if (TransitionPosition > 0 && SceneState == SceneState.TransitionOn)
+            {
+                SceneManager.FadeBackBufferToBlack(TransitionPosition);
+            }
         }
     }
 }

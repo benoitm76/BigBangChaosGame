@@ -57,19 +57,19 @@ namespace BigBangChaosGame
         {
             if (ennemies.Count < maxEnnemies)
             {
-                if (random.Next(0, 1000) % 3 == 0)
+                if (random.Next(0, 10) % 2 == 0)
                 {
-                    bool collision = false;
+                    //bool collision = false;
                     Ennemies newEnnemie = new Ennemies(size_window);
                     newEnnemie.LoadContent(content, newEnnemie.type_ennemies[random.Next(0,3)]);
                     Vector2 pos = new Vector2((int)size_window.X, random.Next(70, (int)(size_window.Y - newEnnemie.texture.Height - 70)));
-                    Parallel.ForEach(ennemies, ennemie =>
+                    /*Parallel.ForEach(ennemies, ennemie =>
                     {
                         if (Collision.BoundingCircle(Collision.GetCenter((int)pos.X, (int)newEnnemie.texture.Width), Collision.GetCenter((int)pos.Y, (int)newEnnemie.texture.Height), (int)(newEnnemie.texture.Width / 2), Collision.GetCenter((int)ennemie.position.X, (int)ennemie.texture.Width), Collision.GetCenter((int)ennemie.position.Y, (int)ennemie.texture.Height), (int)(ennemie.texture.Width / 2)))
                         {
                             collision = true;
                         }
-                    });
+                    });*/
 
                     /*foreach (Ennemies ennemie in ennemies)
                     {
@@ -78,13 +78,13 @@ namespace BigBangChaosGame
                             collision = true;
                         }
                     }*/
-                    if (!collision)
-                    {
+                    /*if (!collision)
+                    {*/
                         newEnnemie.position = pos;
                         float f = (float)((float)random.Next(5, 20) / (float)10);
                         newEnnemie.coef_dep = f;
                         ennemies.Add(newEnnemie);
-                    }
+                    //}
                 }
             }
         }
@@ -93,23 +93,24 @@ namespace BigBangChaosGame
         {
             if (bonus.Count < maxBonus)
             {
-                if (random.Next(0, 40 * ((int)(distance / 1000) + 1)) == 10)
+                int x = 80 + (int)(distance / 1000 * 0.05f * 100);
+                if (random.Next(0, 80 + (int)(distance / 1000 * 0.05f * 80)) == 10)
                 {
                     Bonus newBonus;
-                    int rand = random.Next(0, 100) % 5;
-                    if (rand == 0)
+                    int rand = random.Next(0, 11);
+                    if (rand < 3)
                     {
                         newBonus = new MediKit(size_window, this);                                           
                     }
-                    else if(rand == 1)
+                    else if(rand < 6)
                     {
                         newBonus = new Invulnerability(size_window, this);                       
                     }
-                    else if (rand == 2)
+                    else if (rand < 8)
                     {
                         newBonus = new SpeedDown(size_window, this);
                     }
-                    else if (rand == 3)
+                    else if (rand < 10)
                     {
                         newBonus = new SpeedUp(size_window, this);                        
                     }

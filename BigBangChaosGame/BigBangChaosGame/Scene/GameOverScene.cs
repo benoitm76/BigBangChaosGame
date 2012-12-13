@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Media;
 using System.Threading;
+using BigBangChaosGame.Scene;
 
 namespace BigBangChaosGame
 {
@@ -18,17 +19,19 @@ namespace BigBangChaosGame
         private Video video;
         private VideoPlayer player;
         private Texture2D videoTexture;
+        private BBCGame game;
+        private SceneManager sceneMgr;
 
         #endregion
 
         #region Initialization
 
-        public GameOverScene(SceneManager sceneMgr, Video video)
+        public GameOverScene(SceneManager sceneMgr, Video video, BBCGame game)
             : base(sceneMgr)
         {
-            TransitionOnTime = TimeSpan.FromSeconds(0);
-            TransitionOffTime = TimeSpan.FromSeconds(0);
             this.video = video;
+            this.game = game;
+            this.sceneMgr = sceneMgr;
         }
 
         protected override void LoadContent()
@@ -59,6 +62,7 @@ namespace BigBangChaosGame
                 player.Stop();
                 player.Dispose();
                 Remove();
+                new HighScoreMenuScene(sceneMgr, game).Add();
             }
 
             base.Update(gameTime, othersceneHasFocus, coveredByOtherscene);

@@ -39,6 +39,9 @@ namespace BigBangChaosGame
             //new GameplayScene(sceneMgr).Add();
             this.sceneMgr = sceneMgr;
 
+            TransitionOnTime = TimeSpan.FromSeconds(1.5);
+            //TransitionOffTime = TimeSpan.FromSeconds(0.5);
+
 
         }
 
@@ -106,8 +109,9 @@ namespace BigBangChaosGame
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 sceneMgr.Game.Exit();
-            if (IsActive)
+            if (!(SceneState == SceneState.Hidden || SceneState == SceneState.TransitionOff))
             {
+                sceneMgr.Game.IsMouseVisible = true;
                 // TODO: Add your update logic here
                 if (mouseEvent.UpdateMouse() && mouseEvent.getMouseContainer().Intersects(button1.getContainer()))
                 {
@@ -137,8 +141,7 @@ namespace BigBangChaosGame
                 if (mouseEvent.UpdateMouse() && mouseEvent.getMouseContainer().Intersects(button6.getContainer()))
                 {
                     new ScoreScene(sceneMgr).Add();
-                }
-                sceneMgr.Game.IsMouseVisible = true;
+                }                
             }
 
             base.Update(gameTime);
@@ -150,32 +153,25 @@ namespace BigBangChaosGame
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Draw(GameTime gameTime)
         {
-
-            if (TransitionPosition > 0)
+            if (TransitionPosition > 0 && SceneState == SceneState.TransitionOn)
             {
-                SceneManager.FadeBackBufferToBlack(TransitionAlpha);
+                SceneManager.FadeBackBufferToBlack(TransitionPosition);
             }
 
-            if (IsActive)
+            if (!(SceneState == SceneState.Hidden || SceneState == SceneState.TransitionOff))
             {
-
-                GraphicsDevice.Clear(Color.CornflowerBlue);
-
-                // TODO: Add your drawing code here
-
                 spriteBatch.Begin();
-
                 spriteBatch.Draw(background, Vector2.Zero, Color.White);
                 spriteBatch.Draw(logo_gamejam, new Vector2(20, SceneManager.GraphicsDevice.Viewport.Height - logo_gamejam.Height - 20), Color.Gray);
-
                 button1.DrawButton(spriteBatch);
                 button2.DrawButton(spriteBatch);
                 button3.DrawButton(spriteBatch);
                 button4.DrawButton(spriteBatch);
                 button5.DrawButton(spriteBatch);
-                button6.DrawButton(spriteBatch);                
+                button6.DrawButton(spriteBatch);
                 spriteBatch.End();
             }
+            
             base.Draw(gameTime);            
         }
     }

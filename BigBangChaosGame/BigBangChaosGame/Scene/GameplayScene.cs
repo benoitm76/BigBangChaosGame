@@ -119,7 +119,6 @@ namespace BigBangChaosGame
 
             // TODO: Add your update logic here
             //Mouvement de la particule
-
             if (IsActive)
             {
                 if (MediaPlayer.State == MediaState.Stopped)
@@ -130,6 +129,14 @@ namespace BigBangChaosGame
                 {
                     MediaPlayer.Resume();
                 }
+
+                if (g.particle.health <= 0)
+                {                    
+                    this.Remove();
+                    MediaPlayer.Stop(); 
+                    //new HighScoreMenuScene(sceneMgr, g).Add();
+                    new GameOverScene(sceneMgr, video, g).Add();                                     
+                }                
 
                 //On augmente le scrolling du fond
                 scrollX = (int)(scrollX + 5 * g.vitesse);
@@ -210,16 +217,9 @@ namespace BigBangChaosGame
                 {
                     g.bonus.Remove(lbonus);
                 }
-                if (scrollX % (int)(10 / g.vitesse) == 0)
+                if (scrollX % 20 == 0)
                 {
                     Parallel.Invoke(g.generateEnnemies, g.generateBonus);
-                }
-                if (g.particle.health <= 0)
-                {
-                    MediaPlayer.Stop();
-                    this.Remove();
-                    new HighScoreMenuScene(sceneMgr, g).Add();
-                    new GameOverScene(sceneMgr, video).Add();
                 }
             }
             else

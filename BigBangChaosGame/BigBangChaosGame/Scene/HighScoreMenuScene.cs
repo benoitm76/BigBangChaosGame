@@ -25,12 +25,14 @@ namespace BigBangChaosGame.Scene
         Textbox textbox;
         private String texthighscore;
         private Boolean showTextbox;
+        private SceneManager sceneMgr;
 
         private SoundEffect soundHightScore;
         
         public HighScoreMenuScene(SceneManager sceneMgr, BBCGame game)
             : base(sceneMgr, "")
         {
+            this.sceneMgr = sceneMgr;
             this.game = game;
             if (Content == null)
             {
@@ -44,13 +46,9 @@ namespace BigBangChaosGame.Scene
             // TODO: Add your initialization logic here
 
             tab.Ini();
-
             base.Initialize();
-
             back = new MenuButton(new Vector2(0, 625), Content.Load<Texture2D>("Back"), new Rectangle(100, 100, 100, 100));
-
-            mouseEvent = new MouseEvent();
-          
+            mouseEvent = new MouseEvent();          
             base.Initialize();           
 
         }
@@ -91,13 +89,13 @@ namespace BigBangChaosGame.Scene
 
         public override void Update(GameTime gameTime)
         {
-
             textbox.Update(gameTime);
             if (Textbox.Pseudo != "Default" && Textbox.Pseudo != "")
             {
                 int scorre = (int)game.distance;
                 tab.SaveHighScore(scorre, Textbox.Pseudo);                
                 texthighscore = tab.makeHighScoreString();
+                showTextbox = false;
                 Textbox.Pseudo = "Default";
                 soundHightScore.Play();
             }
@@ -113,6 +111,7 @@ namespace BigBangChaosGame.Scene
 
         public override void Draw(GameTime gameTime)
         {
+            sceneMgr.Game.IsMouseVisible = true;
             if(showTextbox)
                 textbox.PreDraw();
 
@@ -127,8 +126,11 @@ namespace BigBangChaosGame.Scene
             string text2 = string.Format("{0}", afficherHS);
             Vector2 tailletext2 = _font2.MeasureString(text2);
             spriteBatch.DrawString(_font2, text2, new Vector2((game.size_window.X / 2) - (tailletext2.X / 2), 270), Color.White);
-            spriteBatch.DrawString(_font2, "Pseudo :", new Vector2(game.size_window.X-1000, 110), Color.White);
+            if (showTextbox)
+                spriteBatch.DrawString(_font2, "Nickname :", new Vector2(game.size_window.X-1100, 110), Color.White);
             back.DrawButton(spriteBatch);
+            if(showTextbox && Textbox.Pseudo != "")
+                spriteBatch.DrawString(_font2, "Press enter", new Vector2(game.size_window.X - 400, 110), Color.White);
 
             spriteBatch.End();
 
