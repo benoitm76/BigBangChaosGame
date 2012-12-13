@@ -14,6 +14,10 @@ namespace BigBangChaosGame
 
         private ContentManager _content;
         private Texture2D _backgroundTexture;
+        private Texture2D logo_gamejam;
+        private Vector2 size_window;
+
+        private SceneManager sceneMgr;
 
         #endregion
 
@@ -22,6 +26,7 @@ namespace BigBangChaosGame
         public BackgroundScene(SceneManager sceneMgr)
             : base(sceneMgr)
         {
+            this.sceneMgr = sceneMgr;
             TransitionOnTime = TimeSpan.FromSeconds(0.5);
             TransitionOffTime = TimeSpan.FromSeconds(0.5);
         }
@@ -32,6 +37,7 @@ namespace BigBangChaosGame
                 _content = new ContentManager(SceneManager.Game.Services, "Content");
 
             _backgroundTexture = _content.Load<Texture2D>("fond");
+            logo_gamejam = _content.Load<Texture2D>("logo_gamjam_v1.0");
         }
 
         protected override void UnloadContent()
@@ -59,6 +65,7 @@ namespace BigBangChaosGame
             spriteBatch.Begin();
             spriteBatch.Draw(_backgroundTexture, fullscene,
                              new Color(TransitionAlpha, TransitionAlpha, TransitionAlpha));
+            spriteBatch.Draw(logo_gamejam, new Vector2(20, SceneManager.GraphicsDevice.Viewport.Height - logo_gamejam.Height - 20), Color.Gray);
             spriteBatch.End();
         }
 
