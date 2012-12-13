@@ -13,7 +13,9 @@ namespace BigBangChaosGame
         #region Fields
 
         private ContentManager _content;
-        private Texture2D _backgroundTexture;
+        private Texture2D _backgroundTexture;        
+
+        private SceneManager sceneMgr;
 
         #endregion
 
@@ -22,6 +24,7 @@ namespace BigBangChaosGame
         public BackgroundScene(SceneManager sceneMgr)
             : base(sceneMgr)
         {
+            this.sceneMgr = sceneMgr;
             TransitionOnTime = TimeSpan.FromSeconds(0.5);
             TransitionOffTime = TimeSpan.FromSeconds(0.5);
         }
@@ -31,7 +34,7 @@ namespace BigBangChaosGame
             if (_content == null)
                 _content = new ContentManager(SceneManager.Game.Services, "Content");
 
-            _backgroundTexture = _content.Load<Texture2D>("fond");
+            _backgroundTexture = _content.Load<Texture2D>("fond");            
         }
 
         protected override void UnloadContent()
@@ -58,7 +61,7 @@ namespace BigBangChaosGame
 
             spriteBatch.Begin();
             spriteBatch.Draw(_backgroundTexture, fullscene,
-                             new Color(TransitionAlpha, TransitionAlpha, TransitionAlpha));
+                             new Color(TransitionAlpha, TransitionAlpha, TransitionAlpha));            
             spriteBatch.End();
         }
 

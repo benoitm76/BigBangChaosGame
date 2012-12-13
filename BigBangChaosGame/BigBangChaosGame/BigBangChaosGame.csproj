@@ -108,6 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GameElements\Bonus\Bonus.cs" />
+    <Compile Include="GameElements\Bonus\SpeedDown.cs" />
     <Compile Include="GameElements\Core\Collision.cs" />
     <Compile Include="Scene\ControleScene.cs" />
     <Compile Include="Scene\CreditScene.cs" />
@@ -136,9 +137,13 @@
     <Compile Include="Scene\ScoreScene.cs" />
     <Compile Include="GameElements\Core\Sprite.cs" />
     <Compile Include="GameElements\TabScore.cs" />
+    <Compile Include="GameElements\Bonus\SpeedUp.cs" />
     <Compile Include="Textbox.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="credits.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Game.ico" />
     <Content Include="GameThumbnail.png" />
   </ItemGroup>

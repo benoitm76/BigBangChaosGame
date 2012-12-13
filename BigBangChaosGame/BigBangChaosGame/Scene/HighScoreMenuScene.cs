@@ -39,8 +39,8 @@ namespace BigBangChaosGame.Scene
             // TODO: Add your initialization logic here
            
             tab.Ini();
-            int scorre = (int)game.distance;
-            tab.SaveHighScore(scorre, "princeali");
+          
+          
             base.Initialize();           
         }
         protected override void LoadContent()
@@ -65,7 +65,13 @@ namespace BigBangChaosGame.Scene
         {
 
             textbox.Update(gameTime);
-        
+            if (Textbox.Pseudo != "Default")
+            {
+                int scorre = (int)game.distance;
+                tab.SaveHighScore(scorre, Textbox.Pseudo);
+                Textbox.Pseudo = "Default";
+
+            }
 
             base.Update(gameTime);
         }

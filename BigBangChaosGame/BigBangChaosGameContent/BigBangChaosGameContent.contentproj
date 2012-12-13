@@ -291,17 +291,17 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="logo_gamjam_v1.0.png">
+      <Name>logo_gamjam_v1.0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="DFPetit.spritefont">
       <Name>DFPetit</Name>
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Xbox controller.png">
-      <Name>Xbox controller</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -310,8 +310,23 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="logo_gamjam_v1.0.png">
-      <Name>logo_gamjam_v1.0</Name>
+  </ItemGroup>
+  <ItemGroup>
+<<<<<<< HEAD
+    <Compile Include="Intructions_big.png">
+      <Name>Intructions_big</Name>
+<Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+</Compile>
+
+    <Compile Include="compteurdown_v1.0.png">
+      <Name>compteurdown_v1.0</Name>
+
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="compteurup_v1.0.png">
+      <Name>compteurup_v1.0</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Media;
+using System.Threading;
 
 namespace BigBangChaosGame
 {
@@ -14,19 +15,20 @@ namespace BigBangChaosGame
         #region Fields
 
         private ContentManager _content;
-        Video video;
-        VideoPlayer player;
-        Texture2D videoTexture;
+        private Video video;
+        private VideoPlayer player;
+        private Texture2D videoTexture;
 
         #endregion
 
         #region Initialization
 
-        public GameOverScene(SceneManager sceneMgr)
+        public GameOverScene(SceneManager sceneMgr, Video video)
             : base(sceneMgr)
         {
             TransitionOnTime = TimeSpan.FromSeconds(0);
             TransitionOffTime = TimeSpan.FromSeconds(0);
+            this.video = video;
         }
 
         protected override void LoadContent()
@@ -36,8 +38,9 @@ namespace BigBangChaosGame
 
             video = _content.Load<Video>("game_over");
             player = new VideoPlayer();
-            player.IsLooped = false;
-            player.Play(video); 
+            player.IsLooped = false;     
+            player.Play(video);                 
+            
         }
 
         protected override void UnloadContent()
@@ -70,8 +73,6 @@ namespace BigBangChaosGame
             // Only call GetTexture if a video is playing or paused
             if (player.State != MediaState.Stopped)
                 videoTexture = player.GetTexture();
-            else
-                new Color();
 
             // Drawing to the rectangle will stretch the 
             // video to fill the screen

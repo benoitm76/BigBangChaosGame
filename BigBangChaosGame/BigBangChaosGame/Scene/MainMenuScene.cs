@@ -26,6 +26,7 @@ namespace BigBangChaosGame
         MenuButton button6;
 
         private SceneManager sceneMgr;
+        private Texture2D logo_gamejam;
 
         MouseEvent mouseEvent;
 
@@ -65,6 +66,8 @@ namespace BigBangChaosGame
             button6 = new MenuButton(new Vector2(1000, 250), Content.Load<Texture2D>("Scores"), new Rectangle(100, 100, 100, 100));
 
             mouseEvent = new MouseEvent();
+
+            logo_gamejam = Content.Load<Texture2D>("logo_gamjam_v1.0");
 
             base.Initialize();
         }
@@ -153,23 +156,29 @@ namespace BigBangChaosGame
                 SceneManager.FadeBackBufferToBlack(TransitionAlpha);
             }
 
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            if (IsActive)
+            {
 
-            // TODO: Add your drawing code here
+                GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            spriteBatch.Begin();
+                // TODO: Add your drawing code here
 
-            spriteBatch.Draw(background, Vector2.Zero, Color.White);
+                spriteBatch.Begin();
 
-            button1.DrawButton(spriteBatch);
-            button2.DrawButton(spriteBatch);
-            button3.DrawButton(spriteBatch);
-            button4.DrawButton(spriteBatch);
-            button5.DrawButton(spriteBatch);
-            button6.DrawButton(spriteBatch);
+                spriteBatch.Draw(background, Vector2.Zero, Color.White);
+                spriteBatch.Draw(logo_gamejam, new Vector2(20, SceneManager.GraphicsDevice.Viewport.Height - logo_gamejam.Height - 20), Color.Gray);
 
-            sceneMgr.Game.IsMouseVisible = true;
-            spriteBatch.End();
+                button1.DrawButton(spriteBatch);
+                button2.DrawButton(spriteBatch);
+                button3.DrawButton(spriteBatch);
+                button4.DrawButton(spriteBatch);
+                button5.DrawButton(spriteBatch);
+                button6.DrawButton(spriteBatch);
+
+
+                sceneMgr.Game.IsMouseVisible = true;
+                spriteBatch.End();
+            }
             base.Draw(gameTime);            
         }
     }
