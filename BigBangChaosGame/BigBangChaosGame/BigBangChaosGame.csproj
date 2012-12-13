@@ -111,6 +111,7 @@
     <Compile Include="GameElements\Bonus\SpeedDown.cs" />
     <Compile Include="GameElements\Core\Collision.cs" />
     <Compile Include="Scene\ControleScene.cs" />
+    <Compile Include="Scene\ChoixScene.cs" />
     <Compile Include="Scene\CreditScene.cs" />
     <Compile Include="GameElements\Ennemies.cs" />
     <Compile Include="GameElements\BBCGame.cs" />
