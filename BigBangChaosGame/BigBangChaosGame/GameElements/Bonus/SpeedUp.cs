@@ -23,7 +23,7 @@ namespace BigBangChaosGame
             if (bbcgame.maxSpeed > bbcgame.vitesse && bbcgame.timeSpeedDown == 0)
             {
                 bbcgame.vitesse += 0.3f;
-                bbcgame.timeSpeedDown = 60 * 5 + 1;
+                bbcgame.timeSpeedUp = 60 * 5 + 1;
             }
         }
     }

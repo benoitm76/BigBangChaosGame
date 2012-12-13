@@ -93,7 +93,7 @@ namespace BigBangChaosGame
         {
             if (bonus.Count < maxBonus)
             {
-                if (random.Next(0, 100 * ((int)(distance / 1000 / 3) + 1)) == 10)
+                if (random.Next(0, 40 * ((int)(distance / 1000) + 1)) == 10)
                 {
                     Bonus newBonus;
                     int rand = random.Next(0, 100) % 5;
