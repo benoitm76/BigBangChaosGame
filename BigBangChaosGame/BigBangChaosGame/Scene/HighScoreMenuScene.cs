@@ -19,7 +19,7 @@ namespace BigBangChaosGame.Scene
         SpriteBatch spriteBatch;
         private Texture2D background;
         TabScore tab = new TabScore();
-       
+        Textbox textbox;
         public HighScoreMenuScene(SceneManager sceneMgr, BBCGame game)
             : base(sceneMgr, "")
         {
@@ -49,12 +49,23 @@ namespace BigBangChaosGame.Scene
             background = Content.Load<Texture2D>("fond");
             _font = Content.Load<SpriteFont>("DF");
             _font2 = Content.Load<SpriteFont>("DFsmall");
+            textbox = new Textbox(
+            GraphicsDevice,
+            400,
+            Content.Load<SpriteFont>("DFsmall"))
+            {
+                ForegroundColor = Color.Blue,
+                BackgroundColor = Color.White,
+                Position = new Vector2((game.size_window.X/2)-400/2, 110),
+                HasFocus = true
+            };
         }
 
         public override void Update(GameTime gameTime)
         {
 
-
+            textbox.Update(gameTime);
+        
 
             base.Update(gameTime);
         }
@@ -76,6 +87,11 @@ namespace BigBangChaosGame.Scene
            spriteBatch.DrawString(_font2, text2, new Vector2((game.size_window.X / 2) - (tailletext2.X / 2), 270), Color.White);
 
             spriteBatch.End();
+
+
+            textbox.PreDraw();
+            textbox.Draw();
+
 
             base.Draw(gameTime);
         }

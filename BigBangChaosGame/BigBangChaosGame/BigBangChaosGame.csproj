@@ -136,6 +136,7 @@
     <Compile Include="Scene\ScoreScene.cs" />
     <Compile Include="GameElements\Core\Sprite.cs" />
     <Compile Include="GameElements\TabScore.cs" />
+    <Compile Include="Textbox.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />
