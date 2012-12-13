@@ -359,11 +359,11 @@
   <ItemGroup>
     <Compile Include="logo_gamjam_bonus_v1.0.png">
       <Name>logo_gamjam_bonus_v1.0</Name>
-	  <Importer>TextureImporter</Importer>
+      <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-	</ItemGroup>
-	<ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Keyboard.png">
       <Name>Keyboard</Name>
       <Importer>TextureImporter</Importer>
@@ -373,6 +373,13 @@
   <ItemGroup>
     <Compile Include="Gamepad.png">
       <Name>Gamepad</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="pipe_v2.1.png">
+      <Name>pipe_v2.1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
