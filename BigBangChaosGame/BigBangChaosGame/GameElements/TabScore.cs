@@ -12,6 +12,11 @@ namespace BigBangChaosGame
     public class TabScore
     {
 
+        /* More score variables */
+        HighScoreData data;
+        public string HighScoresFilename = "highscores.dat";
+        public StorageDevice device { get; set; }
+
         [Serializable]
         public struct HighScoreData
         {
@@ -35,7 +40,7 @@ namespace BigBangChaosGame
             string fullpath = "highscores.dat";
 
             // Check to see if the save exists
-#if WINDOWS
+
             if (!File.Exists(fullpath))
             {
                 //If the file doesn't exist, make a fake one...
@@ -58,53 +63,15 @@ namespace BigBangChaosGame
 
                 SaveHighScores2(data, HighScoresFilename, device);
             }
-            /*
-#elif XBOX
- 
-            using (IsolatedStorageFile iso = IsolatedStorageFile.GetUserStoreForApplication())
-            {
-                if (!iso.FileExists(fullpath))
-                {
-                    //If the file doesn't exist, make a fake one...
-                    // Create the data to save
-                    data = new HighScoreData(5);
-                     data.PlayerName[0] = "botneil";
-                data.Score[0] = 20;
-
-                data.PlayerName[1] = "botshawn";
-                data.Score[1] = 10;
-
-                data.PlayerName[2] = "botmark";
-                data.Score[2] = 9;
-
-                data.PlayerName[3] = "botcindy";
-                data.Score[3] = 8;
-
-                data.PlayerName[4] = "botsam";
-                data.Score[4] = 2;
- 
-                    SaveHighScores(data, HighScoresFilename, device);
-                }
-            }
- 
-
-
-            */
-#endif
         }
-        /* More score variables */
-        HighScoreData data;
-        public string HighScoresFilename = "highscores.dat";
+
+        
 
         /* Save highscores */
         public static void SaveHighScores2(HighScoreData data, string filename, StorageDevice device)
         {
-            // Get the path of the save game
-            string fullpath = "highscores.dat";
 
-#if WINDOWS
-            // Open the file, creating it if necessary
-            FileStream stream = File.Open(fullpath, FileMode.OpenOrCreate);
+            FileStream stream = File.Open(filename, FileMode.OpenOrCreate);
             try
             {
                 // Convert the object to XML data and put it in the stream
@@ -117,22 +84,8 @@ namespace BigBangChaosGame
                 stream.Close();
             }
 
-#elif XBOX
- 
-            using (IsolatedStorageFile iso = IsolatedStorageFile.GetUserStoreForApplication())
-                {
-               
-                    using (IsolatedStorageFileStream stream = new IsolatedStorageFileStream(fullpath, FileMode.Create, iso))
-                    {
- 
-                        XmlSerializer serializer = new XmlSerializer(typeof(HighScoreData));
-                        serializer.Serialize(stream, data);
- 
-                    }
- 
-                }
-           
-#endif
+
+
         }
         
         /* Load highscores */
@@ -140,13 +93,9 @@ namespace BigBangChaosGame
         {
             HighScoreData data;
 
-            // Get the path of the save game
-            string fullpath = "highscores.dat";
-
-#if WINDOWS
 
             // Open the file
-            FileStream stream = File.Open(fullpath, FileMode.OpenOrCreate, FileAccess.Read);
+            FileStream stream = File.Open(filename, FileMode.OpenOrCreate, FileAccess.Read);
             try
             {
                 // Read the data from the file
@@ -162,21 +111,7 @@ namespace BigBangChaosGame
 
             return (data);
 
-#elif XBOX
- 
-            using (IsolatedStorageFile iso = IsolatedStorageFile.GetUserStoreForApplication())
-            {
-                using (IsolatedStorageFileStream stream = new IsolatedStorageFileStream(fullpath, FileMode.Open,iso))
-                {
-                    // Read the data from the file
-                    XmlSerializer serializer = new XmlSerializer(typeof(HighScoreData));
-                    data = (HighScoreData)serializer.Deserialize(stream);
-                }
-            }
- 
-            return (data);
- 
-#endif
+
 
         }
 
@@ -228,9 +163,6 @@ namespace BigBangChaosGame
             }
             return scoreBoardString;
         }
-
-
-        public StorageDevice device { get; set; }
     }
 
 }
