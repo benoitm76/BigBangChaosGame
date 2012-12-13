@@ -25,6 +25,7 @@ namespace BigBangChaosGame
         MenuButton instructions;
         MenuButton flife;
         MenuButton dlife;
+        MenuButton gamjam;
         MenuButton back;
         MenuButton timeA;
         MenuButton timeR;
@@ -53,6 +54,7 @@ namespace BigBangChaosGame
             instructions = new MenuButton(new Vector2(250, 10), Content.Load<Texture2D>("Intructions_big"), new Rectangle(100, 100, 100, 100));
             medic = new MenuButton(new Vector2(50, 350), Content.Load<Texture2D>("medic_kitv1.0"), new Rectangle(100, 100, 100, 100));
             fiole = new MenuButton(new Vector2(50, 400), Content.Load<Texture2D>("fiole_v2.1"), new Rectangle(100, 100, 100, 100));
+            gamjam = new MenuButton(new Vector2(500, 480), Content.Load<Texture2D>("logo_gamjam_bonus_v1.0"), new Rectangle(100, 100, 100, 100));
             timeA = new MenuButton(new Vector2(50, 465), Content.Load<Texture2D>("compteurup_v1.0"), new Rectangle(100, 100, 100, 100));
             timeR = new MenuButton(new Vector2(50, 525), Content.Load<Texture2D>("compteurdown_v1.0"), new Rectangle(100, 100, 100, 100));
             enemmy1 = new MenuButton(new Vector2(1175, 320), Content.Load<Texture2D>("ennemie1_v2.0"), new Rectangle(100, 100, 100, 100));
@@ -115,6 +117,7 @@ namespace BigBangChaosGame
             spriteBatch.DrawString(spritfont, "enemies :", new Vector2(1050, 440), Color.White);
             spriteBatch.DrawString(spritfont, "Full Life", new Vector2(730, 350), Color.White);
             spriteBatch.DrawString(spritfont, "Damaged Life", new Vector2(730, 400), Color.White);
+            spriteBatch.DrawString(spritfont, "Increase your score of 2000 km", new Vector2(570, 500), Color.White);
 
             fiole.DrawButton(spriteBatch);
             medic.DrawButton(spriteBatch);
@@ -127,6 +130,7 @@ namespace BigBangChaosGame
             back.DrawButton(spriteBatch);
             timeA.DrawButton(spriteBatch);
             timeR.DrawButton(spriteBatch);
+            gamjam.DrawButton(spriteBatch);
 
             sceneMgr.Game.IsMouseVisible = true;
             spriteBatch.End();
