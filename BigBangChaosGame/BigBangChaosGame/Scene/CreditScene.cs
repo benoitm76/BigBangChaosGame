@@ -10,6 +10,10 @@ namespace BigBangChaosGame
 {
     class CreditScene : AbstractGameScene
     {
+        MenuButton back;
+
+        MouseEvent mouseEvent;
+
         private SceneManager sceneMgr;
         private SpriteFont font;
         private SpriteBatch spriteBatch;
@@ -25,6 +29,20 @@ namespace BigBangChaosGame
             lines = System.IO.File.ReadAllLines(@"credits.txt").OfType<String>().ToList();
         }
 
+        public override void Initialize()
+        {
+
+            if (Content == null)
+                Content = new ContentManager(SceneManager.Game.Services, "Content");
+
+            back = new MenuButton(new Vector2(0, 625), Content.Load<Texture2D>("Back"), new Rectangle(100, 100, 100, 100));
+
+            mouseEvent = new MouseEvent();
+
+            base.Initialize();
+        }
+
+
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -39,6 +57,11 @@ namespace BigBangChaosGame
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime, bool othersceneHasFocus, bool coveredByOtherscene)
         {
             base.Update(gameTime, othersceneHasFocus, coveredByOtherscene);
+
+            if (mouseEvent.UpdateMouse() && mouseEvent.getMouseContainer().Intersects(back.getContainer()))
+            {
+                this.Remove();
+            }
         }
 
         public override void Draw(Microsoft.Xna.Framework.GameTime gameTime)
@@ -53,6 +76,9 @@ namespace BigBangChaosGame
                 }
                 i++;
             }
+
+            back.DrawButton(spriteBatch);
+
             scrolling ++;
             spriteBatch.End();
             base.Draw(gameTime);
