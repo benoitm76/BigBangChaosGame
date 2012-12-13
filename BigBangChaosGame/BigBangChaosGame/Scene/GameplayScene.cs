@@ -255,7 +255,7 @@ namespace BigBangChaosGame
              10, (int)(mHealthBar.Width * (pourcent / 100)), mHealthBar.Height), new Rectangle(0, 0, mHealthBar.Width, mHealthBar.Height), Color.Red);
 
             string text = string.Format("Formation of Bigbang: {0} %", (int)pourcent);
-            spriteBatch.DrawString(_lifePourcent, text, new Vector2(40, 13), Color.White);
+            spriteBatch.DrawString(_lifePourcent, text, new Vector2(30, 18), Color.White);
 
             //Texte Distance
             string text2 = string.Format("{0:00000000}", g.distance);
