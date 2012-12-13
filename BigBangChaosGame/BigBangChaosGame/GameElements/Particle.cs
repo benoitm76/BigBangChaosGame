@@ -19,13 +19,13 @@ namespace BigBangChaosGame
         public int health;
 
         private SoundEffect collisionSound;
-        private SoundEffect alerteSound;
+        private SoundEffect alerteSound;        
 
         public Texture2D texture2 { get; set; }
 
         private Game game;
 
-        ParticleEmitter.ParticleSystem emitter = null;
+        private ParticleEmitter.ParticleSystem emitter = null;
 
         public MouseState oldMouseState { get; set; }
 
@@ -146,7 +146,8 @@ namespace BigBangChaosGame
             if (newPos.Y < 70)
             {
                 newPos.Y = 70;
-            }            
+            }
+
             position = newPos;
             emitter.OriginPosition = new Vector2(position.X + texture.Width / 2, position.Y + texture.Height / 2);
             emitter.Update(gameTime);

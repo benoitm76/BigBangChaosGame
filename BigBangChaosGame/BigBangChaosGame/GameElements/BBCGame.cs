@@ -33,6 +33,9 @@ namespace BigBangChaosGame
         public float distancy_meters { get; set; }
         private SoundEffect accelerateSound;
 
+        public int timeSpeedDown { get; set; }
+        public int timeSpeedUp { get; set; } 
+
         public Random random;
 
         public BBCGame(Vector2 size_window, ContentManager content)
@@ -90,7 +93,7 @@ namespace BigBangChaosGame
         {
             if (bonus.Count < maxBonus)
             {
-                if (random.Next(0, 100 * (int)(distance / 1000 / 3) + 1) == 55)
+                if (random.Next(0, 40 * ((int)(distance / 1000 / 3) + 1)) == 10)
                 {
                     Bonus newBonus;
                     int rand = random.Next(0, 100) % 5;
@@ -124,6 +127,19 @@ namespace BigBangChaosGame
 
         public void updateDistancy()
         {
+            if (timeSpeedDown != 0)
+                timeSpeedDown--;
+            if (timeSpeedUp != 0)
+                timeSpeedUp--;
+
+            if (timeSpeedDown == 1)
+            {
+                vitesse += 0.3f;
+            }
+            if (timeSpeedUp == 1)
+            {
+                vitesse -= 0.3f;
+            }
             if (distancy_meters >= 1000)
             {
                 if ((int)(distance / 1000) % 4 == 1)
