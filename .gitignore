@@ -1,3 +1,7 @@
+#Add Perso
+
+*.Debug.cachefile
+
 #################
 ## Eclipse
 #################

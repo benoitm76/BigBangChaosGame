@@ -26,7 +26,7 @@ namespace BigBangChaosGame
         public int maxEnnemies { get; set; }
         public int maxBonus { get; set; }
         public Vector2 size_window { get; set; }
-        public int controller { get; set; }
+        public static int controller { get; set; }
         public ContentManager content { get; set; }
         public float distancy_meters { get; set; }
         private SoundEffect accelerateSound;
@@ -40,7 +40,6 @@ namespace BigBangChaosGame
             maxBonus = 2;
             ennemies = new List<Ennemies>();
             bonus = new List<Bonus>();
-            controller = BBCGame.Keyboard;
             random = new Random();
             this.size_window = size_window;
             this.content = content;
@@ -51,7 +50,7 @@ namespace BigBangChaosGame
         {
             if (ennemies.Count < maxEnnemies)
             {
-                if (random.Next(0, 1000) % 5 == 0)
+                if (random.Next(0, 1000) % 3 == 0)
                 {
                     bool collision = false;
                     Ennemies newEnnemie = new Ennemies(size_window);
@@ -82,11 +81,12 @@ namespace BigBangChaosGame
                 }
             }
         }
+
         public void generateBonus()
         {
             if (bonus.Count < maxBonus)
             {
-                if (random.Next(0, 100) == 55)
+                if (random.Next(0, 100 * (int)(distance / 1000) + 1) == 55)
                 {
                     Bonus newBonus;
                     if (random.Next(0, 100) % 2 == 0)
@@ -111,7 +111,7 @@ namespace BigBangChaosGame
             {
                 if ((int)(distance / 1000) % 4 == 1)
                 {
-                    if (vitesse <= 2.5f)
+                    if (vitesse <= 3f)
                     {
                         vitesse = vitesse * 1.3f;
                         accelerateSound.Play();

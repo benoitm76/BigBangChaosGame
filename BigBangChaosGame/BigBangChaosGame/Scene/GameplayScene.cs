@@ -21,10 +21,10 @@ namespace BigBangChaosGame
 
         private Vector2 size_window;
         private Texture2D background;
+        private Texture2D logo_gamejam;
         private int scrollX = 1;
         private BBCGame g;
         static Mutex mu;
-        private float distancy_meters = 0;
         private ContentManager Content;
         private SceneManager sceneMgr;
         private float _pauseAlpha;        
@@ -51,7 +51,7 @@ namespace BigBangChaosGame
             size_window = new Vector2(1280, 720);
             mu = new Mutex();
 
-            g = new BBCGame(size_window, Content); 
+            g = new BBCGame(size_window, Content);
         }
 
         public override void Initialize()
@@ -66,6 +66,8 @@ namespace BigBangChaosGame
 
             //Chargement du fond
             background = Content.Load<Texture2D>("pipe_v2.0");
+
+            logo_gamejam = Content.Load<Texture2D>("logo_gamjam_v1.0");
 
             //Chargement de la particule
             g.particle = new Particle(new Vector2(size_window.X, size_window.Y), SceneManager.Game);
@@ -133,7 +135,7 @@ namespace BigBangChaosGame
                 {
                     scrollX = 0;
                 }
-                g.particle.HandleInput(BBCGame.XboxController);
+                g.particle.HandleInput(BBCGame.controller);
 
                 //Mise à jour de la position de la particule
                 g.particle.Update(gameTime);
@@ -233,7 +235,9 @@ namespace BigBangChaosGame
             spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.LinearWrap, null, null);
 
             //On dessine le fond
-            spriteBatch.Draw(background, Vector2.Zero, new Rectangle(scrollX, 0, background.Width, background.Height), Color.White);          
+            spriteBatch.Draw(background, Vector2.Zero, new Rectangle(scrollX, 0, background.Width, background.Height), Color.White);
+
+            spriteBatch.Draw(logo_gamejam, new Vector2(size_window.X - logo_gamejam.Width - 20, size_window.Y - logo_gamejam.Height - 90), Color.Gray);
             
             // Desinne la barre de vie et son texte, by Simon
             decimal pourcent = 100 - ((decimal)g.particle.health / 5) * 100;
