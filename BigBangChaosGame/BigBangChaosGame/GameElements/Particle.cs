@@ -19,6 +19,7 @@ namespace BigBangChaosGame
         public int health;
 
         private SoundEffect collisionSound;
+        private SoundEffect alerteSound;
 
         public Texture2D texture2 { get; set; }
 
@@ -71,6 +72,7 @@ namespace BigBangChaosGame
             emitter.OriginPosition = new Vector2(position.X + texture.Width / 2, position.Y + texture.Height / 2);
 
             collisionSound = content.Load<SoundEffect>("Sounds/collision_v1.2");
+            alerteSound = content.Load<SoundEffect>("Sounds/alert_v1.0");
         }
 
         public void HandleInput(int controller)
@@ -177,6 +179,10 @@ namespace BigBangChaosGame
             health--;
             nb_frame_invulnerability = 60;
             collisionSound.Play();
+            if (health == 1)
+            {
+                alerteSound.Play();
+            }
             new Task(() =>
                 {
                     GamePad.SetVibration(PlayerIndex.One, 0.7f, 0.25f);

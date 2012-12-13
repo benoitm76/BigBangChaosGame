@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Media;
 
 namespace BigBangChaosGame
 {
@@ -19,6 +20,8 @@ namespace BigBangChaosGame
         private ContentManager Content;
         private List<String> lines;
         private int scrolling = 1;
+
+        private Song mainTheme;
 
         private Boolean isFinsih = false;
 
@@ -53,6 +56,10 @@ namespace BigBangChaosGame
             }
             //Chargement de la police
             font = Content.Load<SpriteFont>("DFsmall");
+            mainTheme = Content.Load<Song>("Sounds/main_theme_v1.0");
+            MediaPlayer.IsRepeating = true;
+            MediaPlayer.Volume = 0.3f;
+            MediaPlayer.Play(mainTheme);
             base.LoadContent();
         }
 
@@ -61,6 +68,7 @@ namespace BigBangChaosGame
             //on quitte si le scroll est fini
             if (isFinsih)
             {
+                MediaPlayer.Stop();
                 this.Remove();
             }
             else

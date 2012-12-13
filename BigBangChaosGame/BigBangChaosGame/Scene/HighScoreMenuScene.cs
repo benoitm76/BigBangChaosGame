@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Audio;
 
 namespace BigBangChaosGame.Scene
 {
@@ -22,6 +23,9 @@ namespace BigBangChaosGame.Scene
         private Texture2D background;
         TabScore tab = new TabScore();
         Textbox textbox;
+        private String texthighscore;
+
+        private SoundEffect soundHightScore;
         
         public HighScoreMenuScene(SceneManager sceneMgr, BBCGame game)
             : base(sceneMgr, "")
@@ -65,6 +69,9 @@ namespace BigBangChaosGame.Scene
                 Position = new Vector2((game.size_window.X / 2) - 400 / 2, 110),
                 HasFocus = true
             };
+
+            texthighscore = tab.makeHighScoreString();
+            soundHightScore = Content.Load<SoundEffect>("Sounds/highscore_v1.0");
         }
 
         public override void Update(GameTime gameTime)
@@ -75,7 +82,9 @@ namespace BigBangChaosGame.Scene
             {
                 int scorre = (int)game.distance;
                 tab.SaveHighScore(scorre, Textbox.Pseudo);
+                texthighscore = tab.makeHighScoreString();
                 Textbox.Pseudo = "Default";
+                soundHightScore.Play();
             }
 
             if (mouseEvent.UpdateMouse() && mouseEvent.getMouseContainer().Intersects(back.getContainer()))
@@ -97,7 +106,7 @@ namespace BigBangChaosGame.Scene
             string text = string.Format("Score: {0} Km", score);
             Vector2 tailletext = _font.MeasureString(text);
             spriteBatch.DrawString(_font, text, new Vector2((game.size_window.X / 2) - (tailletext.X / 2), 50), Color.White);
-            string afficherHS = tab.makeHighScoreString();
+            string afficherHS = texthighscore;
             string text2 = string.Format("{0}", afficherHS);
             Vector2 tailletext2 = _font2.MeasureString(text2);
             spriteBatch.DrawString(_font2, text2, new Vector2((game.size_window.X / 2) - (tailletext2.X / 2), 270), Color.White);
@@ -115,8 +124,6 @@ namespace BigBangChaosGame.Scene
 
         protected override void OnCancel()
         {
-
-
         }
     }
 }
