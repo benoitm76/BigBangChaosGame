@@ -41,8 +41,11 @@ namespace BigBangChaosGame
             if (Content == null)
                 Content = new ContentManager(SceneManager.Game.Services, "Content");
 
-            clavier = new MenuButton(new Vector2(450, 250), Content.Load<Texture2D>("Keyboard"), new Rectangle(100, 100, 100, 100));
-            xbox = new MenuButton(new Vector2(450, 370), Content.Load<Texture2D>("Gamepad"), new Rectangle(100, 100, 100, 100));
+            Texture2D keyboard = Content.Load<Texture2D>("Keyboard");
+            Texture2D gamepad = Content.Load<Texture2D>("Gamepad");
+
+            clavier = new MenuButton(new Vector2((SceneManager.GraphicsDevice.Viewport.Width - keyboard.Width) / 2, 250), keyboard, new Rectangle(100, 100, 100, 100));
+            xbox = new MenuButton(new Vector2((SceneManager.GraphicsDevice.Viewport.Width - gamepad.Width) / 2, 370), gamepad, new Rectangle(100, 100, 100, 100));
             back = new MenuButton(new Vector2(0, 625), Content.Load<Texture2D>("Back"), new Rectangle(100, 100, 100, 100));
 
             mouseEvent = new MouseEvent();

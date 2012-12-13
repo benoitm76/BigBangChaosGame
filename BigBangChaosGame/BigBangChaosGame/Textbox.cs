@@ -22,11 +22,11 @@ namespace BigBangChaosGame
         KeyboardState lastKeyboard;
         bool renderIsDirty = true;
         public static string Pseudo = "Default";
-    private static Dictionary<Keys, char> characterByKey;
-    static Textbox()
-    {
+        private static Dictionary<Keys, char> characterByKey;
+        static Textbox()
+        {
 
-        characterByKey = new Dictionary<Keys, char>()
+            characterByKey = new Dictionary<Keys, char>()
     {
         {Keys.A, 'a'},
         {Keys.B, 'b'},
@@ -79,71 +79,71 @@ namespace BigBangChaosGame
          {Keys.Space, ' '},
          {Keys.Enter, '\n'}
     };
-}
+        }
 
 
         public Textbox(GraphicsDevice graphicsDevice, int width, SpriteFont font)
-{
-         this.font = font;
-         var fontMeasurements = font.MeasureString("dfgjlJL");
-         var height = (int)fontMeasurements.Y;
-         var pp = graphicsDevice.PresentationParameters; renderTarget = new RenderTarget2D(graphicsDevice, width, height, false, pp.BackBufferFormat, pp.DepthStencilFormat);
-         Text = new StringBuilder();
-         this.graphicsDevice = graphicsDevice;
-         spriteBatch = new SpriteBatch(graphicsDevice);
-}
+        {
+            this.font = font;
+            var fontMeasurements = font.MeasureString("dfgjlJL");
+            var height = (int)fontMeasurements.Y;
+            var pp = graphicsDevice.PresentationParameters; renderTarget = new RenderTarget2D(graphicsDevice, width, height, false, pp.BackBufferFormat, pp.DepthStencilFormat);
+            Text = new StringBuilder();
+            this.graphicsDevice = graphicsDevice;
+            spriteBatch = new SpriteBatch(graphicsDevice);
+        }
 
         public void Update(GameTime gameTime)
-{
-    if (!HasFocus)
-    {
-        return;
-    }
-        
-    var keyboard = Keyboard.GetState();
-foreach (var key in keyboard.GetPressedKeys())
-{
-    if (!lastKeyboard.IsKeyUp(key))
-    {
-        continue;
-    }
+        {
+            if (!HasFocus)
+            {
+                return;
+            }
 
-    if (key == Keys.Enter)
-    {
-        HasFocus = false;
-        Pseudo = Text.ToString();
-    }
-   
+            var keyboard = Keyboard.GetState();
+            foreach (var key in keyboard.GetPressedKeys())
+            {
+                if (!lastKeyboard.IsKeyUp(key))
+                {
+                    continue;
+                }
 
-    if (key == Keys.Delete ||
-    key == Keys.Back)
-{
-    if (Text.Length == 0)
-    {
-        continue;
-    }
-    Text.Length--;
-    renderIsDirty = true;
-    continue;
-}
+                if (key == Keys.Enter)
+                {
+                    HasFocus = false;
+                    Pseudo = Text.ToString();
+                }
 
-    char character;
-    if (!characterByKey.TryGetValue(key, out character))
-    {
-        continue;
-    }
-    if (keyboard.IsKeyDown(Keys.LeftShift) ||
-    keyboard.IsKeyDown(Keys.RightShift))
-    {
-        character = Char.ToUpper(character);
-    }
-    Text.Append(character);
 
-    renderIsDirty = true;
-}
+                if (key == Keys.Delete ||
+                key == Keys.Back)
+                {
+                    if (Text.Length == 0)
+                    {
+                        continue;
+                    }
+                    Text.Length--;
+                    renderIsDirty = true;
+                    continue;
+                }
 
-lastKeyboard = keyboard;
-}
+                char character;
+                if (!characterByKey.TryGetValue(key, out character))
+                {
+                    continue;
+                }
+                if (keyboard.IsKeyDown(Keys.LeftShift) ||
+                keyboard.IsKeyDown(Keys.RightShift))
+                {
+                    character = Char.ToUpper(character);
+                }
+                Text.Append(character);
+
+                renderIsDirty = true;
+            }
+
+            lastKeyboard = keyboard;
+        }
 
         public void PreDraw()
         {
@@ -160,7 +160,7 @@ lastKeyboard = keyboard;
                 font, Text,
                 Vector2.Zero, ForegroundColor);
             spriteBatch.End();
-           graphicsDevice.SetRenderTargets(existingRenderTargets);
+            graphicsDevice.SetRenderTargets(existingRenderTargets);
         }
 
         public void Draw()
@@ -170,7 +170,7 @@ lastKeyboard = keyboard;
             spriteBatch.End();
         }
 
-}
-
     }
+
+}
 
