@@ -40,16 +40,14 @@ namespace BigBangChaosGame.Scene
 
             tab.Ini();
 
-<<<<<<< HEAD
-
             base.Initialize();
-=======
+
             back = new MenuButton(new Vector2(0, 625), Content.Load<Texture2D>("Back"), new Rectangle(100, 100, 100, 100));
 
             mouseEvent = new MouseEvent();
           
             base.Initialize();           
->>>>>>> ead2d0e2492793a28724fd93983e06fe1008f968
+
         }
         protected override void LoadContent()
         {
