@@ -138,6 +138,7 @@ namespace BigBangChaosGame
                 {
                     new ScoreScene(sceneMgr).Add();
                 }
+                sceneMgr.Game.IsMouseVisible = true;
             }
 
             base.Update(gameTime);
@@ -172,10 +173,7 @@ namespace BigBangChaosGame
                 button3.DrawButton(spriteBatch);
                 button4.DrawButton(spriteBatch);
                 button5.DrawButton(spriteBatch);
-                button6.DrawButton(spriteBatch);
-
-
-                sceneMgr.Game.IsMouseVisible = true;
+                button6.DrawButton(spriteBatch);                
                 spriteBatch.End();
             }
             base.Draw(gameTime);            

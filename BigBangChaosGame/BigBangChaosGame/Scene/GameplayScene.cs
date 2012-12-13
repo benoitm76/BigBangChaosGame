@@ -52,6 +52,7 @@ namespace BigBangChaosGame
             mu = new Mutex();
 
             g = new BBCGame(size_window, Content);
+            
         }
 
         public override void Initialize()
