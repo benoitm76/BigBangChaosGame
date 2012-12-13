@@ -23,6 +23,9 @@ namespace BigBangChaosGame
         MenuButton enemmy2;
         MenuButton enemmy3;
         MenuButton instructions;
+        MenuButton flife;
+        MenuButton dlife;
+        MenuButton back;
         SpriteBatch spriteBatch;
 
         private SpriteFont spritfont;
@@ -43,12 +46,15 @@ namespace BigBangChaosGame
             if (Content == null)
                 Content = new ContentManager(SceneManager.Game.Services, "Content");
 
+            instructions = new MenuButton(new Vector2(250, 10), Content.Load<Texture2D>("Intructions_big"), new Rectangle(100, 100, 100, 100));
             medic = new MenuButton(new Vector2(50, 350), Content.Load<Texture2D>("medic_kitv1.0"), new Rectangle(100, 100, 100, 100));
             fiole = new MenuButton(new Vector2(50, 400), Content.Load<Texture2D>("fiole_v2.1"), new Rectangle(100, 100, 100, 100));
             enemmy1 = new MenuButton(new Vector2(1175, 320), Content.Load<Texture2D>("ennemie1_v2.0"), new Rectangle(100, 100, 100, 100));
             enemmy2 = new MenuButton(new Vector2(1200, 420), Content.Load<Texture2D>("ennemie2_v1.0"), new Rectangle(100, 100, 100, 100));
             enemmy3 = new MenuButton(new Vector2(1207, 580), Content.Load<Texture2D>("ennemie3_v1.0"), new Rectangle(100, 100, 100, 100));
-            instructions = new MenuButton(new Vector2(250, 10), Content.Load<Texture2D>("Intructions_big"), new Rectangle(100, 100, 100, 100));
+            flife = new MenuButton(new Vector2(50, 500), Content.Load<Texture2D>("fullLife"), new Rectangle(100, 100, 100, 100));
+            dlife = new MenuButton(new Vector2(50, 550), Content.Load<Texture2D>("DamageLife"), new Rectangle(100, 100, 100, 100));
+            back = new MenuButton(new Vector2(0, 625), Content.Load<Texture2D>("Back"), new Rectangle(100, 100, 100, 100));
             base.Initialize();
         }
 
@@ -80,7 +86,9 @@ namespace BigBangChaosGame
             spriteBatch.DrawString(spritfont, "You can catch various items such as health or invulnerability to go further.", new Vector2(50, 280), Color.White);
             spriteBatch.DrawString(spritfont, "Health", new Vector2(200, 360), Color.White);
             spriteBatch.DrawString(spritfont, "Invulnerability", new Vector2(200, 410), Color.White);
-            spriteBatch.DrawString(spritfont, "Enemies : ", new Vector2(1075, 450), Color.White);
+            spriteBatch.DrawString(spritfont, "enemies :", new Vector2(1075, 440), Color.White);
+            spriteBatch.DrawString(spritfont, "Full Life", new Vector2(300, 500), Color.White);
+            spriteBatch.DrawString(spritfont, "Damaged Life", new Vector2(300, 550), Color.White);
 
             fiole.DrawButton(spriteBatch);
             medic.DrawButton(spriteBatch);
@@ -88,6 +96,9 @@ namespace BigBangChaosGame
             enemmy1.DrawButton(spriteBatch);
             enemmy2.DrawButton(spriteBatch);
             enemmy3.DrawButton(spriteBatch);
+            flife.DrawButton(spriteBatch);
+            dlife.DrawButton(spriteBatch);
+            back.DrawButton(spriteBatch);
 
             sceneMgr.Game.IsMouseVisible = true;
             spriteBatch.End();
