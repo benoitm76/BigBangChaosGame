@@ -23,7 +23,11 @@ namespace BigBangChaosGame
         MenuButton down;
         MenuButton controles;
         MenuButton xbox;
+        MenuButton back;
+        
         SpriteBatch spriteBatch;
+
+        MouseEvent mouseEvent;
 
         private ContentManager Content;
         private Texture2D background;
@@ -47,6 +51,9 @@ namespace BigBangChaosGame
             down = new MenuButton(new Vector2(100, 500), Content.Load<Texture2D>("Down"), new Rectangle(100, 100, 100, 100));
             controles = new MenuButton(new Vector2(250, 10), Content.Load<Texture2D>("ControlesB"), new Rectangle(100, 100, 100, 100));
             xbox = new MenuButton(new Vector2(400, 200), Content.Load<Texture2D>("Xbox controller"), new Rectangle(100, 100, 100, 100));
+            back = new MenuButton(new Vector2(0, 625), Content.Load<Texture2D>("Back"), new Rectangle(100, 100, 100, 100));
+
+            mouseEvent = new MouseEvent();
 
             base.Initialize();
         }
@@ -66,6 +73,21 @@ namespace BigBangChaosGame
             // TODO: use this.Content to load your game content here
         }
 
+        public override void Update(GameTime gameTime)
+        {
+            // Allows the game to exit
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
+                sceneMgr.Game.Exit();
+            if (IsActive)
+            {
+                // TODO: Add your update logic here
+                if (mouseEvent.UpdateMouse() && mouseEvent.getMouseContainer().Intersects(back.getContainer()))
+                {
+                    this.Remove();
+                }
+            }
+        }
+
         public override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
@@ -82,6 +104,7 @@ namespace BigBangChaosGame
             down.DrawButton(spriteBatch);
             controles.DrawButton(spriteBatch);
             xbox.DrawButton(spriteBatch);
+            back.DrawButton(spriteBatch);
 
             sceneMgr.Game.IsMouseVisible = true;
             spriteBatch.End();
