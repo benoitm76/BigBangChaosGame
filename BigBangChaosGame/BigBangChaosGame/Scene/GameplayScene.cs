@@ -22,12 +22,13 @@ namespace BigBangChaosGame
         private Vector2 size_window;
         private Texture2D background;
         private Texture2D logo_gamejam;
+        private Video video;
         private int scrollX = 1;
         private BBCGame g;
         static Mutex mu;
         private ContentManager Content;
         private SceneManager sceneMgr;
-        private float _pauseAlpha;        
+        private float _pauseAlpha;
         private Song mainTheme;
 
         // ajout 12/12 9h by Simon, barre de vie et texte barre de vie.
@@ -55,9 +56,9 @@ namespace BigBangChaosGame
         }
 
         public override void Initialize()
-        {               
+        {
             // TODO: Add your initialization logic here
-            base.Initialize();           
+            base.Initialize();
         }
         protected override void LoadContent()
         {
@@ -89,21 +90,26 @@ namespace BigBangChaosGame
             //Mise à jour position de la souris
             Mouse.SetPosition((int)g.particle.position.X, (int)g.particle.position.Y);
             g.particle.oldMouseState = Mouse.GetState();
-            
+
             mainTheme = Content.Load<Song>("Sounds/main_theme_v1.0");
             MediaPlayer.Volume = 0.3f;
             MediaPlayer.IsRepeating = true;
+
+            new Thread(() =>
+            {
+                video = Content.Load<Video>("game_over");
+            }).Start();
             // TODO: use this.Content to load your game content here
         }
 
         protected override void UnloadContent()
         {
-            if(Content != null)
+            if (Content != null)
                 Content.Unload();
             if (MediaPlayer.State == MediaState.Playing)
             {
                 MediaPlayer.Stop();
-            }            
+            }
             mainTheme.Dispose();
         }
 
@@ -213,9 +219,9 @@ namespace BigBangChaosGame
                 if (g.particle.health <= 0)
                 {
                     MediaPlayer.Stop();
-                    this.Remove();                    
+                    this.Remove();
                     new HighScoreMenuScene(sceneMgr, g).Add();
-                    new GameOverScene(sceneMgr).Add();
+                    new GameOverScene(sceneMgr, video).Add();
                 }
             }
             else
@@ -238,7 +244,7 @@ namespace BigBangChaosGame
             spriteBatch.Draw(background, Vector2.Zero, new Rectangle(scrollX, 0, background.Width, background.Height), Color.White);
 
             spriteBatch.Draw(logo_gamejam, new Vector2(size_window.X - logo_gamejam.Width - 20, size_window.Y - logo_gamejam.Height - 90), Color.Gray);
-            
+
             // Desinne la barre de vie et son texte, by Simon
             decimal pourcent = 100 - ((decimal)g.particle.health / 5) * 100;
             if (pourcent > 100)
@@ -246,7 +252,7 @@ namespace BigBangChaosGame
                 pourcent = 100;
 
             }
-            
+
             spriteBatch.Draw(mHealthBar, new Rectangle(10,
             10, mHealthBar.Width, mHealthBar.Height), new Rectangle(0, 0, mHealthBar.Width, mHealthBar.Height), Color.Blue);
 
