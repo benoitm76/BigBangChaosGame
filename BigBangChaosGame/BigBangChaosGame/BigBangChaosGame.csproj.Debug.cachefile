@@ -26,7 +26,6 @@ Content\Right.xnb
 Content\Up.xnb
 Content\Menu principal1.xnb
 Content\particle2_v1.0.xnb
-Content\fiole_v2.1.xnb
 Content\Life.xnb
 Content\Dist.xnb
 Content\menufont.xnb
@@ -39,5 +38,8 @@ Content\Sounds\accelerator_v1.2.xnb
 Content\DFPetit.xnb
 Content\Xbox controller.xnb
 Content\Intructions_big.xnb
+Content\fiole_v2.1.xnb
+Content\DFsmall.xnb
+Content\logo_gamjam_v1.0.xnb
 Content\game_over.wmv
 Content\Sounds\main_theme_v1.0.wma

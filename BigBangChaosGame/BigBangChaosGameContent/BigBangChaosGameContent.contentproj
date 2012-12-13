@@ -280,6 +280,7 @@
       <Name>DFsmall</Name>
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
+      <SubType>Designer</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -306,6 +307,11 @@
   <ItemGroup>
     <Compile Include="Intructions_big.png">
       <Name>Intructions_big</Name>
+<Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="logo_gamjam_v1.0.png">
+      <Name>logo_gamjam_v1.0</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
