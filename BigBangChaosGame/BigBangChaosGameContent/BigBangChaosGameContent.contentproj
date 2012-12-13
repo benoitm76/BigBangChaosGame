@@ -378,6 +378,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Highscores.png">
+      <Name>Highscores</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+    <ItemGroup>
     <Compile Include="pipe_v2.1.png">
       <Name>pipe_v2.1</Name>
       <Importer>TextureImporter</Importer>
