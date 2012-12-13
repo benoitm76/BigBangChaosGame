@@ -27,23 +27,23 @@ Content\Up.xnb
 Content\Menu principal1.xnb
 Content\particle2_v1.0.xnb
 Content\fiole_v2.1.xnb
-Content\logo_gamjam_v1.0.xnb
-Content\Intructions_big.xnb
-Content\compteurdown_v1.0.xnb
-Content\compteurup_v1.0.xnb
-Content\fullLife.xnb
-Content\DamageLife.xnb
-Content\Back.xnb
 Content\Life.xnb
 Content\Dist.xnb
 Content\menufont.xnb
 Content\DF.xnb
 Content\DFsmall.xnb
-Content\DFPetit.xnb
 Content\game_over.xnb
 Content\Sounds\main_theme_v1.0.xnb
 Content\Sounds\collision_v1.2.xnb
 Content\Sounds\accelerator_v1.2.xnb
+Content\DFPetit.xnb
+Content\Intructions_big.xnb
+Content\logo_gamjam_v1.0.xnb
+Content\fullLife.xnb
+Content\DamageLife.xnb
+Content\Back.xnb
+Content\compteurdown_v1.0.xnb
+Content\compteurup_v1.0.xnb
 Content\Xbox controller.xnb
 Content\game_over.wmv
 Content\Sounds\main_theme_v1.0.wma
