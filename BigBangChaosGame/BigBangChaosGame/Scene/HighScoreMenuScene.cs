@@ -10,7 +10,9 @@ namespace BigBangChaosGame.Scene
 {
     public class HighScoreMenuScene : AbstractMenuScene
     {
-        
+        MenuButton back;
+        MouseEvent mouseEvent;
+
         private SpriteFont _font;
         private SpriteFont _font2;
         private BBCGame game;
@@ -20,6 +22,7 @@ namespace BigBangChaosGame.Scene
         private Texture2D background;
         TabScore tab = new TabScore();
         Textbox textbox;
+        
         public HighScoreMenuScene(SceneManager sceneMgr, BBCGame game)
             : base(sceneMgr, "")
         {
@@ -39,7 +42,10 @@ namespace BigBangChaosGame.Scene
             // TODO: Add your initialization logic here
            
             tab.Ini();
-          
+
+            back = new MenuButton(new Vector2(0, 625), Content.Load<Texture2D>("Back"), new Rectangle(100, 100, 100, 100));
+
+            mouseEvent = new MouseEvent();
           
             base.Initialize();           
         }
@@ -73,6 +79,11 @@ namespace BigBangChaosGame.Scene
 
             }
 
+            if (mouseEvent.UpdateMouse() && mouseEvent.getMouseContainer().Intersects(back.getContainer()))
+            {
+                this.Remove();
+            }
+
             base.Update(gameTime);
         }
 
@@ -91,6 +102,8 @@ namespace BigBangChaosGame.Scene
            string text2 = string.Format("{0}", afficherHS);
            Vector2 tailletext2 = _font2.MeasureString(text2);
            spriteBatch.DrawString(_font2, text2, new Vector2((game.size_window.X / 2) - (tailletext2.X / 2), 270), Color.White);
+
+           back.DrawButton(spriteBatch);
 
             spriteBatch.End();
 
