@@ -76,7 +76,6 @@ namespace BigBangChaosGame.Scene
                 int scorre = (int)game.distance;
                 tab.SaveHighScore(scorre, Textbox.Pseudo);
                 Textbox.Pseudo = "Default";
-
             }
 
             if (mouseEvent.UpdateMouse() && mouseEvent.getMouseContainer().Intersects(back.getContainer()))
@@ -90,7 +89,7 @@ namespace BigBangChaosGame.Scene
 
         public override void Draw(GameTime gameTime)
         {
-
+            textbox.PreDraw();
             spriteBatch.Begin();
             spriteBatch.Draw(background, new Rectangle(0, 0, background.Width, background.Height), Color.White);
 
@@ -103,14 +102,11 @@ namespace BigBangChaosGame.Scene
             Vector2 tailletext2 = _font2.MeasureString(text2);
             spriteBatch.DrawString(_font2, text2, new Vector2((game.size_window.X / 2) - (tailletext2.X / 2), 270), Color.White);
 
-           back.DrawButton(spriteBatch);
+            back.DrawButton(spriteBatch);
 
             spriteBatch.End();
-
-
-            textbox.PreDraw();
+            
             textbox.Draw();
-
 
             base.Draw(gameTime);
         }
