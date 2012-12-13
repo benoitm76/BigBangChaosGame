@@ -21,7 +21,6 @@ namespace BigBangChaosGame
 
         private Vector2 size_window;
         private Texture2D background;
-        private Texture2D logo_gamejam;
         private Video video;
         private int scrollX = 1;
         private BBCGame g;
@@ -67,8 +66,6 @@ namespace BigBangChaosGame
 
             //Chargement du fond
             background = Content.Load<Texture2D>("pipe_v2.0");
-
-            logo_gamejam = Content.Load<Texture2D>("logo_gamjam_v1.0");
 
             //Chargement de la particule
             g.particle = new Particle(new Vector2(size_window.X, size_window.Y), SceneManager.Game);
@@ -243,14 +240,11 @@ namespace BigBangChaosGame
             //On dessine le fond
             spriteBatch.Draw(background, Vector2.Zero, new Rectangle(scrollX, 0, background.Width, background.Height), Color.White);
 
-            spriteBatch.Draw(logo_gamejam, new Vector2(size_window.X - logo_gamejam.Width - 20, size_window.Y - logo_gamejam.Height - 90), Color.Gray);
-
             // Desinne la barre de vie et son texte, by Simon
             decimal pourcent = 100 - ((decimal)g.particle.health / 5) * 100;
             if (pourcent > 100)
             {
                 pourcent = 100;
-
             }
 
             spriteBatch.Draw(mHealthBar, new Rectangle(10,

@@ -90,10 +90,10 @@ namespace BigBangChaosGame
         {
             if (bonus.Count < maxBonus)
             {
-                if (random.Next(0, 100 * (int)(distance / 1000) + 1) == 55)
+                if (random.Next(0, 100 * (int)(distance / 1000 / 3) + 1) == 55)
                 {
                     Bonus newBonus;
-                    int rand = random.Next(0, 100) % 4;
+                    int rand = random.Next(0, 100) % 5;
                     if (rand == 0)
                     {
                         newBonus = new MediKit(size_window);                                           
@@ -106,9 +106,13 @@ namespace BigBangChaosGame
                     {
                         newBonus = new SpeedDown(size_window);
                     }
+                    else if (rand == 3)
+                    {
+                        newBonus = new SpeedUp(size_window);                        
+                    }
                     else
                     {
-                        newBonus = new SpeedUp(size_window);
+                        newBonus = new GameJam(size_window);
                     }
                     newBonus.LoadContent(content);
                     Vector2 pos = new Vector2((int)size_window.X, random.Next(70, (int)(size_window.Y - newBonus.texture.Height - 70)));

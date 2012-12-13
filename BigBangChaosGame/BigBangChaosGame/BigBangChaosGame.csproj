@@ -110,6 +110,7 @@
     <Compile Include="GameElements\Bonus\Bonus.cs" />
     <Compile Include="GameElements\Bonus\SpeedDown.cs" />
     <Compile Include="GameElements\Core\Collision.cs" />
+    <Compile Include="GameElements\Bonus\GameJam.cs" />
     <Compile Include="Scene\ControleScene.cs" />
     <Compile Include="Scene\CreditScene.cs" />
     <Compile Include="GameElements\Ennemies.cs" />
@@ -128,7 +129,7 @@
     <Compile Include="ParticleEmitter\ParticleSystemSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Game1.cs" />
+    <Compile Include="GameElements\Game1.cs" />
     <Compile Include="Scene\Core\AbstractGameScene.cs" />
     <Compile Include="Scene\Core\AbstractMenuScene.cs" />
     <Compile Include="Scene\BackgroundScene.cs" />
