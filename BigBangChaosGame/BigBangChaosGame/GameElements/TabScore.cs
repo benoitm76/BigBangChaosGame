@@ -19,14 +19,14 @@ namespace BigBangChaosGame
             public int[] Score;
             public int Count;
 
-          public HighScoreData(int count)
-          {
-              PlayerName = new string[count];
-              Score = new int[count];
+            public HighScoreData(int count)
+            {
+                PlayerName = new string[count];
+                Score = new int[count];
 
-               Count = count;
-          }
-       }
+                Count = count;
+            }
+        }
 
 
         public void Ini()
@@ -92,14 +92,12 @@ namespace BigBangChaosGame
             */
 #endif
         }
-
-
         /* More score variables */
         HighScoreData data;
-        public string HighScoresFilename = "highscores.dat";        
+        public string HighScoresFilename = "highscores.dat";
 
         /* Save highscores */
-       public static void SaveHighScores2(HighScoreData data, string filename, StorageDevice device)
+        public static void SaveHighScores2(HighScoreData data, string filename, StorageDevice device)
         {
             // Get the path of the save game
             string fullpath = "highscores.dat";
@@ -136,10 +134,7 @@ namespace BigBangChaosGame
            
 #endif
         }
-       
-
-
-
+        
         /* Load highscores */
         public static HighScoreData LoadHighScores(string filename)
         {
@@ -185,8 +180,6 @@ namespace BigBangChaosGame
 
         }
 
-
-
         /* Save player highscore when game ends */
         public void SaveHighScore(int score, string Name)
         {
@@ -231,7 +224,7 @@ namespace BigBangChaosGame
             for (int i = 0; i < 5; i++) // this part was missing (5 means how many in the list/array/Counter)
             {
                 classement = i + 1;
-                scoreBoardString = scoreBoardString + classement + " - " + data2.PlayerName[i] + " - " + data2.Score[i]+" Km" + "\n";
+                scoreBoardString = scoreBoardString + classement + " - " + data2.PlayerName[i] + " - " + data2.Score[i] + " Km" + "\n";
             }
             return scoreBoardString;
         }

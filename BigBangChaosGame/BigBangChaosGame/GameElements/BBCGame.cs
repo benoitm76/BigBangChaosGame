@@ -23,7 +23,9 @@ namespace BigBangChaosGame
         public Particle particle { get; set; }
         public List<Ennemies> ennemies { get; set; }
         public List<Bonus> bonus { get; set; }
+        public float maxSpeed { get; set; }
         public int maxEnnemies { get; set; }
+        public int inGamemaxEnnemies { get; set; }
         public int maxBonus { get; set; }
         public Vector2 size_window { get; set; }
         public static int controller { get; set; }
@@ -38,6 +40,8 @@ namespace BigBangChaosGame
             vitesse = 1f;
             maxEnnemies = 5;
             maxBonus = 2;
+            maxSpeed = 3f;
+            inGamemaxEnnemies = 15;
             ennemies = new List<Ennemies>();
             bonus = new List<Bonus>();
             random = new Random();
@@ -89,13 +93,22 @@ namespace BigBangChaosGame
                 if (random.Next(0, 100 * (int)(distance / 1000) + 1) == 55)
                 {
                     Bonus newBonus;
-                    if (random.Next(0, 100) % 2 == 0)
+                    int rand = random.Next(0, 100) % 4;
+                    if (rand == 0)
                     {
                         newBonus = new MediKit(size_window);                                           
                     }
-                    else
+                    else if(rand == 1)
                     {
                         newBonus = new Invulnerability(size_window);                       
+                    }
+                    else if (rand == 2)
+                    {
+                        newBonus = new SpeedDown(size_window);
+                    }
+                    else
+                    {
+                        newBonus = new SpeedUp(size_window);
                     }
                     newBonus.LoadContent(content);
                     Vector2 pos = new Vector2((int)size_window.X, random.Next(70, (int)(size_window.Y - newBonus.texture.Height - 70)));
@@ -111,7 +124,7 @@ namespace BigBangChaosGame
             {
                 if ((int)(distance / 1000) % 4 == 1)
                 {
-                    if (vitesse <= 3f)
+                    if (vitesse <= maxSpeed)
                     {
                         vitesse = vitesse * 1.3f;
                         accelerateSound.Play();
@@ -119,14 +132,14 @@ namespace BigBangChaosGame
                 }
                 if ((int)(distance / 1000) == 2)
                 {
-                    if (maxEnnemies <= 15)
+                    if (maxEnnemies <= inGamemaxEnnemies)
                     {
                         maxEnnemies += 1;
                     }
                 }
                 if ((int)(distance / 1000) == 0)
                 {
-                    if (maxEnnemies <= 15)
+                    if (maxEnnemies <= inGamemaxEnnemies)
                     {
                         maxEnnemies += 1;
                     }

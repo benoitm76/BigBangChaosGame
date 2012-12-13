@@ -12,17 +12,17 @@ namespace BigBangChaosGame
     {
         private SceneManager sceneMgr;
         private SpriteFont font;
-        private String text;
         private SpriteBatch spriteBatch;
         private ContentManager Content;
+        private List<String> lines;
+        private int scrolling;
 
         public CreditScene(SceneManager sceneMgr)
             : base(sceneMgr)
         {
             this.sceneMgr = sceneMgr;
 
-            text = "Big Bang Chaos \r\n\r\n" +
-                "Programmers :";
+            lines = System.IO.File.ReadAllLines(@"credits.txt").OfType<String>().ToList();
         }
 
         protected override void LoadContent()
@@ -44,7 +44,16 @@ namespace BigBangChaosGame
         public override void Draw(Microsoft.Xna.Framework.GameTime gameTime)
         {
             spriteBatch.Begin();
-            spriteBatch.DrawString(font, text, Vector2.Zero, Color.White);
+            int i = 0;
+            foreach (String line in lines)
+            {
+                if (SceneManager.GraphicsDevice.Viewport.Height + font.MeasureString(line).Y - scrolling + i * 50 >= 0 && SceneManager.GraphicsDevice.Viewport.Height - scrolling + i * 50 < 720)
+                {
+                    spriteBatch.DrawString(font, line, new Vector2((SceneManager.GraphicsDevice.Viewport.Width - font.MeasureString(line).X) / 2, SceneManager.GraphicsDevice.Viewport.Height - scrolling + i * 50), Color.White);
+                }
+                i++;
+            }
+            scrolling ++;
             spriteBatch.End();
             base.Draw(gameTime);
         }
