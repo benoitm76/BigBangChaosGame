@@ -56,7 +56,7 @@ namespace BigBangChaosGame
                 data.PlayerName[4] = "botsam";
                 data.Score[4] = 2;
 
-                SaveHighScores(data, HighScoresFilename, device);
+                SaveHighScores2(data, HighScoresFilename, device);
             }
             /*
 #elif XBOX
@@ -107,7 +107,7 @@ namespace BigBangChaosGame
         string messageString = "";
 
         /* Save highscores */
-        public static void SaveHighScores(HighScoreData data, string filename, StorageDevice device)
+       public static void SaveHighScores2(HighScoreData data, string filename, StorageDevice device)
         {
             // Get the path of the save game
             string fullpath = "highscores.dat";
@@ -144,7 +144,7 @@ namespace BigBangChaosGame
            
 #endif
         }
-
+       
 
 
 
@@ -196,7 +196,7 @@ namespace BigBangChaosGame
 
 
         /* Save player highscore when game ends */
-        public void SaveHighScore(int score)
+        public void SaveHighScore(int score, string Name)
         {
             // Create the data to saved
             HighScoreData data = LoadHighScores(HighScoresFilename);
@@ -219,10 +219,10 @@ namespace BigBangChaosGame
                     data.Score[i] = data.Score[i - 1];
                 }
 
-                data.PlayerName[scoreIndex] = PlayerName; //Retrieve User Name Here
+                data.PlayerName[scoreIndex] = Name; //Retrieve User Name Here
                 data.Score[scoreIndex] = score; // Retrieve score here
 
-                SaveHighScores(data, HighScoresFilename, device);
+                SaveHighScores2(data, HighScoresFilename, device);
             }
         }
 
@@ -235,10 +235,11 @@ namespace BigBangChaosGame
 
             // Create scoreBoardString
             string scoreBoardString = "Highscores:\n\n";
-
+            int classement = 0;
             for (int i = 0; i < 5; i++) // this part was missing (5 means how many in the list/array/Counter)
             {
-                scoreBoardString = scoreBoardString + data2.PlayerName[i] + "-" + data2.Score[i] + "\n";
+                classement = i + 1;
+                scoreBoardString = scoreBoardString + classement + " - " + data2.PlayerName[i] + " - " + data2.Score[i]+" Km" + "\n";
             }
             return scoreBoardString;
         }
