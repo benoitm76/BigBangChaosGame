@@ -65,13 +65,20 @@ namespace BigBangChaosGame
             }
         }
 
-        
+
 
         /* Save highscores */
         public static void SaveHighScores2(HighScoreData data, string filename, StorageDevice device)
         {
-
-            FileStream stream = File.Open(filename, FileMode.OpenOrCreate);
+            FileStream stream;
+            if (!File.Exists(filename))
+            {
+                stream = File.Open(filename, FileMode.OpenOrCreate);
+            }
+            else
+            {
+                stream = File.Open(filename, FileMode.Truncate);
+            }
             try
             {
                 // Convert the object to XML data and put it in the stream
@@ -87,15 +94,14 @@ namespace BigBangChaosGame
 
 
         }
-        
+
         /* Load highscores */
         public static HighScoreData LoadHighScores(string filename)
         {
             HighScoreData data;
 
-
             // Open the file
-            FileStream stream = File.Open(filename, FileMode.OpenOrCreate, FileAccess.Read);
+            FileStream stream = new FileStream(filename, FileMode.OpenOrCreate, FileAccess.Read);
             try
             {
                 // Read the data from the file
@@ -107,13 +113,9 @@ namespace BigBangChaosGame
                 // Close the file
                 stream.Close();
             }
-
-
             return (data);
-
-
-
         }
+
 
         /* Save player highscore when game ends */
         public void SaveHighScore(int score, string Name)
