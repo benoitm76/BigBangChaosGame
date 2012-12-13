@@ -210,8 +210,8 @@ namespace BigBangChaosGame
                 }
                 if (g.particle.health <= 0)
                 {
-                    this.Remove();
                     MediaPlayer.Stop();
+                    this.Remove();                    
                     new HighScoreMenuScene(sceneMgr, g).Add();
                     new GameOverScene(sceneMgr).Add();
                 }
