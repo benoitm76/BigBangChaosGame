@@ -258,8 +258,8 @@ namespace BigBangChaosGame
 
             //Texte Distance
             string text2 = string.Format("{0:00000000}", g.distance);
-            spriteBatch.DrawString(_Dist, text2, new Vector2(size_window.X - 190, 13), Color.Red);
-            spriteBatch.DrawString(_Dist, " Km traveled", new Vector2(size_window.X - 110, 13), Color.Red);
+            spriteBatch.DrawString(_Dist, text2, new Vector2(size_window.X - 250, 13), Color.Yellow);
+            spriteBatch.DrawString(_Dist, " Km traveled", new Vector2(size_window.X - 150, 13), Color.Red);
 
             //On dessine la particule
             g.particle.Draw(spriteBatch, gameTime);
