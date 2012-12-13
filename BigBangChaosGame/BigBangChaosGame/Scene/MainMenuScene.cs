@@ -108,7 +108,7 @@ namespace BigBangChaosGame
                 // TODO: Add your update logic here
                 if (mouseEvent.UpdateMouse() && mouseEvent.getMouseContainer().Intersects(button1.getContainer()))
                 {
-                    BBCGame.controller = BBCGame.XboxController;
+                    BBCGame.controller = BBCGame.Keyboard;
                     new GameplayScene(sceneMgr).Add();
                 }
 
