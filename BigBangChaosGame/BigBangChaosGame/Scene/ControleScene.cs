@@ -22,6 +22,7 @@ namespace BigBangChaosGame
         MenuButton up;
         MenuButton down;
         MenuButton controles;
+        MenuButton xbox;
         SpriteBatch spriteBatch;
 
         private ContentManager Content;
@@ -45,6 +46,7 @@ namespace BigBangChaosGame
             up = new MenuButton(new Vector2(100, 400), Content.Load<Texture2D>("Up"), new Rectangle(100, 100, 100, 100));
             down = new MenuButton(new Vector2(100, 500), Content.Load<Texture2D>("Down"), new Rectangle(100, 100, 100, 100));
             controles = new MenuButton(new Vector2(250, 10), Content.Load<Texture2D>("ControlesB"), new Rectangle(100, 100, 100, 100));
+            xbox = new MenuButton(new Vector2(400, 200), Content.Load<Texture2D>("Xbox controller"), new Rectangle(100, 100, 100, 100));
 
             base.Initialize();
         }
@@ -79,6 +81,7 @@ namespace BigBangChaosGame
             up.DrawButton(spriteBatch);
             down.DrawButton(spriteBatch);
             controles.DrawButton(spriteBatch);
+            xbox.DrawButton(spriteBatch);
 
             sceneMgr.Game.IsMouseVisible = true;
             spriteBatch.End();
