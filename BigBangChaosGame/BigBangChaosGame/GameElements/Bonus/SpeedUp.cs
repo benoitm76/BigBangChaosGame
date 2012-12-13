@@ -20,9 +20,9 @@ namespace BigBangChaosGame
 
         public override void applyBonus()
         {
-            if (bbcgame.maxSpeed > bbcgame.vitesse && bbcgame.timeSpeedDown == 0)
+            if (bbcgame.timeSpeedDown == 0)
             {
-                bbcgame.vitesse += 0.3f;
+                bbcgame.vitesse += 0.5f;
                 bbcgame.timeSpeedUp = 60 * 5 + 1;
             }
         }

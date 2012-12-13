@@ -34,7 +34,7 @@ namespace BigBangChaosGame
         private SoundEffect accelerateSound;
 
         public int timeSpeedDown { get; set; }
-        public int timeSpeedUp { get; set; } 
+        public int timeSpeedUp { get; set; }
 
         public Random random;
 
@@ -93,7 +93,6 @@ namespace BigBangChaosGame
         {
             if (bonus.Count < maxBonus)
             {
-                int x = 80 + (int)(distance / 1000 * 0.05f * 100);
                 if (random.Next(0, 80 + (int)(distance / 1000 * 0.05f * 80)) == 10)
                 {
                     Bonus newBonus;
@@ -135,30 +134,23 @@ namespace BigBangChaosGame
 
             if (timeSpeedDown == 1)
             {
-                vitesse += 0.3f;
+                vitesse += 0.5f;
             }
             if (timeSpeedUp == 1)
             {
-                vitesse -= 0.3f;
+                vitesse -= 0.5f;
             }
             if (distancy_meters >= 1000)
             {
-                if ((int)(distance / 1000) % 4 == 1)
+                if ((int)(distance / 1000) % 3 == 1)
                 {
                     if (vitesse <= maxSpeed)
                     {
-                        vitesse = vitesse * 1.3f;
+                        vitesse += 0.2f;
                         accelerateSound.Play();
                     }
                 }
-                if ((int)(distance / 1000) == 2)
-                {
-                    if (maxEnnemies <= inGamemaxEnnemies)
-                    {
-                        maxEnnemies += 1;
-                    }
-                }
-                if ((int)(distance / 1000) == 0)
+                if ((int)(distance / 1000) % 3 == 2)
                 {
                     if (maxEnnemies <= inGamemaxEnnemies)
                     {
