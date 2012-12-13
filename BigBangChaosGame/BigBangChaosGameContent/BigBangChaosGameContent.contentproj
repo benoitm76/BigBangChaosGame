@@ -384,7 +384,7 @@
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
-    <ItemGroup>
+  <ItemGroup>
     <Compile Include="pipe_v2.1.png">
       <Name>pipe_v2.1</Name>
       <Importer>TextureImporter</Importer>
@@ -394,6 +394,13 @@
   <ItemGroup>
     <Compile Include="Sounds\alert_v1.0.wav">
       <Name>alert_v1.0</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Sounds\highscore_v1.0.wav">
+      <Name>highscore_v1.0</Name>
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>

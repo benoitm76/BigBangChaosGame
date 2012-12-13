@@ -96,7 +96,7 @@ namespace BigBangChaosGame
         }
 
         /* Load highscores */
-        public static HighScoreData LoadHighScores(string filename)
+        public HighScoreData LoadHighScores(string filename)
         {
             HighScoreData data;
 
@@ -153,8 +153,12 @@ namespace BigBangChaosGame
         public string makeHighScoreString()
         {
             // Create the data to save
-            HighScoreData data2 = LoadHighScores(HighScoresFilename);
+            return makeHighScoreString(LoadHighScores(HighScoresFilename));
+        }
 
+        /* Iterate through data if highscore is called and make the string to be saved*/
+        public string makeHighScoreString(HighScoreData data2)
+        {
             // Create scoreBoardString
             string scoreBoardString = "Highscores:\n\n";
             int classement = 0;

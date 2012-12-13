@@ -24,6 +24,7 @@ namespace BigBangChaosGame.Scene
         TabScore tab = new TabScore();
         Textbox textbox;
         private String texthighscore;
+        private Boolean showTextbox;
 
         private SoundEffect soundHightScore;
         
@@ -70,7 +71,21 @@ namespace BigBangChaosGame.Scene
                 HasFocus = true
             };
 
-            texthighscore = tab.makeHighScoreString();
+            BigBangChaosGame.TabScore.HighScoreData data = tab.LoadHighScores(tab.HighScoresFilename);
+            score = (int)game.distance;
+            int scoreIndex = -1;
+            for (int i = data.Count - 1; i > -1; i--)
+            {
+                if (score >= data.Score[i])
+                {
+                    scoreIndex = i;
+                }
+            }
+            if (scoreIndex > -1)
+            {
+                showTextbox = true;
+            }
+            texthighscore = tab.makeHighScoreString(data);
             soundHightScore = Content.Load<SoundEffect>("Sounds/highscore_v1.0");
         }
 
@@ -78,10 +93,10 @@ namespace BigBangChaosGame.Scene
         {
 
             textbox.Update(gameTime);
-            if (Textbox.Pseudo != "Default")
+            if (Textbox.Pseudo != "Default" && Textbox.Pseudo != "")
             {
                 int scorre = (int)game.distance;
-                tab.SaveHighScore(scorre, Textbox.Pseudo);
+                tab.SaveHighScore(scorre, Textbox.Pseudo);                
                 texthighscore = tab.makeHighScoreString();
                 Textbox.Pseudo = "Default";
                 soundHightScore.Play();
@@ -98,7 +113,9 @@ namespace BigBangChaosGame.Scene
 
         public override void Draw(GameTime gameTime)
         {
-            textbox.PreDraw();
+            if(showTextbox)
+                textbox.PreDraw();
+
             spriteBatch.Begin();
             spriteBatch.Draw(background, new Rectangle(0, 0, background.Width, background.Height), Color.White);
 
@@ -114,8 +131,9 @@ namespace BigBangChaosGame.Scene
             back.DrawButton(spriteBatch);
 
             spriteBatch.End();
-            
-            textbox.Draw();
+
+            if (showTextbox)
+                textbox.Draw();
 
             base.Draw(gameTime);
         }
