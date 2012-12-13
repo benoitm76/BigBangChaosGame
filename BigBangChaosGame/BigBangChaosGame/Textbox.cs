@@ -21,7 +21,7 @@ namespace BigBangChaosGame
         RenderTarget2D renderTarget;
         KeyboardState lastKeyboard;
         bool renderIsDirty = true;
-
+        public static string Pseudo = "Default";
     private static Dictionary<Keys, char> characterByKey;
     static Textbox()
     {
@@ -76,7 +76,8 @@ namespace BigBangChaosGame
         {Keys.NumPad9, '9'},
         {Keys.OemPeriod, '.'},
         {Keys.OemMinus, '-'},
-         {Keys.Space, ' '}
+         {Keys.Space, ' '},
+         {Keys.Enter, '\n'}
     };
 }
 
@@ -107,6 +108,13 @@ foreach (var key in keyboard.GetPressedKeys())
         continue;
     }
 
+    if (key == Keys.Enter)
+    {
+        HasFocus = false;
+        Pseudo = Text.ToString();
+    }
+   
+
     if (key == Keys.Delete ||
     key == Keys.Back)
 {
@@ -130,6 +138,7 @@ foreach (var key in keyboard.GetPressedKeys())
         character = Char.ToUpper(character);
     }
     Text.Append(character);
+
     renderIsDirty = true;
 }
 
