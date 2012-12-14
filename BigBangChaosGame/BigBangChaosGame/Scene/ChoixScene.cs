@@ -19,12 +19,14 @@ namespace BigBangChaosGame
     {
         MenuButton clavier;
         MenuButton xbox;
+        MenuButton souris;
         MenuButton back;
 
         SpriteBatch spriteBatch;
 
         MouseEvent mouseEvent;
 
+        private SpriteFont spritfont;
         private ContentManager Content;
         private Texture2D background;
         private SceneManager sceneMgr;
@@ -44,9 +46,11 @@ namespace BigBangChaosGame
 
             Texture2D keyboard = Content.Load<Texture2D>("Keyboard");
             Texture2D gamepad = Content.Load<Texture2D>("Gamepad");
+            Texture2D mouse = Content.Load<Texture2D>("Mouse");
 
             clavier = new MenuButton(new Vector2((SceneManager.GraphicsDevice.Viewport.Width - keyboard.Width) / 2, 250), keyboard, new Rectangle(100, 100, 100, 100));
             xbox = new MenuButton(new Vector2((SceneManager.GraphicsDevice.Viewport.Width - gamepad.Width) / 2, 370), gamepad, new Rectangle(100, 100, 100, 100));
+            souris = new MenuButton(new Vector2((SceneManager.GraphicsDevice.Viewport.Width - gamepad.Width) / 2, 490), mouse, new Rectangle(100, 100, 100, 100));
             back = new MenuButton(new Vector2(0, 625), Content.Load<Texture2D>("Back"), new Rectangle(100, 100, 100, 100));
 
             mouseEvent = new MouseEvent();
@@ -96,6 +100,14 @@ namespace BigBangChaosGame
                     }
                 }
 
+                if (mouseEvent.UpdateMouse() && mouseEvent.getMouseContainer().Intersects(souris.getContainer()))
+                {
+                        sceneMgr.Game.IsMouseVisible = false;
+                        BBCGame.controller = BBCGame.Mouse;
+                        new GameplayScene(sceneMgr).Add();
+                        this.Remove();
+                }
+
                 // TODO: Add your update logic here
                 if (mouseEvent.UpdateMouse() && mouseEvent.getMouseContainer().Intersects(back.getContainer()))
                 {
@@ -112,8 +124,11 @@ namespace BigBangChaosGame
 
             spriteBatch.Begin();
 
-            spriteBatch.Draw(background, Vector2.Zero, Color.White);
+            //spriteBatch.DrawString(spritfont, "Mouse", new Vector2(570, 500), Color.White);
 
+            spriteBatch.Draw(background, Vector2.Zero, Color.White);
+           
+            souris.DrawButton(spriteBatch);
             clavier.DrawButton(spriteBatch);
             if (GamePad.GetState(PlayerIndex.One).IsConnected)
             {
