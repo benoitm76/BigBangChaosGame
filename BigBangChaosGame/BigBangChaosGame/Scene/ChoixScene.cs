@@ -26,7 +26,6 @@ namespace BigBangChaosGame
 
         MouseEvent mouseEvent;
 
-        private SpriteFont spritfont;
         private ContentManager Content;
         private Texture2D background;
         private SceneManager sceneMgr;

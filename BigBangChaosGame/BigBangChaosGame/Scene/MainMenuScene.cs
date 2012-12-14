@@ -66,7 +66,7 @@ namespace BigBangChaosGame
             button3 = new MenuButton(new Vector2(500, 650), Content.Load<Texture2D>("Credits"), new Rectangle(100, 100, 100, 100));
             button4 = new MenuButton(new Vector2(1075, 650), Content.Load<Texture2D>("Exit"), new Rectangle(100, 100, 100, 100));
             button5 = new MenuButton(new Vector2(10, 400), Content.Load<Texture2D>("Instructions"), new Rectangle(100, 100, 100, 100));
-            button6 = new MenuButton(new Vector2(1000, 250), Content.Load<Texture2D>("High Scores"), new Rectangle(100, 100, 100, 100));
+            button6 = new MenuButton(new Vector2(980, 250), Content.Load<Texture2D>("High Scores"), new Rectangle(100, 100, 100, 100));
 
             mouseEvent = new MouseEvent();
 
