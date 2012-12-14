@@ -26,6 +26,7 @@ namespace BigBangChaosGame
         private ContentManager Content;
         private SceneManager sceneMgr;
         private Vector2 size_window;
+        private Texture2D title;
         TabScore tab = new TabScore();
 
         public ScoreScene(SceneManager sceneMgr)
@@ -43,6 +44,7 @@ namespace BigBangChaosGame
                 Content = new ContentManager(SceneManager.Game.Services, "Content");
 
             back = new MenuButton(new Vector2(0, 625), Content.Load<Texture2D>("Back"), new Rectangle(100, 100, 100, 100));
+            title = Content.Load<Texture2D>("High Scores_big");
 
             mouseEvent = new MouseEvent();
 
@@ -76,11 +78,11 @@ namespace BigBangChaosGame
             
             back.DrawButton(spriteBatch);
 
-            string afficherHS = tab.makeHighScoreString();
+            string afficherHS = tab.makeHighScoreString2();
             string text = string.Format("{0}", afficherHS);
             Vector2 tailletext2 = font.MeasureString(text);
-            spriteBatch.DrawString(font, text, new Vector2((size_window.X / 2) - (tailletext2.X / 2), (size_window.Y / 2) - (tailletext2.Y / 2)), Color.White);
-
+            spriteBatch.Draw(title, new Vector2((size_window.X / 2) - (title.Width / 2), 10), Color.White);
+            spriteBatch.DrawString(font, text, new Vector2((size_window.X / 2) - (tailletext2.X / 2), 300), Color.White);
             spriteBatch.End();
             base.Draw(gameTime);
 

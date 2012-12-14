@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BigBangChaosGame", "BigBangChaosGame\BigBangChaosGame\BigBangChaosGame.csproj", "{F1C1B57F-A900-4021-8A66-3E7C267E835B}"
 EndProject
-Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "BigBangChaosGameContent", "BigBangChaosGame\BigBangChaosGameContent\BigBangChaosGameContent.contentproj", "{1CB33A88-B564-4520-81B3-7745EFB5D3E0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BigBangChaosGameContent", "BigBangChaosGame\BigBangChaosGameContent\BigBangChaosGameContent.contentproj", "{1CB33A88-B564-4520-81B3-7745EFB5D3E0}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "BigBangChaos.Setup", "BigBangChaos.Setup\BigBangChaos.Setup.vdproj", "{63E20E66-63D0-4F38-8A07-303EE48344AD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,6 +19,8 @@ Global
 		{F1C1B57F-A900-4021-8A66-3E7C267E835B}.Release|x86.Build.0 = Release|x86
 		{1CB33A88-B564-4520-81B3-7745EFB5D3E0}.Debug|x86.ActiveCfg = Debug|x86
 		{1CB33A88-B564-4520-81B3-7745EFB5D3E0}.Release|x86.ActiveCfg = Release|x86
+		{63E20E66-63D0-4F38-8A07-303EE48344AD}.Debug|x86.ActiveCfg = Debug
+		{63E20E66-63D0-4F38-8A07-303EE48344AD}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

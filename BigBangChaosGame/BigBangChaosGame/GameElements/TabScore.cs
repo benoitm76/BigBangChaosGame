@@ -169,6 +169,27 @@ namespace BigBangChaosGame
             }
             return scoreBoardString;
         }
+
+        /* Iterate through data if highscore is called and make the string to be saved*/
+        public string makeHighScoreString2()
+        {
+            // Create the data to save
+            return makeHighScoreString2(LoadHighScores(HighScoresFilename));
+        }
+
+        /* Iterate through data if highscore is called and make the string to be saved*/
+        public string makeHighScoreString2(HighScoreData data2)
+        {
+            // Create scoreBoardString
+            string scoreBoardString = "";
+            int classement = 0;
+            for (int i = 0; i < 5; i++) // this part was missing (5 means how many in the list/array/Counter)
+            {
+                classement = i + 1;
+                scoreBoardString = scoreBoardString + classement + " - " + data2.PlayerName[i] + " - " + data2.Score[i] + " Km" + "\n";
+            }
+            return scoreBoardString;
+        }
     }
 
 }
