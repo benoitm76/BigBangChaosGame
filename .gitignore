@@ -1,6 +1,7 @@
 #AddPerso
 
 *.Debug.cachefile
+*.Release.cachefile
 
 #################
 ## Eclipse

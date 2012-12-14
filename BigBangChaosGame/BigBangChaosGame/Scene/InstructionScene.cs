@@ -109,15 +109,15 @@ namespace BigBangChaosGame
             spriteBatch.Begin();
 
             spriteBatch.Draw(background, Vector2.Zero, Color.White);
-            spriteBatch.DrawString(spritfont, "The goal is to go as far as possible while avoiding enemies", new Vector2(50, 255), Color.White);
+            spriteBatch.DrawString(spritfont, "The goal is to go as far as possible while avoiding enemies and keep the particle stable", new Vector2(50, 255), Color.White);
             spriteBatch.DrawString(spritfont, "You can catch various items such as health or invulnerability to go further.", new Vector2(50, 280), Color.White);
             spriteBatch.DrawString(spritfont, "Health", new Vector2(130, 360), Color.White);
             spriteBatch.DrawString(spritfont, "Invulnerability", new Vector2(130, 410), Color.White);
-            spriteBatch.DrawString(spritfont, "Deceleration", new Vector2(130, 475), Color.White);
-            spriteBatch.DrawString(spritfont, "Acceleration", new Vector2(130, 535), Color.White);
-            spriteBatch.DrawString(spritfont, "enemies :", new Vector2(1050, 440), Color.White);
-            spriteBatch.DrawString(spritfont, "Full Life", new Vector2(730, 350), Color.White);
-            spriteBatch.DrawString(spritfont, "Damaged Life", new Vector2(730, 400), Color.White);
+            spriteBatch.DrawString(spritfont, "Acceleration", new Vector2(130, 475), Color.White);
+            spriteBatch.DrawString(spritfont, "Deceleration", new Vector2(130, 535), Color.White);
+            spriteBatch.DrawString(spritfont, "Enemies :", new Vector2(1050, 440), Color.White);
+            spriteBatch.DrawString(spritfont, "Complety stable", new Vector2(730, 350), Color.White);
+            spriteBatch.DrawString(spritfont, "Percentage of instability", new Vector2(730, 400), Color.White);
             spriteBatch.DrawString(spritfont, "Increase your score of 2000 km", new Vector2(570, 500), Color.White);
 
             fiole.DrawButton(spriteBatch);
