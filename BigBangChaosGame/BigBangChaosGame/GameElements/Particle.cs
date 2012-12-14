@@ -160,8 +160,8 @@ namespace BigBangChaosGame
             spriteBatch.Begin();
             Color color = Color.White;
             Color color2 = Color.Black;
-            color2 = new Color(Math.Abs((health - 5)) * 127, Math.Abs((health - 5)) * 127, Math.Abs((health - 5)) * 51, Math.Abs((health - 5)) * 51);
-            color = new Color(health * 51, health * 51, health * 51, health * 51);   
+            color2 = new Color(Math.Abs((health - 5)) * 64, Math.Abs((health - 5)) * 64, Math.Abs((health - 5)) * 64, Math.Abs((health - 5)) * 64);
+            color = new Color(health * 64, health * 64, health * 64, health * 64);   
             if (nb_frame_invulnerability != 0)
             {
                 if ((int)(nb_frame_invulnerability / 20) % 2 == 0)
@@ -184,12 +184,15 @@ namespace BigBangChaosGame
             {
                 alerteSound.Play();
             }
-            new Task(() =>
-                {
-                    GamePad.SetVibration(PlayerIndex.One, 0.7f, 0.25f);
-                    System.Threading.Thread.Sleep(500);
-                    GamePad.SetVibration(PlayerIndex.One, 0f, 0f);
-                }).Start();
+            if (BBCGame.controller == BBCGame.XboxController)
+            {
+                new Task(() =>
+                    {
+                        GamePad.SetVibration(PlayerIndex.One, 0.7f, 0.25f);
+                        System.Threading.Thread.Sleep(500);
+                        GamePad.SetVibration(PlayerIndex.One, 0f, 0f);
+                    }).Start();
+            }
         }
     }
 }

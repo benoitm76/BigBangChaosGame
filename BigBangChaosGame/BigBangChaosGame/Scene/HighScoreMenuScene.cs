@@ -127,7 +127,7 @@ namespace BigBangChaosGame.Scene
             Vector2 tailletext2 = _font2.MeasureString(text2);
             spriteBatch.DrawString(_font2, text2, new Vector2((game.size_window.X / 2) - (tailletext2.X / 2), 270), Color.White);
             if (showTextbox)
-                spriteBatch.DrawString(_font2, "Nickname :", new Vector2(game.size_window.X-1100, 110), Color.White);
+                spriteBatch.DrawString(_font2, "Nickname :", new Vector2(game.size_window.X-1100, 140), Color.White);
             back.DrawButton(spriteBatch);
             if(showTextbox && Textbox.Pseudo != "")
                 spriteBatch.DrawString(_font2, "Press enter", new Vector2(game.size_window.X - 400, 110), Color.White);
