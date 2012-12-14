@@ -427,13 +427,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DFMedium.xml">
-      <Name>DFMedium</Name>
-      <Importer>XmlImporter</Importer>
-      <Processor>PassThroughProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Mouse.png">
       <Name>Mouse</Name>
       <Importer>TextureImporter</Importer>
