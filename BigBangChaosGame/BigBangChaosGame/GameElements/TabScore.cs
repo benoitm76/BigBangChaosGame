@@ -160,7 +160,7 @@ namespace BigBangChaosGame
         public string makeHighScoreString(HighScoreData data2)
         {
             // Create scoreBoardString
-            string scoreBoardString = "Highscores:\n\n";
+            string scoreBoardString = "Highs cores:\n\n";
             int classement = 0;
             for (int i = 0; i < 5; i++) // this part was missing (5 means how many in the list/array/Counter)
             {
